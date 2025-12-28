@@ -3,15 +3,17 @@ import react from "@vitejs/plugin-react";
 // 1. REMOVED: cssInjectedByJsPlugin
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+  ],
   build: {
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 500,
+    modulePreload: {
+      polyfill: false,
+    },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor': ['react', 'react-dom'],
-        },
+        manualChunks: undefined,
       },
     },
   },
