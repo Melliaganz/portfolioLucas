@@ -18,7 +18,13 @@ export const Footer = () => {
         <div className={styles.contentWrapper}>
           <div className={styles.socialLinks}>
             {socialLinks.map((link, index) => (
-              <a key={index} href={link.href} className={styles.iconLink}>
+              <a
+                key={index}
+                href={link.href}
+                className={styles.iconLink}
+                target="_blank"
+                rel="noopener"
+              >
                 <span
                   className={`material-symbols-outlined ${styles.iconText}`}
                 >
