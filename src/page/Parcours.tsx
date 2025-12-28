@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback, useLayoutEffect } from "react";
 import { experiences } from "../data/parcours";
 import styles from "../styles/Parcours.module.css";
-import { icons } from "../utils/icons.module";
+import { IconParchemin } from "../utils/icons.module";
 
 export const Parcours = () => {
   const [isExpanded, setIsExpanded] = useState<Record<string, boolean>>({});
@@ -46,7 +46,7 @@ export const Parcours = () => {
       <div className={styles.header}>
         <div className={styles.headerIconBox}>
           <span className={`material-symbols-outlined ${styles.headerIcon}`}>
-            {icons.parchemin}
+            <IconParchemin />
           </span>
         </div>
         <h2 className={styles.titleMain}>Mon Parcours</h2>

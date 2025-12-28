@@ -1,4 +1,4 @@
-import { icons } from "../utils/icons.module";
+import { IconDiscord, IconGithub, IconInstagram, IconLinkedIn, IconMail, IconTwitter } from "../utils/icons.module";
 import styles from "../styles/Footer.module.css";
 import { currentYear } from "../utils/date";
 
@@ -6,32 +6,32 @@ export const Footer = () => {
   const socialLinks = [
     {
       href: "https://github.com/Melliaganz",
-      icon: icons.github,
+      icon: <IconGithub />,
       title: "Mon github",
     },
     {
       href: "https://discord.gg/YJhEmGKK",
-      icon: icons.discord,
+      icon: <IconDiscord />,
       title: "Mon discord",
     },
     {
       href: "mailto:lucaslengranddev@gmail.com",
-      icon: icons.mail,
+      icon: <IconMail />,
       title: "Mon mail",
     },
     {
       href: "https://x.com/LucasLengrand2",
-      icon: icons.twitter,
+      icon: <IconTwitter />,
       title: "Mon X",
     },
     {
       href: "https://www.linkedin.com/in/lucaslengrand",
-      icon: icons.linkedIn,
+      icon: <IconLinkedIn />,
       title: "Mon linkedIn",
     },
     {
       href: "https://www.instagram.com/melliaganz/",
-      icon: icons.instagram,
+      icon: <IconInstagram />,
       title: "Mon instagram",
     },
   ];

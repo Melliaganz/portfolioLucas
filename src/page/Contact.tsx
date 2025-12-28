@@ -1,5 +1,5 @@
 import styles from "../styles/Contact.module.css";
-import { icons } from "../utils/icons.module";
+import { IconDiscord, IconEmail, IconFerme, IconGithub, IconInstagram, IconLinkedIn, IconMapPin, IconSend, IconTwitter } from "../utils/icons.module";
 
 export const Contact = () => {
   return (
@@ -22,7 +22,7 @@ export const Contact = () => {
                   <span
                     className={`material-symbols-outlined ${styles.navIcon}`}
                   >
-                    {icons.email}
+                   <IconEmail />
                   </span>
                 </div>
                 <div className={styles.detailText}>
@@ -41,7 +41,7 @@ export const Contact = () => {
                   <span
                     className={`material-symbols-outlined ${styles.navIcon}`}
                   >
-                    {icons.mapPin}
+                    <IconMapPin />
                   </span>
                 </div>
                 <div className={styles.detailText}>
@@ -62,7 +62,7 @@ export const Contact = () => {
                   title="Mon discord"
                 >
                   <span className="material-symbols-outlined">
-                    {icons.discord}
+                    <IconDiscord />
                   </span>
                 </a>
                 <a
@@ -73,7 +73,7 @@ export const Contact = () => {
                   title="Mon Github"
                 >
                   <span className="material-symbols-outlined">
-                    {icons.github}
+                    <IconGithub />
                   </span>
                 </a>
                 <a
@@ -84,7 +84,7 @@ export const Contact = () => {
                   title="Mon LinkedIn"
                 >
                   <span className="material-symbols-outlined">
-                    {icons.linkedIn}
+                    <IconLinkedIn />
                   </span>
                 </a>
                 <a
@@ -95,7 +95,7 @@ export const Contact = () => {
                   title="Mon Discord"
                 >
                   <span className="material-symbols-outlined">
-                    {icons.twitter}
+                    <IconTwitter />
                   </span>
                 </a>
                 <a
@@ -106,7 +106,7 @@ export const Contact = () => {
                   title="Mon Instagram"
                 >
                   <span className="material-symbols-outlined">
-                    {icons.instagram}
+                    <IconInstagram />
                   </span>
                 </a>
                 <a
@@ -117,7 +117,7 @@ export const Contact = () => {
                   title="Mon mail"
                 >
                   <span className="material-symbols-outlined">
-                    {icons.mail}
+                    <IconEmail />
                   </span>
                 </a>
               </div>
@@ -159,7 +159,7 @@ export const Contact = () => {
                   <span
                     className={`material-symbols-outlined ${styles.selectArrow}`}
                   >
-                    {icons.ferme}
+                    <IconFerme />
                   </span>
                 </div>
               </label>
@@ -176,7 +176,7 @@ export const Contact = () => {
               <button type="submit" className={styles.submitBtn}>
                 <span>Envoyer</span>
                 <span className={`material-symbols-outlined ${styles.btnIcon}`}>
-                  {icons.send}
+                  <IconSend />
                 </span>
               </button>
             </form>

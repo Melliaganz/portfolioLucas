@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { NavItem } from "../types/navigation";
 import styles from "../styles/Header.module.css";
-import { icons } from "../utils/icons.module";
+import { IconCode, IconTelecharger } from "../utils/icons.module";
 
 const navLinks: NavItem[] = [
   { label: "À propos", href: "#about" },
@@ -25,7 +25,7 @@ export const Header = () => {
       <div className={styles.container}>
         {/* Logo Section */}
         <div className={styles.logo}>
-          <div className={styles.logoBox}>{icons.code}</div>
+          <div className={styles.logoBox}><IconCode /></div>
           <span className={styles.navTitre}>Lengrand Lucas</span>
         </div>
 
@@ -45,7 +45,7 @@ export const Header = () => {
             rel="noopener noreferrer"
             className={styles.cvButton}
           >
-            {icons.télécharger}
+            <IconTelecharger/>
             CV
           </a>
         </div>

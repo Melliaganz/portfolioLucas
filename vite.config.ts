@@ -1,18 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 export default defineConfig({
   plugins: [
     react(),
-    cssInjectedByJsPlugin(),
   ],
   build: {
-    assetsInlineLimit: 10000,
+    assetsInlineLimit: 4096,
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor': ['react', 'react-dom'],
+          'vendor-react': ['react'],
+          'vendor-icons': ['react-icons'],
         },
       },
     },
