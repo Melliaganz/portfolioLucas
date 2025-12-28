@@ -2,7 +2,7 @@
 import { IconMobile, IconCode, IconDiplome } from "../utils/icons.module";
 import { getDgfipStoreLink } from "../utils/getStoreLink";
 
-export interface Experience {
+ interface Experience {
   id: string;
   title: string;
   company: string;

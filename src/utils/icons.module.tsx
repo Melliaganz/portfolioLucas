@@ -8,7 +8,6 @@ import {
   FaLinkedin,
   FaMobile,
   FaReact,
-  FaSuitcase,
 } from "react-icons/fa";
 import { GiScrollQuill } from "react-icons/gi";
 import { IoMdDownload } from "react-icons/io";
@@ -52,7 +51,6 @@ const iconsData: Record<string, IconConfig> = {
   IconMongoDb: { icon: SiMongodb, color: "#139251", size: 24 },
   IconKotlin: { icon: SiKotlin, color: "#aa23e3", size: 24 },
   IconGithub: { icon: SiGithub, size: 24 },
-  IconValise: { icon: FaSuitcase, size: 24 },
   IconMail: { icon: SiMailgun, size: 24 },
   IconMySQL: { icon: SiMysql, color: "#006f9e", size: 24 },
   IconNodeJs: { icon: SiNodedotjs, color: "#55b936", size: 24 },
@@ -100,7 +98,6 @@ export const {
   IconMongoDb,
   IconKotlin,
   IconGithub,
-  IconValise,
   IconMail,
   IconMySQL,
   IconNodeJs,
@@ -117,4 +114,3 @@ export const {
   IconDiscord,
 } = generatedIcons;
 
-export const Puce = "\u2022";
