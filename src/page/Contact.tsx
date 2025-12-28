@@ -78,19 +78,28 @@ export const Contact = () => {
                     {icons.linkedIn}
                   </span>
                 </a>
-                <a href="https://x.com/LucasLengrand2" className={styles.socialBtn}>
+                <a
+                  href="https://x.com/LucasLengrand2"
+                  className={styles.socialBtn}
+                >
                   <span className="material-symbols-outlined">
                     {icons.twitter}
                   </span>
                 </a>
-                <a href="https://www.instagram.com/melliaganz/" className={styles.socialBtn}>
+                <a
+                  href="https://www.instagram.com/melliaganz/"
+                  className={styles.socialBtn}
+                >
                   <span className="material-symbols-outlined">
                     {icons.instagram}
                   </span>
                 </a>
-                   <a href="mailto:lucaslengranddev@gmail.com" className={styles.mail}>
+                <a
+                  href="mailto:lucaslengranddev@gmail.com"
+                  className={styles.socialBtn}
+                >
                   <span className="material-symbols-outlined">
-                    {icons.instagram}
+                    {icons.mail}
                   </span>
                 </a>
               </div>
