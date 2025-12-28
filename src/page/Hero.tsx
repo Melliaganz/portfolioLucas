@@ -1,7 +1,12 @@
-import { TechStack } from "../components/TechStack";
+import { TechStack, techNames } from "../components/TechStack";
 import styles from "../styles/Hero.module.css";
+import profilePic from "../assets/images/1000016538_20251228162503.jpg";
 
 export const Hero = () => {
+  const displayedSkills = techNames
+    .slice(0, 6)
+    .map((skill) => `'${skill}'`)
+    .join(", ");
   return (
     <section id="about" className={styles.hero}>
       <div className={styles.haloPrimary} />
@@ -10,7 +15,7 @@ export const Hero = () => {
         <div className={styles.textContent}>
           <div className={styles.badge}>
             <span className={styles.badgeDot} />
-            <span className={styles.badgeText}>Disponible pour freelance</span>
+            <span className={styles.badgeText}>Disponible en freelance</span>
           </div>
 
           <h1 className={styles.title}>
@@ -20,8 +25,8 @@ export const Hero = () => {
           </h1>
 
           <p className={styles.description}>
-            Je conçois des expériences web et mobiles performantes, accessibles 
-            et modernes. Expert en écosystème JavaScript, je transforme vos 
+            Je conçois des expériences web et mobiles performantes, accessibles
+            et modernes. Expert en écosystème JavaScript, je transforme vos
             idées en produits digitaux robustes.
           </p>
 
@@ -54,16 +59,23 @@ export const Hero = () => {
                 <span className={styles.blue}>Developer</span> = {"{"}
               </div>
               <div className={`${styles.codeLine} ${styles.indent}`}>
-                name: <span className={styles.green}>'John Doe'</span>,
+                name: <span className={styles.green}>'Lengrand Lucas'</span>,
               </div>
               <div className={`${styles.codeLine} ${styles.indent}`}>
-                skills: [<span className={styles.green}>'React'</span>,{" "}
-                <span className={styles.green}>'TS'</span>],
+                skills: [<span className={styles.green}>{displayedSkills}</span>
+                ],
               </div>
               <div className={`${styles.codeLine} ${styles.indent}`}>
                 status: <span className={styles.green}>'Open to work'</span>
               </div>
               <div className={styles.codeLine}>{"};"}</div>
+            </div>
+                <div className={styles.profileImageWrapper}>
+              <img 
+                src={profilePic} 
+                alt="Lucas Lengrand" 
+                className={styles.profileImage} 
+              />
             </div>
           </div>
         </div>
