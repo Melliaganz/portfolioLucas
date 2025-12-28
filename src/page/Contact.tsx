@@ -55,7 +55,7 @@ export const Contact = () => {
               <p className={styles.socialTitle}>Suivez-moi</p>
               <div className={styles.socialLinks}>
                 <a
-                  href="https://discord.gg/YJhEmGKK"
+                  href="https://discord.gg/7q5KAbqfdu"
                   className={styles.socialBtn}
                 >
                   <span className="material-symbols-outlined">
