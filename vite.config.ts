@@ -1,19 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-// 1. REMOVED: cssInjectedByJsPlugin
 
 export default defineConfig({
-  plugins: [
-    react(),
-  ],
+  plugins: [react()],
   build: {
-    cssCodeSplit: true,
-    modulePreload: {
-      polyfill: false,
-    },
+    cssCodeSplit: false, 
+    assetsInlineLimit: 4096, 
     rollupOptions: {
       output: {
-        manualChunks: undefined,
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
       },
     },
   },
