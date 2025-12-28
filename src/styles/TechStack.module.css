@@ -5,12 +5,15 @@
 }
 
 .title {
-  text-align: left;
-  margin-bottom: 2rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  color: #4b5563;
+  color: #f8fafc; 
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  text-align: left;
 }
-
 .marqueeContainer {
   position: relative;
   width: 100%;

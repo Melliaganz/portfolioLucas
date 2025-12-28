@@ -59,6 +59,7 @@ export const Contact = () => {
                   className={styles.socialBtn}
                   target="_blank"
                   rel="noopener"
+                  title="Mon discord"
                 >
                   <span className="material-symbols-outlined">
                     {icons.discord}
@@ -69,6 +70,7 @@ export const Contact = () => {
                   className={styles.socialBtn}
                   target="_blank"
                   rel="noopener"
+                  title="Mon Github"
                 >
                   <span className="material-symbols-outlined">
                     {icons.github}
@@ -79,6 +81,7 @@ export const Contact = () => {
                   className={styles.socialBtn}
                   target="_blank"
                   rel="noopener"
+                  title="Mon LinkedIn"
                 >
                   <span className="material-symbols-outlined">
                     {icons.linkedIn}
@@ -89,6 +92,7 @@ export const Contact = () => {
                   className={styles.socialBtn}
                   target="_blank"
                   rel="noopener"
+                  title="Mon Discord"
                 >
                   <span className="material-symbols-outlined">
                     {icons.twitter}
@@ -99,6 +103,7 @@ export const Contact = () => {
                   className={styles.socialBtn}
                   target="_blank"
                   rel="noopener"
+                  title="Mon Instagram"
                 >
                   <span className="material-symbols-outlined">
                     {icons.instagram}
@@ -109,6 +114,7 @@ export const Contact = () => {
                   className={styles.socialBtn}
                   target="_blank"
                   rel="noopener"
+                  title="Mon mail"
                 >
                   <span className="material-symbols-outlined">
                     {icons.mail}
@@ -119,7 +125,7 @@ export const Contact = () => {
           </div>
 
           <div className={styles.formCard}>
-            <h3 className={styles.formTitle}>Envoyer un message</h3>
+            <h2 className={styles.formTitle}>Envoyer un message</h2>
             <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
               <div className={styles.row}>
                 <label className={styles.inputLabel}>

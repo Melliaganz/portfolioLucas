@@ -25,7 +25,7 @@
 }
 
 .subtitle {
-  color: #9da6b9;
+  color: #e2e8f0;
   font-size: 1.1rem;
   max-width: 600px;
 }
@@ -132,9 +132,9 @@
 }
 
 .description {
-  color: #9da6b9;
+  color: #cbd5e1;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .tags {
@@ -145,12 +145,12 @@
 }
 
 .tag {
-  background: rgba(19, 91, 236, 0.1);
-  color: #135bec;
+  background: rgba(96, 165, 250, 0.15); 
+  color: #93c5fd; 
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700; 
 }
 
 .yearBadge {
