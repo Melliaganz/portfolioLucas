@@ -10,6 +10,43 @@
       name="description"
       content="Développeur spécialisé React, TypeScript et Mobile. Découvrez mes projets et mon expertise en création d'applications web et mobiles modernes."
     />
+    <style>
+      :root {
+        --primary: #135bec;
+        --background-dark: #101622;
+        --surface-dark: #1a2333;
+        --border-color: #282e39;
+        --text-main: #ffffff;
+        --text-muted: #94a3b8;
+        --font-display: "Inter", sans-serif;
+      }
+      html, body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background-color: var(--background-dark); /* Évite le flash blanc au chargement */
+        color: var(--text-main);
+        font-family: var(--font-display);
+      }
+      main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      #root {
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      /* Styles critiques pour le logo/loader si présents */
+      .logo { height: 6em; padding: 1.5em; will-change: filter; }
+      @media (prefers-reduced-motion: no-preference) {
+        .logo { animation: logo-spin infinite 20s linear; }
+      }
+      @keyframes logo-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
     <meta
       name="keywords"
       content="développeur web, React, TypeScript, Mobile, React Native, Lucas Lengrand, portfolio dev, frontend"
