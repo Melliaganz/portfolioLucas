@@ -4,12 +4,12 @@ import { currentYear } from "../utils/date";
 
 export const Footer = () => {
   const socialLinks = [
-    { href: "#", icon: icons.github },
-    { href: "#", icon: icons.discord },
-    { href: "#", icon: icons.mail },
-    { href: "#", icon: icons.twitter },
-    { href: "#", icon: icons.linkedIn },
-    { href: "#", icon: icons.instagram },
+    { href: "https://github.com/Melliaganz", icon: icons.github },
+    { href: "href=https://discord.gg/YJhEmGKK", icon: icons.discord },
+    { href: "mailto:lucaslengranddev@gmail.com", icon: icons.mail },
+    { href: "https://x.com/LucasLengrand2", icon: icons.twitter },
+    { href: "www.linkedin.com/in/lucaslengrand", icon: icons.linkedIn },
+    { href: "https://www.instagram.com/melliaganz/", icon: icons.instagram },
   ];
 
   return (

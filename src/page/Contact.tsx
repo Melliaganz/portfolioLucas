@@ -54,27 +54,41 @@ export const Contact = () => {
             <div className={styles.socialGroup}>
               <p className={styles.socialTitle}>Suivez-moi</p>
               <div className={styles.socialLinks}>
-                <a href="#" className={styles.socialBtn}>
+                <a
+                  href="https://discord.gg/YJhEmGKK"
+                  className={styles.socialBtn}
+                >
                   <span className="material-symbols-outlined">
                     {icons.discord}
                   </span>
                 </a>
-                <a href="#" className={styles.socialBtn}>
+                <a
+                  href="https://github.com/Melliaganz"
+                  className={styles.socialBtn}
+                >
                   <span className="material-symbols-outlined">
                     {icons.github}
                   </span>
                 </a>
-                <a href="#" className={styles.socialBtn}>
+                <a
+                  href="www.linkedin.com/in/lucaslengrand"
+                  className={styles.socialBtn}
+                >
                   <span className="material-symbols-outlined">
                     {icons.linkedIn}
                   </span>
                 </a>
-                <a href="#" className={styles.socialBtn}>
+                <a href="https://x.com/LucasLengrand2" className={styles.socialBtn}>
                   <span className="material-symbols-outlined">
                     {icons.twitter}
                   </span>
                 </a>
-                <a href="#" className={styles.socialBtn}>
+                <a href="https://www.instagram.com/melliaganz/" className={styles.socialBtn}>
+                  <span className="material-symbols-outlined">
+                    {icons.instagram}
+                  </span>
+                </a>
+                   <a href="mailto:lucaslengranddev@gmail.com" className={styles.mail}>
                   <span className="material-symbols-outlined">
                     {icons.instagram}
                   </span>
