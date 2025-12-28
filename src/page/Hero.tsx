@@ -70,12 +70,13 @@ export const Hero = () => {
               </div>
               <div className={styles.codeLine}>{"};"}</div>
             </div>
-                <div className={styles.profileImageWrapper}>
-              <img 
-                src={profilePic} 
-                alt="Lucas Lengrand" 
-                className={styles.profileImage} 
+            <div className={styles.profileImageWrapper}>
+              <img
+                src={profilePic}
+                alt="Lucas Lengrand"
+                className={styles.profileImage}
                 fetchPriority="high"
+                sizes="(max-width: 600px) 480px, 800px"
               />
             </div>
           </div>
