@@ -33,17 +33,18 @@ export const Header = () => {
         <div className={styles.rightNavContainer}>
           <nav className={styles.nav}>
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={styles.navLink}
-              >
+              <a key={link.href} href={link.href} className={styles.navLink}>
                 {link.label}
               </a>
             ))}
           </nav>
-          <a href="/public/CVLengrandLucas.pdf" className={styles.cvButton}>
-           {icons.télécharger}
+          <a
+            href="/public/CVLengrandLucas.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.cvButton}
+          >
+            {icons.télécharger}
             CV
           </a>
         </div>
