@@ -2,7 +2,7 @@
   padding: 100px 20px;
   background-color: #101622;
   color: white;
-  width: 100vw
+  width: 100vw;
 }
 
 .container {
@@ -63,6 +63,7 @@
 .detailItem {
   display: flex;
   align-items: center;
+  text-align: left;
   gap: 20px;
 }
 
@@ -84,7 +85,8 @@
   margin: 0;
 }
 
-.detailLink, .staticDetail {
+.detailLink,
+.staticDetail {
   font-weight: 700;
   font-size: 1.1rem;
   color: white;
@@ -165,7 +167,9 @@
   font-weight: 500;
 }
 
-.input, .textarea, .select {
+.input,
+.textarea,
+.select {
   background: #1c1f27;
   border: 1px solid #3b4354;
   color: white;
@@ -175,7 +179,9 @@
   outline: none;
 }
 
-.input:focus, .textarea:focus, .select:focus {
+.input:focus,
+.textarea:focus,
+.select:focus {
   border-color: #135bec;
 }
 
