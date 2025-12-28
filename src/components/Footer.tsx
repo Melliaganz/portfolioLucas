@@ -1,5 +1,5 @@
 import { IconDiscord, IconGithub, IconInstagram, IconLinkedIn, IconMail, IconTwitter } from "../utils/icons.module";
-import styles from "../styles/Footer.module.css";
+import styles from "../styles/Footer.module.css"
 import { currentYear } from "../utils/date";
 
 export const Footer = () => {
