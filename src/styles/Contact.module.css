@@ -1,0 +1,225 @@
+.contactSection {
+  padding: 100px 20px;
+  background-color: #101622;
+  color: white;
+  width: 100vw
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* --- Colonne Gauche --- */
+.infoColumn {
+  flex: 1;
+}
+
+.headerGroup {
+  margin-bottom: 40px;
+}
+
+.accentBar {
+  width: 48px;
+  height: 4px;
+  background-color: #135bec;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: #9da6b9;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  max-width: 450px;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.detailItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.iconWrapper {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c1f27;
+  border: 1px solid #282e39;
+  border-radius: 12px;
+  color: #135bec;
+}
+
+.labelSmall {
+  font-size: 0.85rem;
+  color: #9da6b9;
+  margin: 0;
+}
+
+.detailLink, .staticDetail {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.detailLink:hover {
+  color: #135bec;
+}
+
+.socialGroup {
+  margin-top: 50px;
+}
+
+.socialTitle {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 15px;
+}
+
+.socialBtn {
+  width: 45px;
+  height: 45px;
+  background: #1c1f27;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.socialBtn:hover {
+  background: #135bec;
+  transform: translateY(-3px);
+}
+
+/* --- Formulaire --- */
+.formCard {
+  flex: 1.2;
+  background: #161a23;
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid #282e39;
+}
+
+.formTitle {
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.input, .textarea, .select {
+  background: #1c1f27;
+  border: 1px solid #3b4354;
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input:focus, .textarea:focus, .select:focus {
+  border-color: #135bec;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  appearance: none;
+}
+
+.selectArrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #9da6b9;
+}
+
+.textarea {
+  min-height: 160px;
+}
+
+.submitBtn {
+  background: #135bec;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  transition: 0.3s;
+}
+
+.submitBtn:hover {
+  background: #1e66ff;
+  box-shadow: 0 5px 20px rgba(19, 91, 236, 0.4);
+}
+
+.btnIcon {
+  font-size: 1.1rem;
+}
