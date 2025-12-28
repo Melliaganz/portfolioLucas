@@ -75,6 +75,7 @@ export const Hero = () => {
                 src={profilePic} 
                 alt="Lucas Lengrand" 
                 className={styles.profileImage} 
+                fetchPriority="high"
               />
             </div>
           </div>

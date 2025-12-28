@@ -6,6 +6,7 @@
   --color-surface-light: #1e293b;
 }
 
+/* On force le background sur le body */
 :root {
   --primary: #135bec;
   --background-dark: #101622;
@@ -16,18 +17,18 @@
   --font-display: "Inter", sans-serif;
 }
 html {
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 0;
   overflow-x:  hidden;
 }
 main {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
 #root {
-  max-width: 100vw;
+  max-width: 1280px;
   text-align: center;
 }
 
