@@ -1,11 +1,20 @@
 import { useState, useEffect } from "react";
 import type { NavItem } from "../types/navigation";
 import styles from "../styles/Header.module.css";
+
+const navLinks: NavItem[] = [
+  { label: "À propos", href: "#about" },
+  { label: "Projets", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
+
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -13,21 +22,24 @@ export const Header = () => {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
       <div className={styles.container}>
+        {/* Logo Section */}
         <div className={styles.logo}>
           <div className={styles.logoBox}>{"<>"}</div>
           <span className={styles.navTitre}>Lengrand Lucas</span>
         </div>
+
+        {/* Navigation & Action Section */}
         <div className={styles.rightNavContainer}>
           <nav className={styles.nav}>
-            <a href="#about" className={styles.navLink}>
-              À propos
-            </a>
-            <a href="#projects" className={styles.navLink}>
-              Projets
-            </a>
-            <a href="#contact" className={styles.navLink}>
-              Contact
-            </a>
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={styles.navLink}
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <a href="#cv" className={styles.cvButton}>

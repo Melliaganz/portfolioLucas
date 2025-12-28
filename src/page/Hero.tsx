@@ -4,21 +4,24 @@ import styles from "../styles/Hero.module.css";
 export const Hero = () => {
   return (
     <section id="about" className={styles.hero}>
+      <div className={styles.haloPrimary} />
+
       <div className={styles.container}>
-        <div className={styles.content}>
+        <div className={styles.textContent}>
           <div className={styles.badge}>
-            <span className={styles.dot} />
-            Disponible pour freelance
+            <span className={styles.badgeDot} />
+            <span className={styles.badgeText}>Disponible pour freelance</span>
           </div>
 
           <h1 className={styles.title}>
             Développeur <br />
-            <span className={styles.gradientText}>React & Mobile</span>
+            <span className={styles.gradientText}>React</span> &{" "}
+            <span className={styles.gradientText}>Mobile</span>
           </h1>
 
-          <p style={{ color: '#94a3b8', fontSize: '1.125rem', maxWidth: '500px', lineHeight: '1.6' }}>
-            Je conçois des expériences web et mobiles performantes, accessibles
-            et modernes. Expert en écosystème JavaScript, je transforme vos
+          <p className={styles.description}>
+            Je conçois des expériences web et mobiles performantes, accessibles 
+            et modernes. Expert en écosystème JavaScript, je transforme vos 
             idées en produits digitaux robustes.
           </p>
 
@@ -30,24 +33,38 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* Côté Droit : Snippet de code */}
-        <div className={styles.codeWrapper}>
-          <div className={styles.halo} />
-          <div className={styles.codeCard}>
-            <div style={{ display: 'flex', gap: '6px', marginBottom: '20px' }}>
-              <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ff5f56' }} />
-              <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
-              <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27c93f' }} />
+        <div className={styles.visualWrapper}>
+          <div className={styles.cardGradient} />
+          <div className={styles.cardContent}>
+            <div className={styles.skeletonGroup}>
+              <div className={styles.skeletonTitle} />
+              <div className={`${styles.skeletonLine} ${styles.w60}`} />
+              <div className={`${styles.skeletonLine} ${styles.w50}`} />
+              <div className={`${styles.skeletonLine} ${styles.w80}`} />
             </div>
-            <pre style={{ margin: 0, fontFamily: 'monospace', color: '#60a5fa' }}>
-              <code>
-                <span style={{ color: '#c084fc' }}>const</span> Developer = {'{'}{'\n'}
-                &nbsp;&nbsp;name: <span style={{ color: '#4ade80' }}>'John Doe'</span>,{'\n'}
-                &nbsp;&nbsp;skills: [<span style={{ color: '#4ade80' }}>'React'</span>, <span style={{ color: '#4ade80' }}>'TS'</span>],{'\n'}
-                &nbsp;&nbsp;status: <span style={{ color: '#4ade80' }}>'Ready'</span>{'\n'}
-                {'}'};
-              </code>
-            </pre>
+
+            <div className={styles.editor}>
+              <div className={styles.dots}>
+                <div className={`${styles.dot} ${styles.dotRed}`} />
+                <div className={`${styles.dot} ${styles.dotYellow}`} />
+                <div className={`${styles.dot} ${styles.dotGreen}`} />
+              </div>
+              <div className={styles.codeLine}>
+                <span className={styles.purple}>const</span>{" "}
+                <span className={styles.blue}>Developer</span> = {"{"}
+              </div>
+              <div className={`${styles.codeLine} ${styles.indent}`}>
+                name: <span className={styles.green}>'John Doe'</span>,
+              </div>
+              <div className={`${styles.codeLine} ${styles.indent}`}>
+                skills: [<span className={styles.green}>'React'</span>,{" "}
+                <span className={styles.green}>'TS'</span>],
+              </div>
+              <div className={`${styles.codeLine} ${styles.indent}`}>
+                status: <span className={styles.green}>'Open to work'</span>
+              </div>
+              <div className={styles.codeLine}>{"};"}</div>
+            </div>
           </div>
         </div>
       </div>
