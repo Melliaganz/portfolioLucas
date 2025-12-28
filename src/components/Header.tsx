@@ -42,7 +42,7 @@ export const Header = () => {
               </a>
             ))}
           </nav>
-          <a href="/src/assets/CVLengrandLucas.pdf" className={styles.cvButton}>
+          <a href="/public/CVLengrandLucas.pdf" className={styles.cvButton}>
            {icons.télécharger}
             CV
           </a>
