@@ -71,7 +71,7 @@ export const Contact = () => {
                   </span>
                 </a>
                 <a
-                  href="www.linkedin.com/in/lucaslengrand"
+                  href="https://www.linkedin.com/in/lucaslengrand"
                   className={styles.socialBtn}
                 >
                   <span className="material-symbols-outlined">
