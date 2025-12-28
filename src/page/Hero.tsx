@@ -1,6 +1,6 @@
 import { TechStack, techNames } from "../components/TechStack";
 import styles from "../styles/Hero.module.css";
-import profilePic from "../assets/images/1000016538_20251228162503.jpg";
+import profilePic from "../assets/images/lucasTravail.webp";
 
 export const Hero = () => {
   const displayedSkills = techNames
