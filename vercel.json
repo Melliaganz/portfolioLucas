@@ -1,13 +1,8 @@
 {
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
+    "headers": [
         {
-          "key": "Link",
-          "value": "</assets/index-mRJ5Vds_.css>; rel=preload; as=style, </assets/index-Br8bgLT0.js>; rel=modulepreload; as=script"
+            "source": "/(.*)",
+            "headers": []
         }
-      ]
-    }
-  ]
+    ]
 }
