@@ -1,6 +1,5 @@
 import { TechStack, techNames } from "../components/TechStack";
 import styles from "../styles/Hero.module.css";
-import profilePic from "/lucasTravail.webp";
 
 export const Hero = () => {
   const displayedSkills = techNames
@@ -72,10 +71,11 @@ export const Hero = () => {
             </div>
             <div className={styles.profileImageWrapper}>
               <img
-                src={profilePic}
+                src="/lucasTravail.webp" 
                 alt="Lucas Lengrand"
                 className={styles.profileImage}
                 fetchPriority="high"
+                loading="eager" 
                 sizes="(max-width: 600px) 480px, 800px"
               />
             </div>
