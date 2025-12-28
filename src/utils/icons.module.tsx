@@ -30,7 +30,6 @@ import {
 } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 
-// Exports individuels pour un Tree-Shaking optimal
 export const IconReact = () => <FaReact color="#61dafb" size={24} />;
 export const IconCss = () => <FaCss3 color="#204de5" size={24} />;
 export const IconTypeScript = () => <SiTypescript color="#2d79c7" size={24} />;
@@ -60,5 +59,4 @@ export const IconInstagram = () => <SiInstagram size={24} />;
 export const IconFerme = () => <MdOutlineKeyboardArrowDown size={24} />;
 export const IconDiscord = () => <FaDiscord size={24} />;
 
-// Constante simple pour la puce
 export const Puce = "\u2022";
