@@ -1,3 +1,5 @@
+import React, { memo } from "react";
+import { IconType, IconContext } from "react-icons";
 import {
   FaCode,
   FaCss3,
@@ -30,33 +32,89 @@ import {
 } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 
-export const IconReact = () => <FaReact color="#61dafb" size={24} />;
-export const IconCss = () => <FaCss3 color="#204de5" size={24} />;
-export const IconTypeScript = () => <SiTypescript color="#2d79c7" size={24} />;
-export const IconReactNative = () => <TbBrandReactNative color="#61dafb" size={24} />;
-export const IconAndroidStudio = () => <SiAndroidstudio color="#a5c736" size={24} />;
-export const IconAppStore = () => <SiXcode color="#1d7df3" size={24} />;
-export const IconGradle = () => <SiGradle size={24} />;
-export const IconCode = () => <FaCode size={18} />;
-export const IconTelecharger = () => <IoMdDownload size={18} />;
-export const IconJavaScript = () => <SiJavascript color="#f7df1e" size={24} />;
-export const IconMongoDb = () => <SiMongodb color="#139251" size={24} />;
-export const IconKotlin = () => <SiKotlin color="#aa23e3" size={24} />;
-export const IconGithub = () => <SiGithub size={24} />;
-export const IconValise = () => <FaSuitcase size={24} />;
-export const IconMail = () => <SiMailgun size={24} />;
-export const IconMySQL = () => <SiMysql color="#006f9e" size={24} />;
-export const IconNodeJs = () => <SiNodedotjs color="#55b936" size={24} />;
-export const IconDiplome = () => <FaGraduationCap size={24} />;
-export const IconMobile = () => <FaMobile />;
-export const IconParchemin = () => <GiScrollQuill />;
-export const IconEmail = () => <SiMailboxdotorg size={24} />;
-export const IconMapPin = () => <RiMapPin2Fill size={24} />;
-export const IconSend = () => <IoSend size={24} />;
-export const IconLinkedIn = () => <FaLinkedin size={24} />;
-export const IconTwitter = () => <RiTwitterXFill size={24} />;
-export const IconInstagram = () => <SiInstagram size={24} />;
-export const IconFerme = () => <MdOutlineKeyboardArrowDown size={24} />;
-export const IconDiscord = () => <FaDiscord size={24} />;
+interface IconConfig {
+  icon: IconType;
+  color?: string;
+  size?: number;
+}
+
+const iconsData: Record<string, IconConfig> = {
+  IconReact: { icon: FaReact, color: "#61dafb", size: 24 },
+  IconCss: { icon: FaCss3, color: "#204de5", size: 24 },
+  IconTypeScript: { icon: SiTypescript, color: "#2d79c7", size: 24 },
+  IconReactNative: { icon: TbBrandReactNative, color: "#61dafb", size: 24 },
+  IconAndroidStudio: { icon: SiAndroidstudio, color: "#a5c736", size: 24 },
+  IconAppStore: { icon: SiXcode, color: "#1d7df3", size: 24 },
+  IconGradle: { icon: SiGradle, size: 24 },
+  IconCode: { icon: FaCode, size: 18 },
+  IconTelecharger: { icon: IoMdDownload, size: 18 },
+  IconJavaScript: { icon: SiJavascript, color: "#f7df1e", size: 24 },
+  IconMongoDb: { icon: SiMongodb, color: "#139251", size: 24 },
+  IconKotlin: { icon: SiKotlin, color: "#aa23e3", size: 24 },
+  IconGithub: { icon: SiGithub, size: 24 },
+  IconValise: { icon: FaSuitcase, size: 24 },
+  IconMail: { icon: SiMailgun, size: 24 },
+  IconMySQL: { icon: SiMysql, color: "#006f9e", size: 24 },
+  IconNodeJs: { icon: SiNodedotjs, color: "#55b936", size: 24 },
+  IconDiplome: { icon: FaGraduationCap, size: 24 },
+  IconMobile: { icon: FaMobile, size: 24 },
+  IconParchemin: { icon: GiScrollQuill, size: 24 },
+  IconEmail: { icon: SiMailboxdotorg, size: 24 },
+  IconMapPin: { icon: RiMapPin2Fill, size: 24 },
+  IconSend: { icon: IoSend, size: 24 },
+  IconLinkedIn: { icon: FaLinkedin, size: 24 },
+  IconTwitter: { icon: RiTwitterXFill, size: 24 },
+  IconInstagram: { icon: SiInstagram, size: 24 },
+  IconFerme: { icon: MdOutlineKeyboardArrowDown, size: 24 },
+  IconDiscord: { icon: FaDiscord, size: 24 },
+};
+
+const generatedIcons: Record<string, React.FC<any>> = {};
+
+Object.keys(iconsData).forEach((key) => {
+  const { icon: IconComponent, color, size } = iconsData[key];
+
+  generatedIcons[key] = memo((props: any) => (
+    <IconContext.Provider
+      value={{
+        color: props.color || color,
+        size: props.size ? String(props.size) : String(size || 24),
+      }}
+    >
+      <IconComponent {...props} />
+    </IconContext.Provider>
+  ));
+});
+
+export const {
+  IconReact,
+  IconCss,
+  IconTypeScript,
+  IconReactNative,
+  IconAndroidStudio,
+  IconAppStore,
+  IconGradle,
+  IconCode,
+  IconTelecharger,
+  IconJavaScript,
+  IconMongoDb,
+  IconKotlin,
+  IconGithub,
+  IconValise,
+  IconMail,
+  IconMySQL,
+  IconNodeJs,
+  IconDiplome,
+  IconMobile,
+  IconParchemin,
+  IconEmail,
+  IconMapPin,
+  IconSend,
+  IconLinkedIn,
+  IconTwitter,
+  IconInstagram,
+  IconFerme,
+  IconDiscord,
+} = generatedIcons;
 
 export const Puce = "\u2022";
