@@ -1,19 +1,31 @@
+import { lazy, Suspense } from "react";
 import "./App.css";
-import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { Contact } from "./page/Contact";
 import { Hero } from "./page/Hero";
-import { Parcours } from "./page/Parcours";
-import { Projects } from "./page/Projects";
+import { Footer } from "./components/Footer";
+
+// Lazy load non-critical sections
+const Parcours = lazy(() =>
+  import("./page/Parcours").then((module) => ({ default: module.Parcours }))
+);
+const Projects = lazy(() =>
+  import("./page/Projects").then((module) => ({ default: module.Projects }))
+);
+const Contact = lazy(() =>
+  import("./page/Contact").then((module) => ({ default: module.Contact }))
+);
 
 function App() {
   return (
     <main>
       <Header />
       <Hero />
-      <Parcours />
-      <Projects />
-      <Contact />
+      <Suspense fallback={<div />}>
+        <Parcours />
+        <Projects />
+        <Contact />
+      </Suspense>
+
       <Footer />
     </main>
   );
