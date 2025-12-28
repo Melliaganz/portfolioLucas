@@ -1,6 +1,7 @@
 import {
   FaCode,
   FaCss3,
+  FaDiscord,
   FaGraduationCap,
   FaLinkedin,
   FaMobile,
@@ -56,7 +57,7 @@ export const icons = {
   send: <IoSend size={24} />,
   linkedIn: <FaLinkedin size={24} />,
   twitter: <RiTwitterXFill size={24} />,
-  instagram: <SiInstagram size={24}/>,
-  ferme: <MdOutlineKeyboardArrowDown size={24} />
-
+  instagram: <SiInstagram size={24} />,
+  ferme: <MdOutlineKeyboardArrowDown size={24} />,
+  discord: <FaDiscord size={24} />,
 };

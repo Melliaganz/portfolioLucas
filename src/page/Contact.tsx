@@ -31,7 +31,7 @@ export const Contact = () => {
                     href="mailto:votre.email@exemple.com"
                     className={styles.detailLink}
                   >
-                    votre.email@exemple.com
+                    lucaslengranddev@gmail.com
                   </a>
                 </div>
               </div>
@@ -56,12 +56,7 @@ export const Contact = () => {
               <div className={styles.socialLinks}>
                 <a href="#" className={styles.socialBtn}>
                   <span className="material-symbols-outlined">
-                    {icons.code}
-                  </span>
-                </a>
-                <a href="#" className={styles.socialBtn}>
-                  <span className="material-symbols-outlined">
-                    {icons.valise}
+                    {icons.discord}
                   </span>
                 </a>
                 <a href="#" className={styles.socialBtn}>

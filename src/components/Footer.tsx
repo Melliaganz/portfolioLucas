@@ -5,7 +5,7 @@ import { currentYear } from "../utils/date";
 export const Footer = () => {
   const socialLinks = [
     { href: "#", icon: icons.github },
-    { href: "#", icon: icons.valise },
+    { href: "#", icon: icons.discord },
     { href: "#", icon: icons.mail },
     { href: "#", icon: icons.twitter },
     { href: "#", icon: icons.linkedIn },
