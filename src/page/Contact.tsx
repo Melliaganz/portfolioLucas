@@ -57,6 +57,8 @@ export const Contact = () => {
                 <a
                   href="https://discord.gg/7q5KAbqfdu"
                   className={styles.socialBtn}
+                  target="_blank"
+                  rel="noopener"
                 >
                   <span className="material-symbols-outlined">
                     {icons.discord}
@@ -65,6 +67,8 @@ export const Contact = () => {
                 <a
                   href="https://github.com/Melliaganz"
                   className={styles.socialBtn}
+                  target="_blank"
+                  rel="noopener"
                 >
                   <span className="material-symbols-outlined">
                     {icons.github}
@@ -73,6 +77,8 @@ export const Contact = () => {
                 <a
                   href="https://www.linkedin.com/in/lucaslengrand"
                   className={styles.socialBtn}
+                  target="_blank"
+                  rel="noopener"
                 >
                   <span className="material-symbols-outlined">
                     {icons.linkedIn}
@@ -81,6 +87,8 @@ export const Contact = () => {
                 <a
                   href="https://x.com/LucasLengrand2"
                   className={styles.socialBtn}
+                  target="_blank"
+                  rel="noopener"
                 >
                   <span className="material-symbols-outlined">
                     {icons.twitter}
@@ -89,6 +97,8 @@ export const Contact = () => {
                 <a
                   href="https://www.instagram.com/melliaganz/"
                   className={styles.socialBtn}
+                  target="_blank"
+                  rel="noopener"
                 >
                   <span className="material-symbols-outlined">
                     {icons.instagram}
@@ -97,6 +107,8 @@ export const Contact = () => {
                 <a
                   href="mailto:lucaslengranddev@gmail.com"
                   className={styles.socialBtn}
+                  target="_blank"
+                  rel="noopener"
                 >
                   <span className="material-symbols-outlined">
                     {icons.mail}
