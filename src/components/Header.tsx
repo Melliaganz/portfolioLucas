@@ -39,7 +39,8 @@ export const Header = () => {
             ))}
           </nav>
           <a
-            href="/public/CVLengrandLucas.pdf"
+            href="/CVLengrandLucas.pdf"
+            download="CV_Lengrand_Lucas.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.cvButton}
