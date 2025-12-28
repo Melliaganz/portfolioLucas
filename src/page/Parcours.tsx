@@ -95,7 +95,7 @@ export const Parcours = () => {
                   <h3 className={styles.jobTitle}>{exp.title}</h3>
                   <p className={styles.company}>
                     {exp.companyUrl ? (
-                      <a href={exp.companyUrl} target="_blank" rel="noopener">
+                      <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer">
                         {exp.company}
                       </a>
                     ) : (

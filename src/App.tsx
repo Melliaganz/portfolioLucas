@@ -4,7 +4,6 @@ import { Header } from "./components/Header";
 import { Hero } from "./page/Hero";
 import { Footer } from "./components/Footer";
 
-// Lazy load non-critical sections
 const Parcours = lazy(() =>
   import("./page/Parcours").then((module) => ({ default: module.Parcours }))
 );
