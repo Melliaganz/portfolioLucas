@@ -1,11 +1,17 @@
-import { TechStack, techNames } from "../components/TechStack";
+import { useMemo } from "react";
+import { TechStack } from "../components/TechStack";
+import { techNames } from "../utils/techData";
 import styles from "../styles/Hero.module.css";
 
 export const Hero = () => {
-  const displayedSkills = techNames
-    .slice(0, 6)
-    .map((skill) => `'${skill}'`)
-    .join(", ");
+  const displayedSkills = useMemo(
+    () =>
+      techNames
+        .slice(0, 6)
+        .map((skill) => `'${skill}'`)
+        .join(", "),
+    []
+  );
   return (
     <section id="about" className={styles.hero}>
       <div className={styles.haloPrimary} />
@@ -71,11 +77,11 @@ export const Hero = () => {
             </div>
             <div className={styles.profileImageWrapper}>
               <img
-                src="/lucasTravail.webp" 
+                src="/lucasTravail.webp"
                 alt="Lucas Lengrand"
                 className={styles.profileImage}
                 fetchPriority="high"
-                loading="eager" 
+                loading="eager"
                 sizes="(max-width: 600px) 480px, 800px"
               />
             </div>

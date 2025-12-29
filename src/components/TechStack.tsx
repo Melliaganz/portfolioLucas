@@ -1,20 +1,21 @@
 import type { Technology } from "../types/navigation";
 import styles from "../styles/TechStack.module.css";
+import { techNames } from "../utils/techData";
 import { IconAndroidStudio, IconAppStore, IconCss, IconGradle, IconJavaScript, IconKotlin, IconMongoDb, IconMySQL, IconNodeJs, IconReact, IconReactNative, IconTypeScript } from "../utils/icons.module";
 
 const technologies: Technology[] = [
-  { name: "React.js", icon: <IconReact /> },
-  { name: "TypeScript", icon: <IconTypeScript /> },
-  { name: "React Native", icon: <IconReactNative/> },
-  { name: "CSS3", icon: <IconCss /> },
-  { name: "Android Studio", icon: <IconAndroidStudio /> },
-  { name: "XCode", icon: <IconAppStore /> },
-  { name: "Gradle", icon: <IconGradle /> },
-  { name: "Javascript", icon: <IconJavaScript/>},
-  { name: "MongoDB", icon: <IconMongoDb /> },
-  { name: "Kotlin", icon: <IconKotlin/> },
-  { name: "MySQL", icon: <IconMySQL /> },
-  { name: "NodeJs", icon: <IconNodeJs /> },
+  { name: techNames[0], icon: <IconReact /> },
+  { name: techNames[1], icon: <IconTypeScript /> },
+  { name: techNames[2], icon: <IconReactNative/> },
+  { name: techNames[3], icon: <IconCss /> },
+  { name: techNames[4], icon: <IconAndroidStudio /> },
+  { name: techNames[5], icon: <IconAppStore /> },
+  { name: techNames[6], icon: <IconGradle /> },
+  { name: techNames[7], icon: <IconJavaScript/>},
+  { name: techNames[8], icon: <IconMongoDb /> },
+  { name: techNames[9], icon: <IconKotlin/> },
+  { name: techNames[10], icon: <IconMySQL /> },
+  { name: techNames[11], icon: <IconNodeJs /> },
 ];
 
 export const TechStack = () => {
@@ -41,8 +42,3 @@ export const TechStack = () => {
     </div>
   );
 };
-export const techNames = [
-  "React.js", "TypeScript", "React Native", "CSS3", 
-  "Android Studio", "XCode", "Gradle", "Javascript", 
-  "MongoDB", "Kotlin", "MySQL", "NodeJs"
-];

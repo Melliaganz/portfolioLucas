@@ -10,9 +10,8 @@ import { RiMapPin2Fill, RiTwitterXFill } from "react-icons/ri";
 import { SiAndroidstudio, SiGithub, SiGradle, SiInstagram, SiJavascript, SiKotlin, SiMailboxdotorg, SiMailgun, SiMongodb, SiMysql, SiNodedotjs, SiTypescript, SiXcode } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 
-// Petit composant wrapper pour garder la logique de couleur/taille
 const createIcon = (IconComponent: IconType, defaultColor?: string, defaultSize: number = 24) => {
-  const Icon = memo((props: any) => (
+  const Icon: React.FC<any> = memo((props: any) => (
     <IconContext.Provider
       value={{
         color: props.color || defaultColor,
@@ -22,11 +21,11 @@ const createIcon = (IconComponent: IconType, defaultColor?: string, defaultSize:
       <IconComponent {...props} />
     </IconContext.Provider>
   ));
+  
   Icon.displayName = `Icon_${IconComponent.name}`;
   return Icon;
 };
 
-// Exports statiques : Vite peut maintenant voir exactement ce qui est utilisé
 export const IconReact = createIcon(FaReact, "#61dafb");
 export const IconCss = createIcon(FaCss3, "#204de5");
 export const IconTypeScript = createIcon(SiTypescript, "#2d79c7");

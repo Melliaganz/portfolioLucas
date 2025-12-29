@@ -1,34 +1,43 @@
 // 1. Remplacez l'import de l'objet global par les exports nommés
 import { IconMobile, IconCode, IconDiplome } from "../utils/icons.module";
-import { getDgfipStoreLink } from "../utils/getStoreLink";
 
- interface Experience {
+interface Experience {
   id: string;
   title: string;
   company: string;
   companyUrl?: string;
   location: string;
   date: string;
-  intro?: string; 
-  description: string | string[]; 
-  isList: boolean; 
+  intro?: string;
+  description: string | string[];
+  isList: boolean;
   icon: React.ReactNode;
   isActive?: boolean;
 }
+const getSmartLink = () => {
+  if (typeof window === "undefined") return "https://www.impots.gouv.fr";
+  const ua = navigator.userAgent;
+  if (/iPad|iPhone|iPod/.test(ua))
+    return "https://apps.apple.com/fr/app/impots-gouv/id505488770";
+  if (/android/i.test(ua))
+    return "https://play.google.com/store/apps/details?id=fr.gouv.finances.smartphone.android";
+  return "https://www.impots.gouv.fr";
+};
 
 export const experiences: Experience[] = [
   {
     id: "dgfip",
     title: "Développeur Analyste pour application mobile",
     company: "DGFiP",
-    companyUrl: getDgfipStoreLink(),
+    companyUrl: getSmartLink(),
     location: "Montreuil",
     date: "2023 - Présent",
     // 2. Utilisez directement le nouveau composant d'icône
-    icon: <IconMobile />, 
+    icon: <IconMobile />,
     isActive: true,
     isList: true,
-    intro: "Développement de l'application mobile des impôts. Les travaux effectués sont :",
+    intro:
+      "Développement de l'application mobile des impôts. Les travaux effectués sont :",
     description: [
       "Étude des spécifications de la MOA",
       "Conception générale et détaillée",
@@ -36,8 +45,8 @@ export const experiences: Experience[] = [
       "Tests unitaires",
       "Mise en commun des codes sous Subversion",
       "Confection de l’APK et livraison à la MOA",
-      "Dépôt sur les stores Apple et Android"
-    ]
+      "Dépôt sur les stores Apple et Android",
+    ],
   },
   {
     id: "freelance",
@@ -49,7 +58,8 @@ export const experiences: Experience[] = [
     // 3. Appel de l'icône de code
     icon: <IconCode />,
     isList: false,
-    description: "Création d'un site vitrine entièrement développé en React pour la boutique Optique Chatenay. J'ai travaillé en étroite collaboration avec HecateStudio pour le design, en veillant à ce que celui-ci reflète parfaitement l'image de la boutique."
+    description:
+      "Création d'un site vitrine entièrement développé en React pour la boutique Optique Chatenay. J'ai travaillé en étroite collaboration avec HecateStudio pour le design, en veillant à ce que celui-ci reflète parfaitement l'image de la boutique.",
   },
   {
     id: "diplome",
@@ -61,6 +71,7 @@ export const experiences: Experience[] = [
     // 4. Appel de l'icône de diplôme
     icon: <IconDiplome />,
     isList: false,
-    description: "Formation intensive sur la construction de sites web Responsive et dynamiques, la création d'API et de bases de données, l'optimisation des performances et la gestion de projet de A à Z."
-  }
+    description:
+      "Formation intensive sur la construction de sites web Responsive et dynamiques, la création d'API et de bases de données, l'optimisation des performances et la gestion de projet de A à Z.",
+  },
 ];

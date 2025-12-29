@@ -5,8 +5,6 @@ import imagePiquante from "../assets/images/piquante.webp";
 import imageNetflix from "../assets/images/Netflix.webp";
 import imageImpots from "../assets/images/impots.webp";
 import logoDiscord from "../assets/images/discordLogoP.webp";
-import { getDgfipStoreLink } from "../utils/getStoreLink";
-import { currentYear } from "../utils/date";
 
 interface Project {
   id: number;
@@ -19,12 +17,13 @@ interface Project {
   githubUrl?: string;
   liveUrl?: string;
 }
+declare const __APP_YEAR__: string;
 
 export const projectsData: Project[] = [
   {
     id: 1,
     title: "Impots.gouv",
-    year: `2023-${currentYear}`,
+    year: `2023-${__APP_YEAR__}`,
     description:
       "Développeur / Analyste sur l'application mobile officielle. Conception, développements des CUs, gestion des livraisons APK/IPA et résolution d'incidents de production.",
     tags: [
@@ -37,7 +36,7 @@ export const projectsData: Project[] = [
     ],
     category: "Mobile",
     image: imageImpots,
-    liveUrl: getDgfipStoreLink(),
+    liveUrl: "dgfip_smart_link",
   },
   {
     id: 2,

@@ -2,20 +2,27 @@ import { useState, useMemo } from "react";
 import styles from "../styles/Projects.module.css";
 import { projectsData } from "../data/projectsData";
 
+const IOS_STORE = "https://apps.apple.com/fr/app/impots-gouv/id505488770";
+const ANDROID_STORE =
+  "https://play.google.com/store/apps/details?id=fr.gouv.finances.smartphone.android";
+const DESKTOP_SITE = "https://www.impots.gouv.fr";
+
 export const Projects = () => {
   const [filter, setFilter] = useState("Tout");
- const categories = useMemo(() => {
-    const allCategories = projectsData.map(p => p.category);
-    const allTags = projectsData.flatMap(p => p.tags);
-    
-    const uniqueFilters = Array.from(new Set([...allCategories, ...allTags])).sort();
-    
+  const categories = useMemo(() => {
+    const allCategories = projectsData.map((p) => p.category);
+    const allTags = projectsData.flatMap((p) => p.tags);
+
+    const uniqueFilters = Array.from(
+      new Set([...allCategories, ...allTags])
+    ).sort();
+
     return ["Tout", ...uniqueFilters];
   }, []);
 
   const filteredProjects = useMemo(() => {
     if (filter === "Tout") return projectsData;
-    
+
     return projectsData.filter(
       (p) => p.category === filter || p.tags.includes(filter)
     );
@@ -29,6 +36,15 @@ export const Projects = () => {
       ? [...filteredProjects, ...filteredProjects]
       : filteredProjects;
   }, [filteredProjects, shouldScroll]);
+
+  const handleSmartLink = (url: string) => {
+    if (url !== "dgfip_smart_link") return url;
+
+    const ua = navigator.userAgent;
+    if (/iPad|iPhone|iPod/.test(ua)) return IOS_STORE;
+    if (/android/i.test(ua)) return ANDROID_STORE;
+    return DESKTOP_SITE;
+  };
 
   return (
     <section id="projects" className={styles.projectsSection}>
@@ -69,6 +85,10 @@ export const Projects = () => {
                     src={project.image}
                     alt={project.title}
                     className={styles.image}
+                    loading="lazy"
+                    decoding="async"
+                    width="auto"
+                    height="auto"
                   />
                   <span className={styles.yearBadge}>{project.year}</span>
                 </div>
@@ -89,7 +109,7 @@ export const Projects = () => {
                       )}
                       {project.liveUrl && (
                         <a
-                          href={project.liveUrl}
+                          href={handleSmartLink(project.liveUrl)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className={styles.iconLink}

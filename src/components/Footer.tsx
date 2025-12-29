@@ -1,6 +1,6 @@
 import { IconDiscord, IconGithub, IconInstagram, IconLinkedIn, IconMail, IconTwitter } from "../utils/icons.module";
 import styles from "../styles/Footer.module.css"
-import { currentYear } from "../utils/date";
+declare const __APP_YEAR__: string;
 
 export const Footer = () => {
   const socialLinks = [
@@ -60,7 +60,7 @@ export const Footer = () => {
           </div>
 
           <p className={styles.copyright}>
-            © {currentYear} Lengrand Lucas. Tous droits réservés.
+            © {__APP_YEAR__} Lengrand Lucas. Tous droits réservés.
           </p>
         </div>
       </footer>
