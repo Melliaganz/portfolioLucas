@@ -25,7 +25,9 @@ export const Header = () => {
       <div className={styles.container}>
         {/* Logo Section */}
         <div className={styles.logo}>
-          <div className={styles.logoBox}><IconCode /></div>
+          <div className={styles.logoBox}>
+            <IconCode />
+          </div>
           <span className={styles.navTitre}>Lengrand Lucas</span>
         </div>
 
@@ -44,9 +46,12 @@ export const Header = () => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.cvButton}
+            aria-label="Télécharger mon CV au format PDF (ouvre une nouvelle fenêtre)"
           >
-            <IconTelecharger/>
-            CV
+            <IconTelecharger aria-hidden="true" />
+            <span>
+              CV <span className={styles.fileFormat}>(PDF)</span>
+            </span>
           </a>
         </div>
       </div>
