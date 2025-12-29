@@ -46,11 +46,14 @@ export const Header = () => {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.cvButton}
-            aria-label="Télécharger mon CV au format PDF (ouvre une nouvelle fenêtre)"
           >
             <IconTelecharger aria-hidden="true" />
             <span>
-              CV <span className={styles.fileFormat}>(PDF)</span>
+              CV
+              <span className={styles.fileFormat}>
+                <span className="sr-only"> au format </span>(PDF)
+                <span className="sr-only"> - Ouvre un nouvel onglet</span>
+              </span>
             </span>
           </a>
         </div>
