@@ -1,16 +1,33 @@
-import { memo } from "react";
-import { IconContext, IconType } from "react-icons";
-// On utilise les imports directs pour aider le Tree Shaking
-import { FaCode, FaCss3, FaGraduationCap, FaLinkedin, FaMobile, FaReact, FaDiscord } from "react-icons/fa";
-import { GiScrollQuill } from "react-icons/gi";
-import { IoMdDownload } from "react-icons/io";
-import { IoSend } from "react-icons/io5";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { RiMapPin2Fill, RiTwitterXFill } from "react-icons/ri";
-import { SiAndroidstudio, SiGithub, SiGradle, SiInstagram, SiJavascript, SiKotlin, SiMailboxdotorg, SiMailgun, SiMongodb, SiMysql, SiNodedotjs, SiTypescript, SiXcode } from "react-icons/si";
-import { TbBrandReactNative } from "react-icons/tb";
+import { memo } from 'react'
+import { IconContext, IconType } from 'react-icons'
+import { FaCode, FaCss3, FaDiscord, FaGraduationCap, FaLinkedin, FaMobile, FaReact } from 'react-icons/fa'
+import { GiScrollQuill } from 'react-icons/gi'
+import { IoMdDownload } from 'react-icons/io'
+import { IoSend } from 'react-icons/io5'
+import { MdEmail, MdOutlineKeyboardArrowDown } from 'react-icons/md'
+import { RiMapPin2Fill, RiTwitterXFill } from 'react-icons/ri'
+import {
+  SiAndroidstudio,
+  SiGithub,
+  SiGradle,
+  SiInstagram,
+  SiJavascript,
+  SiKotlin,
+  SiMailgun,
+  SiMongodb,
+  SiMysql,
+  SiNodedotjs,
+  SiTypescript,
+  SiXcode,
+} from 'react-icons/si'
+import { TbBrandReactNative } from 'react-icons/tb'
 
-const createIcon = (IconComponent: IconType, defaultColor?: string, defaultSize: number = 24) => {
+// On utilise les imports directs pour aider le Tree Shaking
+const createIcon = (
+  IconComponent: IconType,
+  defaultColor?: string,
+  defaultSize: number = 24
+) => {
   const Icon: React.FC<any> = memo((props: any) => (
     <IconContext.Provider
       value={{
@@ -21,7 +38,7 @@ const createIcon = (IconComponent: IconType, defaultColor?: string, defaultSize:
       <IconComponent {...props} />
     </IconContext.Provider>
   ));
-  
+
   Icon.displayName = `Icon_${IconComponent.name}`;
   return Icon;
 };
@@ -45,7 +62,7 @@ export const IconNodeJs = createIcon(SiNodedotjs, "#55b936");
 export const IconDiplome = createIcon(FaGraduationCap);
 export const IconMobile = createIcon(FaMobile);
 export const IconParchemin = createIcon(GiScrollQuill);
-export const IconEmail = createIcon(SiMailboxdotorg);
+export const IconEmail = createIcon(MdEmail);
 export const IconMapPin = createIcon(RiMapPin2Fill);
 export const IconSend = createIcon(IoSend);
 export const IconLinkedIn = createIcon(FaLinkedin);

@@ -77,8 +77,13 @@
   border: 1px solid #282e39;
   border-radius: 12px;
   color: #135bec;
+  flex-shrink: 0;
+  /* Suppression de l'overflow hidden s'il y en avait un */
+  overflow: visible;
 }
-
+.iconWrapper svg {
+  display: block;
+}
 .labelSmall {
   font-size: 0.85rem;
   color: #9da6b9;
@@ -187,6 +192,8 @@
 
 .selectWrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .select {
@@ -197,10 +204,12 @@
 .selectArrow {
   position: absolute;
   right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
   pointer-events: none;
   color: #9da6b9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .textarea {
@@ -228,5 +237,7 @@
 }
 
 .btnIcon {
-  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

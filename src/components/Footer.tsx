@@ -1,5 +1,6 @@
-import { IconDiscord, IconGithub, IconInstagram, IconLinkedIn, IconMail, IconTwitter } from "../utils/icons.module";
-import styles from "../styles/Footer.module.css"
+import styles from '../styles/Footer.module.css'
+import { IconDiscord, IconGithub, IconInstagram, IconLinkedIn, IconMail, IconTwitter } from '../utils/icons.module'
+
 declare const __APP_YEAR__: string;
 
 export const Footer = () => {
@@ -50,11 +51,7 @@ export const Footer = () => {
                 rel="noopener"
                 title={link.title}
               >
-                <span
-                  className={`material-symbols-outlined ${styles.iconText}`}
-                >
-                  {link.icon}
-                </span>
+                {link.icon}
               </a>
             ))}
           </div>

@@ -24,6 +24,7 @@
   background-color: #3b82f6;
   color: white;
   box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+  line-height: 0; 
 }
 
 .titleMain {
@@ -83,8 +84,15 @@
   background-color: #161b26;
   color: #9ca3af;
   z-index: 1;
+  line-height: 0;
+  overflow: hidden; 
 }
-
+.iconSmall, .headerIcon {
+  display: block;
+  font-size: 1.25rem;
+  width: auto;
+  height: auto;
+}
 .activeIcon {
   border-color: #3b82f6;
   color: #3b82f6;

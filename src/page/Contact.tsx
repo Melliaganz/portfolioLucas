@@ -1,5 +1,15 @@
-import styles from "../styles/Contact.module.css";
-import { IconDiscord, IconEmail, IconFerme, IconGithub, IconInstagram, IconLinkedIn, IconMapPin, IconSend, IconTwitter } from "../utils/icons.module";
+import styles from '../styles/Contact.module.css'
+import {
+  IconDiscord,
+  IconEmail,
+  IconFerme,
+  IconGithub,
+  IconInstagram,
+  IconLinkedIn,
+  IconMapPin,
+  IconSend,
+  IconTwitter,
+} from '../utils/icons.module'
 
 export const Contact = () => {
   return (
@@ -19,11 +29,7 @@ export const Contact = () => {
             <div className={styles.contactDetails}>
               <div className={styles.detailItem}>
                 <div className={styles.iconWrapper}>
-                  <span
-                    className={`material-symbols-outlined ${styles.navIcon}`}
-                  >
-                   <IconEmail />
-                  </span>
+                  <IconEmail />
                 </div>
                 <div className={styles.detailText}>
                   <p className={styles.labelSmall}>Email me at</p>
@@ -38,11 +44,7 @@ export const Contact = () => {
 
               <div className={styles.detailItem}>
                 <div className={styles.iconWrapper}>
-                  <span
-                    className={`material-symbols-outlined ${styles.navIcon}`}
-                  >
-                    <IconMapPin />
-                  </span>
+                  <IconMapPin />
                 </div>
                 <div className={styles.detailText}>
                   <p className={styles.labelSmall}>Based in</p>
@@ -61,9 +63,7 @@ export const Contact = () => {
                   rel="noopener"
                   title="Mon discord"
                 >
-                  <span className="material-symbols-outlined">
-                    <IconDiscord />
-                  </span>
+                  <IconDiscord />
                 </a>
                 <a
                   href="https://github.com/Melliaganz"
@@ -72,9 +72,7 @@ export const Contact = () => {
                   rel="noopener"
                   title="Mon Github"
                 >
-                  <span className="material-symbols-outlined">
-                    <IconGithub />
-                  </span>
+                  <IconGithub />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/lucaslengrand"
@@ -83,9 +81,7 @@ export const Contact = () => {
                   rel="noopener"
                   title="Mon LinkedIn"
                 >
-                  <span className="material-symbols-outlined">
-                    <IconLinkedIn />
-                  </span>
+                  <IconLinkedIn />
                 </a>
                 <a
                   href="https://x.com/LucasLengrand2"
@@ -94,9 +90,7 @@ export const Contact = () => {
                   rel="noopener"
                   title="Mon Discord"
                 >
-                  <span className="material-symbols-outlined">
-                    <IconTwitter />
-                  </span>
+                  <IconTwitter />
                 </a>
                 <a
                   href="https://www.instagram.com/melliaganz/"
@@ -105,9 +99,7 @@ export const Contact = () => {
                   rel="noopener"
                   title="Mon Instagram"
                 >
-                  <span className="material-symbols-outlined">
-                    <IconInstagram />
-                  </span>
+                  <IconInstagram />
                 </a>
                 <a
                   href="mailto:lucaslengranddev@gmail.com"
@@ -116,9 +108,7 @@ export const Contact = () => {
                   rel="noopener"
                   title="Mon mail"
                 >
-                  <span className="material-symbols-outlined">
-                    <IconEmail />
-                  </span>
+                  <IconEmail />
                 </a>
               </div>
             </div>
