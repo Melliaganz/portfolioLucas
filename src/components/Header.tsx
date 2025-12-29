@@ -52,7 +52,6 @@ export const Header = () => {
               CV
               <span className={styles.fileFormat}>
                 <span className="sr-only"> au format </span>(PDF)
-                <span className="sr-only"> - Ouvre un nouvel onglet</span>
               </span>
             </span>
           </a>
