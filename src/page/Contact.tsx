@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import styles from '../styles/Contact.module.css'
 import {
   IconDiscord,
@@ -12,6 +14,42 @@ import {
 } from '../utils/icons.module'
 
 export const Contact = () => {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  
+const apiKey = import.meta.env.VITE_API_FORM;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    const formData = new FormData(e.currentTarget);
+    
+    if (apiKey) {
+      formData.append("access_key", apiKey);
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus("success");
+        (e.target as HTMLFormElement).reset();
+        
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi:", error);
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className={styles.contactSection}>
       <div className={styles.container}>
@@ -34,7 +72,7 @@ export const Contact = () => {
                 <div className={styles.detailText}>
                   <p className={styles.labelSmall}>Email me at</p>
                   <a
-                    href="mailto:votre.email@exemple.com"
+                    href="mailto:lucaslengranddev@gmail.com"
                     className={styles.detailLink}
                   >
                     lucaslengranddev@gmail.com
@@ -56,58 +94,22 @@ export const Contact = () => {
             <div className={styles.socialGroup}>
               <p className={styles.socialTitle}>Suivez-moi</p>
               <div className={styles.socialLinks}>
-                <a
-                  href="https://discord.gg/7q5KAbqfdu"
-                  className={styles.socialBtn}
-                  target="_blank"
-                  rel="noopener"
-                  title="Mon discord"
-                >
+                <a href="https://discord.gg/7q5KAbqfdu" className={styles.socialBtn} target="_blank" rel="noopener" title="Mon discord">
                   <IconDiscord />
                 </a>
-                <a
-                  href="https://github.com/Melliaganz"
-                  className={styles.socialBtn}
-                  target="_blank"
-                  rel="noopener"
-                  title="Mon Github"
-                >
+                <a href="https://github.com/Melliaganz" className={styles.socialBtn} target="_blank" rel="noopener" title="Mon Github">
                   <IconGithub />
                 </a>
-                <a
-                  href="https://www.linkedin.com/in/lucaslengrand"
-                  className={styles.socialBtn}
-                  target="_blank"
-                  rel="noopener"
-                  title="Mon LinkedIn"
-                >
+                <a href="https://www.linkedin.com/in/lucaslengrand" className={styles.socialBtn} target="_blank" rel="noopener" title="Mon LinkedIn">
                   <IconLinkedIn />
                 </a>
-                <a
-                  href="https://x.com/LucasLengrand2"
-                  className={styles.socialBtn}
-                  target="_blank"
-                  rel="noopener"
-                  title="Mon Discord"
-                >
+                <a href="https://x.com/LucasLengrand2" className={styles.socialBtn} target="_blank" rel="noopener" title="Mon Twitter">
                   <IconTwitter />
                 </a>
-                <a
-                  href="https://www.instagram.com/melliaganz/"
-                  className={styles.socialBtn}
-                  target="_blank"
-                  rel="noopener"
-                  title="Mon Instagram"
-                >
+                <a href="https://www.instagram.com/melliaganz/" className={styles.socialBtn} target="_blank" rel="noopener" title="Mon Instagram">
                   <IconInstagram />
                 </a>
-                <a
-                  href="mailto:lucaslengranddev@gmail.com"
-                  className={styles.socialBtn}
-                  target="_blank"
-                  rel="noopener"
-                  title="Mon mail"
-                >
+                <a href="mailto:lucaslengranddev@gmail.com" className={styles.socialBtn} target="_blank" rel="noopener" title="Mon mail">
                   <IconEmail />
                 </a>
               </div>
@@ -116,11 +118,15 @@ export const Contact = () => {
 
           <div className={styles.formCard}>
             <h2 className={styles.formTitle}>Envoyer un message</h2>
-            <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+            
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <input type="checkbox" name="botcheck" style={{ display: "none" }} />
+
               <div className={styles.row}>
                 <label className={styles.inputLabel}>
                   Nom
                   <input
+                    name="name"
                     type="text"
                     placeholder="John Doe"
                     className={styles.input}
@@ -130,6 +136,7 @@ export const Contact = () => {
                 <label className={styles.inputLabel}>
                   Email
                   <input
+                    name="email"
                     type="email"
                     placeholder="john@example.com"
                     className={styles.input}
@@ -141,14 +148,12 @@ export const Contact = () => {
               <label className={styles.inputLabel}>
                 Sujet
                 <div className={styles.selectWrapper}>
-                  <select className={styles.select}>
-                    <option>Demande de projet</option>
-                    <option>Opportunité freelance</option>
-                    <option>Question générale</option>
+                  <select name="subject" className={styles.select} required>
+                    <option value="Demande de projet">Demande de projet</option>
+                    <option value="Opportunité freelance">Opportunité freelance</option>
+                    <option value="Question générale">Question générale</option>
                   </select>
-                  <span
-                    className={`material-symbols-outlined ${styles.selectArrow}`}
-                  >
+                  <span className={styles.selectArrow}>
                     <IconFerme />
                   </span>
                 </div>
@@ -157,18 +162,33 @@ export const Contact = () => {
               <label className={styles.inputLabel}>
                 Message
                 <textarea
+                  name="message"
                   placeholder="Décrivez votre projet, vos délais et vos objectifs..."
                   className={styles.textarea}
                   required
                 />
               </label>
 
-              <button type="submit" className={styles.submitBtn}>
-                <span>Envoyer</span>
-                <span className={`material-symbols-outlined ${styles.btnIcon}`}>
+              <button 
+                type="submit" 
+                className={`${styles.submitBtn} ${status === "loading" ? styles.loading : ""}`}
+                disabled={status === "loading"}
+              >
+                <span>
+                  {status === "loading" ? "Envoi en cours..." : 
+                   status === "success" ? "Message envoyé !" : 
+                   "Envoyer"}
+                </span>
+                <span className={styles.btnIcon}>
                   <IconSend />
                 </span>
               </button>
+
+              {status === "error" && (
+                <p className={styles.errorMessage}>
+                  Désolé, une erreur est survenue. Veuillez réessayer.
+                </p>
+              )}
             </form>
           </div>
         </div>
