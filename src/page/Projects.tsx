@@ -68,8 +68,8 @@ export const Projects = () => {
           <h2 className={styles.title}>Mes Projets</h2>
           <p className={styles.subtitle}>
             {shouldScroll
-              ? "Découvrez mes réalisations (cliquez et glissez pour explorer)."
-              : "Mes réalisations pour cette catégorie."}
+              ? "Découvrez mes projets (cliquez et glissez pour explorer)."
+              : "Mes projets pour cette catégorie."}
           </p>
         </div>
 

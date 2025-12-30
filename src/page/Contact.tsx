@@ -72,7 +72,7 @@ export const Contact = () => {
                   <IconEmail />
                 </div>
                 <div className={styles.detailText}>
-                  <p className={styles.labelSmall}>Email me at</p>
+                  <p className={styles.labelSmall}>Envoyez moi un mèl à cet adresse</p>
                   <a
                     href="mailto:lucaslengranddev@gmail.com"
                     className={styles.detailLink}
@@ -87,7 +87,7 @@ export const Contact = () => {
                   <IconMapPin />
                 </div>
                 <div className={styles.detailText}>
-                  <p className={styles.labelSmall}>Based in</p>
+                  <p className={styles.labelSmall}>J'habite près de</p>
                   <span className={styles.staticDetail}>Paris, France</span>
                 </div>
               </div>
@@ -158,7 +158,6 @@ export const Contact = () => {
             <h2 className={styles.formTitle}>Envoyer un message</h2>
 
             <form className={styles.form} onSubmit={handleSubmit}>
-              {/* Honeypot avec aria-label pour l'accessibilité */}
               <input
                 type="checkbox"
                 id="botcheck"
