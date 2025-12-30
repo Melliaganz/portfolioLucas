@@ -7,14 +7,19 @@ export default defineConfig({
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
   build: {
+    cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'react-core';
+          }
+          if (id.includes('node_modules/react-icons')) {
+            return 'ui-icons';
           }
         }
       }
-    }
+    },
+    chunkSizeWarningLimit: 600,
   }
-})
+});
