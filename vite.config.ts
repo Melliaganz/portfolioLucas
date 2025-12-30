@@ -1,8 +1,12 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"; // Importe le plugin
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    cssInjectedByJsPlugin(), // Ajoute-le à la liste des plugins
+  ],
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
