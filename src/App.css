@@ -5,7 +5,6 @@
   --color-surface-light: #1e293b;
 }
 
-/* On force le background sur le body */
 :root {
   --primary: #135bec;
   --background-dark: #101622;
@@ -14,45 +13,82 @@
   --text-main: #ffffff;
   --text-muted: #94a3b8;
   --font-display: "Inter", sans-serif;
+
+  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --section-spacing: clamp(3rem, 10vh, 8rem);
+  --container-padding: clamp(1rem, 5vw, 2rem);
 }
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   width: 100%;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  font-size: var(--font-size-base);
+  background-color: var(--background-dark);
+  color: var(--text-main);
+  overflow-x: hidden; 
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  font-family: var(--font-display);
+}
+/* App.css */
 main {
   width: 100%;
+  flex: 1 0 auto; 
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
 }
+
+footer {
+  flex-shrink: 0;
+}
+
+main > section {
+  padding: var(--section-spacing) 0;
+}
+
+/* App.css */
 #root {
-  text-align: center;
+  width: 100%;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
-  height: 6em;
+  height: clamp(3em, 10vw, 6em); 
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Animations */
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -62,9 +98,18 @@ main {
 }
 
 .card {
-  padding: 2em;
+  padding: clamp(1rem, 3vw, 2rem); 
+  background: var(--surface-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  #root {
+    text-align: left; 
+  }
 }
