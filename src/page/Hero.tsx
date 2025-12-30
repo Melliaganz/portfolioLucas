@@ -38,8 +38,13 @@ export const Hero = () => {
           <TechStack />
 
           <div className={styles.buttonGroup}>
-            <button className={styles.btnPrimary}>Voir mes projets</button>
-            <button className={styles.btnSecondary}>Me contacter</button>
+            <a href="#projects" className={styles.btnPrimary}>
+              Voir mes projets
+            </a>
+
+            <a href="#contact" className={styles.btnSecondary}>
+              Me contacter
+            </a>
           </div>
         </div>
 

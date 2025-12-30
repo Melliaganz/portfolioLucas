@@ -99,7 +99,13 @@
   gap: 16px;
   margin-top: 12px;
 }
-
+.btnPrimary, .btnSecondary {
+  display: inline-flex; /* ou inline-block */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Enlever le soulignement par défaut des liens */
+  cursor: pointer;
+}
 .btnPrimary {
   background-color: #135bec;
   color: white;

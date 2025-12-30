@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import type { Technology } from "../types/navigation";
 import styles from "../styles/TechStack.module.css";
 import { techNames } from "../utils/techData";
@@ -19,20 +20,46 @@ const technologies: Technology[] = [
 ];
 
 export const TechStack = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // Gestion du début du clic
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    // On enregistre la position de départ de la souris et du scroll actuel
+    setStartX(e.pageX - (scrollRef.current?.offsetLeft || 0));
+    setScrollLeft(scrollRef.current?.scrollLeft || 0);
+  };
+
+  // Gestion du mouvement
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5; // Multiplicateur pour la vitesse de scroll
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const stopDragging = () => setIsDragging(false);
+
   return (
     <div className={styles.stackContainer}>
       <p className={styles.title}>Stack technique principale</p>
       
-      <div className={styles.marqueeContainer}>
+      <div 
+        className={`${styles.marqueeContainer} ${isDragging ? styles.isDragging : ""}`}
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={stopDragging}
+        onMouseLeave={stopDragging}
+      >
         <div className={styles.marqueeTrack}>
-          {technologies.map((tech, index) => (
-            <div key={`first-${index}`} className={styles.badge}>
-              <span className={styles.icon}>{tech.icon}</span>
-              <span className={styles.techName}>{tech.name}</span>
-            </div>
-          ))}
-          {technologies.map((tech, index) => (
-            <div key={`second-${index}`} className={styles.badge}>
+          {/* On boucle 3 fois au lieu de 2 pour s'assurer que l'espace est toujours rempli lors du drag manuel */}
+          {[...technologies, ...technologies, ...technologies].map((tech, index) => (
+            <div key={index} className={styles.badge}>
               <span className={styles.icon}>{tech.icon}</span>
               <span className={styles.techName}>{tech.name}</span>
             </div>
