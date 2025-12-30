@@ -20,7 +20,7 @@ const getSmartLink = (url: string) => {
 };
 
 // --- Sous-composant ProjectCard ---
-const ProjectCard = ({ project, index }: { project: any; index: number }) => (
+const ProjectCard = ({ project }: { project: any; index: number }) => (
   <article className={styles.card}>
     <div className={styles.imageWrapper}>
       <img 
