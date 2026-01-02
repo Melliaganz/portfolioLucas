@@ -20,8 +20,11 @@ const viteConfig = defineConfig({
   },
   resolve: {
     alias: {
-      // Force la redirection si un module tente d'appeler la version next par erreur
       "@vercel/speed-insights/next": "@vercel/speed-insights/react",
+      "react": "preact/compat",
+      "react-dom/test-utils": "preact/test-utils",
+      "react-dom": "preact/compat",
+      "react/jsx-runtime": "preact/jsx-runtime",
     },
   },
   build: {
@@ -29,7 +32,7 @@ const viteConfig = defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+          if (id.includes('node_modules/preact/') || id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
             return 'react-core';
           }
           if (id.includes('node_modules/react-icons')) {
