@@ -18,6 +18,12 @@ const viteConfig = defineConfig({
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
+  resolve: {
+    alias: {
+      // Force la redirection si un module tente d'appeler la version next par erreur
+      "@vercel/speed-insights/next": "@vercel/speed-insights/react",
+    },
+  },
   build: {
     cssMinify: 'esbuild', 
     rollupOptions: {
