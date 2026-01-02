@@ -3,6 +3,7 @@ import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import Sitemap from 'vite-plugin-sitemap';
+import { viteSingleFile } from "vite-plugin-singlefile";
 
 const viteConfig = defineConfig({
   plugins: [
@@ -14,6 +15,8 @@ const viteConfig = defineConfig({
       generateRobotsTxt: true,
       dynamicRoutes: ['/'],
     }),
+    // Ce plugin va inclure votre JS directement dans l'index.html
+    viteSingleFile(),
   ],
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
@@ -28,23 +31,12 @@ const viteConfig = defineConfig({
     },
   },
   build: {
-    modulePreload: {
-      polyfill: false,
-    },
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/preact/') || id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
-            return 'react-core';
-          }
-          if (id.includes('node_modules/react-icons')) {
-            return 'ui-icons';
-          }
-        }
+        manualChunks: undefined, // On désactive les chunks pour tout mettre dans le HTML
       }
     },
-    chunkSizeWarningLimit: 600,
   }
 });
 
