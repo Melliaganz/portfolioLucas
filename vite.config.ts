@@ -1,11 +1,19 @@
-import { defineConfig } from "vite";
+import { defineConfig, mergeConfig } from "vite";
+import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"; // Importe le plugin
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import Sitemap from 'vite-plugin-sitemap';
 
-export default defineConfig({
+const viteConfig = defineConfig({
   plugins: [
     react(),
-    cssInjectedByJsPlugin(), // Ajoute-le à la liste des plugins
+    cssInjectedByJsPlugin(),
+    Sitemap({ 
+      hostname: 'https://www.ton-portfolio.fr', // À remplacer par ton vrai domaine
+      readable: true,
+      generateRobotsTxt: true,
+      dynamicRoutes: ['/']
+    }),
   ],
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
@@ -27,3 +35,14 @@ export default defineConfig({
     chunkSizeWarningLimit: 600,
   }
 });
+
+const vitestConfig = defineVitestConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts',
+    include: ['src/**/*.{test,spec}.{ts,tsx}'],
+  },
+});
+
+export default mergeConfig(viteConfig, vitestConfig);
