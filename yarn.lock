@@ -2956,6 +2956,7 @@ __metadata:
     react-dom: "npm:^19.2.3"
     react-icons: "npm:^5.5.0"
     rimraf: "npm:^6.1.2"
+    rollup: "npm:^4.44.1"
     rollup-plugin-visualizer: "npm:^6.0.5"
     typescript: "npm:~5.9.3"
     typescript-eslint: "npm:^8.51.0"
@@ -3210,7 +3211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^4.43.0":
+"rollup@npm:^4.43.0, rollup@npm:^4.44.1":
   version: 4.54.0
   resolution: "rollup@npm:4.54.0"
   dependencies:
