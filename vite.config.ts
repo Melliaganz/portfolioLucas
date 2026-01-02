@@ -13,14 +13,12 @@ const viteConfig = defineConfig({
       readable: true,
       generateRobotsTxt: true,
       dynamicRoutes: ['/'],
-      outDir: 'dist'
     }),
   ],
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
   build: {
-    outDir: 'dist',
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
