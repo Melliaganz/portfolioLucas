@@ -9,16 +9,18 @@ const viteConfig = defineConfig({
     react(),
     cssInjectedByJsPlugin(),
     Sitemap({ 
-      hostname: 'https://www.ton-portfolio.fr', // À remplacer par ton vrai domaine
+      hostname: 'https://www.lengrandlucas.com',
       readable: true,
       generateRobotsTxt: true,
-      dynamicRoutes: ['/']
+      dynamicRoutes: ['/'],
+      outDir: 'dist'
     }),
   ],
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
   build: {
+    outDir: 'dist',
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
