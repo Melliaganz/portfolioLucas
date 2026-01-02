@@ -28,6 +28,9 @@ const viteConfig = defineConfig({
     },
   },
   build: {
+    modulePreload: {
+      polyfill: false,
+    },
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
