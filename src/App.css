@@ -22,44 +22,64 @@
   box-sizing: border-box;
 }
 
-html {
+html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
-  font-size: var(--font-size-base);
   background-color: var(--background-dark);
   color: var(--text-main);
-  overflow-x: hidden;
+  /* Empêche le scroll horizontal et stabilise le scroll vertical */
+  overflow-x: hidden; 
+  position: relative;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: var(--font-size-base);
 }
 
 body {
-  margin: 0;
-  padding: 0;
   line-height: 1.5;
   font-family: var(--font-display);
+  min-height: 100dvh;
+}
+
+#root {
+  width: 100%;
+  /* Changement ici : min-height au lieu de height pour laisser le contenu grandir */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  /* Force le root à contenir toutes les marges de ses enfants */
+  display: flow-root; 
+}
+
+/* Si tu utilises Flexbox sur root, utilise cette version alternative : */
+#root {
+  display: flex;
+  flex-direction: column;
 }
 
 main {
   width: 100%;
-  flex: 1 0 auto;
+  /* flex-grow: 1 permet de prendre toute la place, mais 0 en shrink évite de pousser le footer */
+  flex: 1 0 auto; 
   display: flex;
   flex-direction: column;
 }
 
 footer {
   flex-shrink: 0;
+  width: 100%;
+  /* On s'assure qu'aucune marge ne dépasse en bas */
+  margin-bottom: 0; 
 }
 
 main > section {
   padding: var(--section-spacing) 0;
-}
-
-#root {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  /* Empêche les éléments animés dans les sections de créer du scroll */
+  overflow: hidden; 
 }
 
 .logo {
@@ -117,14 +137,15 @@ img {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10000;
   padding: var(--container-padding);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   animation: fadeIn 0.3s ease-out;
 }
