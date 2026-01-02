@@ -3,7 +3,9 @@ import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import Sitemap from 'vite-plugin-sitemap';
-import { viteSingleFile } from "vite-plugin-singlefile";
+
+// Détection de l'environnement Vitest
+const isVitest = process.env.VITEST === "true";
 
 const viteConfig = defineConfig({
   plugins: [
@@ -15,8 +17,6 @@ const viteConfig = defineConfig({
       generateRobotsTxt: true,
       dynamicRoutes: ['/'],
     }),
-    // Ce plugin va inclure votre JS directement dans l'index.html
-    viteSingleFile(),
   ],
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
@@ -24,19 +24,33 @@ const viteConfig = defineConfig({
   resolve: {
     alias: {
       "@vercel/speed-insights/next": "@vercel/speed-insights/react",
-      "react": "preact/compat",
-      "react-dom/test-utils": "preact/test-utils",
-      "react-dom": "preact/compat",
-      "react/jsx-runtime": "preact/jsx-runtime",
+      // On applique Preact uniquement si on n'est pas en mode test
+      ...(!isVitest ? {
+        "react": "preact/compat",
+        "react-dom/test-utils": "preact/test-utils",
+        "react-dom": "preact/compat",
+        "react/jsx-runtime": "preact/jsx-runtime",
+      } : {}),
     },
   },
   build: {
+    modulePreload: {
+      polyfill: false,
+    },
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
-        manualChunks: undefined, // On désactive les chunks pour tout mettre dans le HTML
+        manualChunks(id) {
+          if (id.includes('node_modules/preact/') || id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'react-core';
+          }
+          if (id.includes('node_modules/react-icons')) {
+            return 'ui-icons';
+          }
+        }
       }
     },
+    chunkSizeWarningLimit: 600,
   }
 });
 
