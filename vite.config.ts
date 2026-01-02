@@ -3,8 +3,8 @@ import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import Sitemap from 'vite-plugin-sitemap';
+import { viteSingleFile } from "vite-plugin-singlefile";
 
-// Détection de l'environnement Vitest
 const isVitest = process.env.VITEST === "true";
 
 const viteConfig = defineConfig({
@@ -17,6 +17,8 @@ const viteConfig = defineConfig({
       generateRobotsTxt: true,
       dynamicRoutes: ['/'],
     }),
+    // On n'inline le fichier QUE pour le build de production, pas pour les tests
+    ...(!isVitest ? [viteSingleFile()] : []),
   ],
   define: {
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
@@ -24,7 +26,6 @@ const viteConfig = defineConfig({
   resolve: {
     alias: {
       "@vercel/speed-insights/next": "@vercel/speed-insights/react",
-      // On applique Preact uniquement si on n'est pas en mode test
       ...(!isVitest ? {
         "react": "preact/compat",
         "react-dom/test-utils": "preact/test-utils",
@@ -40,7 +41,8 @@ const viteConfig = defineConfig({
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
-        manualChunks(id) {
+        // En mode singleFile, on ne veut pas de chunks séparés
+        manualChunks: !isVitest ? undefined : (id) => {
           if (id.includes('node_modules/preact/') || id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
             return 'react-core';
           }
