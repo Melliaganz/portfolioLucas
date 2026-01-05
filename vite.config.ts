@@ -17,7 +17,6 @@ const viteConfig = defineConfig({
       generateRobotsTxt: true,
       dynamicRoutes: ['/'],
     }),
-    // On n'inline le fichier QUE pour le build de production, pas pour les tests
     ...(!isVitest ? [viteSingleFile()] : []),
   ],
   define: {
@@ -41,7 +40,6 @@ const viteConfig = defineConfig({
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
-        // En mode singleFile, on ne veut pas de chunks séparés
         manualChunks: !isVitest ? undefined : (id) => {
           if (id.includes('node_modules/preact/') || id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
             return 'react-core';
