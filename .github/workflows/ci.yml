@@ -2,9 +2,9 @@ name: CI Portfolio
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
 
 jobs:
   test-and-build:
@@ -29,7 +29,7 @@ jobs:
         run: yarn install --immutable
 
       - name: Run Tests
-        run: yarn test:run
+        run: yarn vitest run --no-threads
 
       - name: Build Project
         run: yarn build
