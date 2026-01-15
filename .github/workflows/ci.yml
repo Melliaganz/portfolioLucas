@@ -9,7 +9,6 @@ on:
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,9 +28,9 @@ jobs:
         run: yarn install --immutable
 
       - name: Run Tests
-        run: yarn test:run --poolOptions.forks.execArgv="--loader .pnp.loader.mjs"
+        run: yarn test:run
         env:
-          NODE_OPTIONS: "--loader ./.pnp.loader.mjs"
+          NODE_OPTIONS: "--import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"./.pnp.loader.mjs\", pathToFileURL(\"./\"));'"
 
       - name: Build Project
         run: yarn build
