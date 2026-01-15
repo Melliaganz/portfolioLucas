@@ -34,14 +34,10 @@ const viteConfig = defineConfig({
     },
   },
   build: {
-    modulePreload: {
-      polyfill: false,
-    },
+    modulePreload: { polyfill: false },
     cssMinify: 'esbuild', 
     rollupOptions: {
-      output: {
-        manualChunks: undefined 
-      }
+      output: { manualChunks: undefined }
     },
     chunkSizeWarningLimit: 600,
   }
@@ -53,12 +49,13 @@ const vitestConfig = defineVitestConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
-    // Vitest 4+ : Les options de pool sont désormais à la racine
-    // On désactive l'isolation des processus qui casse le loader PnP de Yarn
-    pool: 'forks',
-    forksOptions: {
-      singleFork: true,
-    },
+    // On peut revenir à une config standard
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        singleThread: true,
+      }
+    }
   } as any,
 });
 

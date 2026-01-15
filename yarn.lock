@@ -3722,6 +3722,9 @@ __metadata:
     vite-plugin-singlefile: "npm:^2.3.0"
     vite-plugin-sitemap: "npm:^0.8.2"
     vitest: "npm:^4.0.17"
+  dependenciesMeta:
+    "@exodus/bytes@1.8.0":
+      unplugged: true
   languageName: unknown
   linkType: soft
 

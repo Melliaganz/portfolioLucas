@@ -45,5 +45,10 @@
     "vite-plugin-sitemap": "^0.8.2",
     "vitest": "^4.0.17"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.12.0",
+  "dependenciesMeta": {
+    "@exodus/bytes@1.8.0": {
+      "unplugged": true
+    }
+  }
 }

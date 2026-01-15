@@ -2,14 +2,13 @@ name: CI Portfolio
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,13 +22,15 @@ jobs:
         run: corepack enable
 
       - name: Set Yarn Version
-        run: corepack prepare yarn@4.12.0 --activate
+        run: yarn set version 4.12.0
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: |
+          yarn config set nodeLinker node-modules
+          yarn install
 
       - name: Run Tests
         run: yarn test:run
 
-      - name: Build Project
+      - name: Build
         run: yarn build
