@@ -29,7 +29,9 @@ jobs:
         run: yarn install --immutable
 
       - name: Run Tests
-        run: yarn test:run
+        run: yarn test:run --poolOptions.forks.execArgv="--loader .pnp.loader.mjs"
+        env:
+          NODE_OPTIONS: "--loader ./.pnp.loader.mjs"
 
       - name: Build Project
         run: yarn build
