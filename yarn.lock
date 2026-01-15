@@ -586,7 +586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@exodus/bytes@npm:^1.6.0":
+"@exodus/bytes@npm:*, @exodus/bytes@npm:^1.6.0":
   version: 1.8.0
   resolution: "@exodus/bytes@npm:1.8.0"
   peerDependencies:
