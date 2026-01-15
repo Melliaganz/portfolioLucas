@@ -44,7 +44,7 @@ export const projectsData: Project[] = [
     year: "2024",
     description:
       "Bot Discord multi-serveur spécialisé dans la lecture musicale haute fidélité avec intégration des API Spotify et YouTube.",
-    tags: ["Java", "JDA", "Spotify API", "YouTube API"],
+    tags: ["NodeJS", "Typescript", "Spotify API", "YouTube API", "Docker"],
     category: "Backend",
     image: logoDiscord,
     githubUrl: "https://github.com/Melliaganz/MellianBotV2",
