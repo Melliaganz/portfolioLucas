@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#101622" />
 
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      img-src 'self' data: https:;
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self' https://vitals.vercel-insights.com;
+      upgrade-insecure-requests;
+    ">
+
     <title>Lucas Lengrand | Développeur Fullstack React & Mobile</title>
-    <meta
-      name="description"
-      content="Découvrez le portfolio de Lucas Lengrand, développeur Fullstack spécialisé en React, TypeScript et Kotlin."
-    />
+    <meta name="description" content="Découvrez le portfolio de Lucas Lengrand, développeur Fullstack spécialisé en React, TypeScript et Kotlin." />
     <meta name="author" content="Lucas Lengrand" />
     <link rel="canonical" href="https://www.lengrandlucas.com/" />
+
+    <link rel="preload" as="image" href="/lucasTravail.webp" fetchpriority="high" />
 
     <style>
       :root {
@@ -21,9 +30,7 @@
         --text-main: #ffffff;
         --font-display: "Inter", system-ui, -apple-system, sans-serif;
       }
-
-      html,
-      body {
+      html, body {
         width: 100%;
         margin: 0;
         padding: 0;
@@ -40,14 +47,12 @@
         opacity: 1 !important;
         text-rendering: optimizeSpeed;
       }
-
       #root:empty {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
       }
-
       #root:empty::after {
         content: "Lucas Lengrand";
         color: var(--primary);
@@ -56,13 +61,6 @@
       }
     </style>
 
-    <link
-      rel="preload"
-      href="/lucasTravail.webp"
-      as="image"
-      type="image/webp"
-      fetchpriority="high"
-    />
     <script type="module" src="/src/main.tsx"></script>
   </head>
   <body>

@@ -34,12 +34,24 @@ const ProjectCard = ({ project }: { project: any; index: number }) => (
       
       <nav className={styles.links}>
         {project.githubUrl && (
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+          <a 
+            href={project.githubUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={styles.iconLink}
+            aria-label={`Voir le code source de ${project.title} sur GitHub`}
+          >
             Code
           </a>
         )}
         {project.liveUrl && (
-          <a href={getSmartLink(project.liveUrl)} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+          <a 
+            href={getSmartLink(project.liveUrl)} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={styles.iconLink}
+            aria-label={`Voir la démo en direct de ${project.title}`}
+          >
             Live
           </a>
         )}
@@ -145,6 +157,7 @@ export const Projects = () => {
         onMouseMove={handleMove}
         onMouseUp={handleStop}
         onMouseLeave={handleStop}
+        onFocusCapture={(e) => e.stopPropagation()}
         onTouchStart={handleStart}
         onTouchMove={handleMove}
         onTouchEnd={handleStop}

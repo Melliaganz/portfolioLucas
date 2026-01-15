@@ -90,7 +90,9 @@ export const Hero = () => {
                 className={styles.profileImage}
                 fetchPriority="high"
                 loading="eager"
-                sizes="(max-width: 600px) 480px, 800px"
+                decoding="sync"
+                width="800"
+                height="450"
               />
             </div>
           </div>
