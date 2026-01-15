@@ -9,69 +9,17 @@
     <title>Lucas Lengrand | Développeur Fullstack React & Mobile</title>
     <meta
       name="description"
-      content="Découvrez le portfolio de Lucas Lengrand, développeur Fullstack spécialisé en React, TypeScript et Kotlin. Explorez mes projets web et mobiles, mon parcours technique et contactez-moi pour vos futurs projets."
-    />
-    <meta
-      name="keywords"
-      content="développeur web, développeur mobile, React, TypeScript, Kotlin, front-end, back-end, portfolio, Lucas Lengrand, programmation, applications mobiles"
+      content="Découvrez le portfolio de Lucas Lengrand, développeur Fullstack spécialisé en React, TypeScript et Kotlin."
     />
     <meta name="author" content="Lucas Lengrand" />
     <link rel="canonical" href="https://www.lengrandlucas.com/" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Portfolio de Lucas Lengrand",
-        "lastReviewed": "2026-01-02",
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Lucas Lengrand",
-          "url": "https://www.lengrandlucas.com/",
-          "jobTitle": "Développeur Fullstack",
-          "description": "Développeur spécialisé en React, TypeScript et Kotlin."
-        }
-      }
-    </script>
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.lengrandlucas.com/" />
-    <meta
-      property="og:title"
-      content="Lucas Lengrand - Développeur Web et Mobile"
-    />
-    <meta
-      property="og:description"
-      content="Découvrez le portfolio de Lucas Lengrand, développeur Fullstack spécialisé en React et Kotlin. Explorez mes projets et mon expertise technique."
-    />
-    <meta
-      property="og:image"
-      content="https://www.lengrandlucas.com/lucasTravail.webp"
-    />
-    <meta property="og:updated_time" content="2026-01-02T16:00:00Z" />
-    <meta property="article:published_time" content="2026-01-02T16:00:00Z" />
-
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://www.lengrandlucas.com/" />
-    <meta
-      property="twitter:title"
-      content="Lucas Lengrand - Développeur Web et Mobile"
-    />
-    <meta
-      property="twitter:description"
-      content="Développeur spécialisé React et Mobile. Découvrez mes derniers projets."
-    />
-    <meta
-      property="twitter:image"
-      content="https://www.lengrandlucas.com/lucasTravail.webp"
-    />
 
     <style>
       :root {
         --primary: #135bec;
         --background-dark: #101622;
         --text-main: #ffffff;
-        --font-display: "Inter", sans-serif;
+        --font-display: "Inter", system-ui, -apple-system, sans-serif;
       }
 
       html,
@@ -82,28 +30,29 @@
         background-color: var(--background-dark);
         color: var(--text-main);
         font-family: var(--font-display);
-        overflow-x: hidden;
+      }
+      h1 {
+        font-size: clamp(2.25rem, 8vw, 4rem) !important;
+        font-weight: 900 !important;
+        line-height: 1.1 !important;
+        visibility: visible !important;
+        display: block !important;
+        opacity: 1 !important;
+        text-rendering: optimizeSpeed;
       }
 
-      #root {
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .loader-container {
+      #root:empty {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        width: 100%;
       }
 
-      .loader-title {
+      #root:empty::after {
+        content: "Lucas Lengrand";
         color: var(--primary);
-        font-family: sans-serif;
         font-weight: bold;
-        margin: 0;
+        font-size: 1.5rem;
       }
     </style>
 
@@ -117,10 +66,6 @@
     <script type="module" src="/src/main.tsx"></script>
   </head>
   <body>
-    <div id="root">
-      <div class="loader-container">
-        <h1 class="loader-title">Lucas Lengrand</h1>
-      </div>
-    </div>
+    <div id="root"></div>
   </body>
 </html>

@@ -23,7 +23,6 @@ export const TechStack = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   
-  // Utilisation de Refs pour la logique de mouvement (évite les stale closures et re-rendus)
   const dragInfo = useRef({
     startX: 0,
     scrollLeft: 0,
@@ -60,8 +59,8 @@ export const TechStack = () => {
   };
 
   return (
-    <div className={styles.stackContainer}>
-      <p className={styles.title}>Stack technique principale</p>
+    <section className={styles.stackContainer}>
+      <h2 className={styles.title}>Stack technique principale</h2>
       
       <div 
         className={`${styles.marqueeContainer} ${isDragging ? styles.isDragging : ""}`}
@@ -72,7 +71,7 @@ export const TechStack = () => {
         onMouseLeave={stopDragging}
       >
         <div className={styles.marqueeTrack}>
-          {[...technologies, ...technologies, ...technologies].map((tech, index) => (
+          {[...technologies, ...technologies].map((tech, index) => (
             <div key={index} className={styles.badge}>
               <span className={styles.icon}>{tech.icon}</span>
               <span className={styles.techName}>{tech.name}</span>
@@ -80,6 +79,6 @@ export const TechStack = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };

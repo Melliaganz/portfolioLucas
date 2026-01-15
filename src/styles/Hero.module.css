@@ -8,7 +8,9 @@
   overflow: hidden;
   background-color: #101622;
   padding: 80px 0;
+  contain: layout paint;
 }
+
 .container {
   width: 100%;
   max-width: 1280px;
@@ -19,61 +21,38 @@
   gap: 40px;
   z-index: 2;
 }
+
 @media (min-width: 1024px) {
   .container {
     flex-direction: row;
     align-items: center;
     gap: 80px;
   }
-  .textContent {
-    flex: 1;
-  }
-  .visualWrapper {
-    flex: 1;
-  }
 }
-.haloPrimary {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(
-    circle,
-    rgb(29 99 255 / 0.15) 0%,
-    transparent 100%
-  );
-  filter: blur(80px);
-  z-index: 1;
-}
+
 .textContent {
-  width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  z-index: 2;
 }
+
 @media (max-width: 1023px) {
   .textContent {
     align-items: center;
     text-align: center;
   }
-  .title,
-  .description {
-    text-align: center;
-  }
-  .buttonGroup {
-    justify-content: center;
-    width: 100%;
-  }
 }
+
 .badge {
-  background: rgb(19 91 236 / 0.15);
-  border: 1px solid rgb(19 91 236 / 0.3);
-  padding: 10px 16px;
+  background: rgba(19, 91, 236, 0.15);
+  border: 1px solid rgba(19, 91, 236, 0.3);
+  padding: 8px 16px;
   border-radius: 16px;
   margin-bottom: 24px;
+  display: inline-flex;
 }
+
 .badgeText {
   font-size: 12px;
   font-weight: 700;
@@ -81,19 +60,29 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
 .title {
   font-size: clamp(2.25rem, 8vw, 4rem);
   font-weight: 900;
   line-height: 1.1;
   color: #fff;
   margin: 0;
+  /* Supprime le micro-délai de rendu */
+  text-rendering: optimizeSpeed;
 }
+
+.noWrap {
+  white-space: nowrap;
+}
+
 .gradientText {
   background: linear-gradient(to right, #135bec, #a855f7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: #fff0;
   background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #fff;
 }
+
 .description {
   font-size: 1.125rem;
   color: #94a3b8;
@@ -101,109 +90,72 @@
   line-height: 1.6;
   margin-top: 20px;
 }
+
 .buttonGroup {
   display: flex;
   gap: 16px;
   margin-top: 32px;
   flex-wrap: wrap;
 }
-.btnPrimary,
-.btnSecondary {
+
+.btnPrimary, .btnSecondary {
   padding: 14px 28px;
   border-radius: 10px;
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.2s;
   font-size: 0.95rem;
 }
-@media (max-width: 480px) {
-  .btnPrimary,
-  .btnSecondary {
-    width: 100%;
-    text-align: center;
-  }
-}
-.btnPrimary {
-  background-color: #135bec;
-  color: #fff;
-}
-.btnPrimary:hover {
-  background-color: #0e44b5;
-  transform: translateY(-2px);
-}
-.btnSecondary {
-  background-color: #1a202c;
-  color: #fff;
-  border: 1px solid #282e39;
-}
-.btnSecondary:hover {
-  background-color: #282e39;
-}
+
+.btnPrimary { background-color: #135bec; color: #fff; }
+.btnSecondary { background-color: #1a202c; color: #fff; border: 1px solid #282e39; }
+
 .visualWrapper {
-  position: relative;
+  flex: 1;
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 25px 50px rgb(0 0 0 / 0.5);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  background: #1a2333;
+  contain: paint;
 }
-.cardGradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #101622 0%, #1a2333 50%, #0d121c 100%);
-}
+
 .cardContent {
-  position: relative;
   padding: 24px;
 }
-@media (min-width: 768px) {
-  .cardContent {
-    padding: 32px;
-  }
-}
+
 .editor {
   background: #0d121c;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
   padding: 16px;
-  font-family: "Monaco", "Consolas", monospace;
+  font-family: ui-monospace, monospace;
   font-size: 13px;
-  overflow-x: auto;
 }
-@media (min-width: 768px) {
-  .editor {
-    font-size: 14px;
-    padding: 20px;
-  }
-}
+
 .profileImageWrapper {
   margin-top: 2rem;
   width: 100%;
-  height: auto;
+  aspect-ratio: 16/9;
   border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 16/9;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid rgba(255,255,255,0.1);
 }
+
 .profileImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.skeletonGroup {
-  margin-bottom: 24px;
-}
-.skeletonTitle {
-  height: 12px;
-  width: 35%;
-  background: rgb(51 65 85 / 0.5);
-  border-radius: 999px;
-  margin-bottom: 12px;
-}
-.skeletonLine {
-  height: 6px;
-  background: rgb(51 65 85 / 0.3);
-  border-radius: 999px;
-  margin-bottom: 8px;
+
+.haloPrimary {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(29, 99, 255, 0.15) 0%, transparent 100%);
+  filter: blur(80px);
+  z-index: 1;
+  pointer-events: none;
 }

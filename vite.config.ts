@@ -49,7 +49,6 @@ const vitestConfig = defineVitestConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
-    // On peut revenir à une config standard
     pool: 'threads',
     poolOptions: {
       threads: {

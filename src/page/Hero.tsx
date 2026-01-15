@@ -12,6 +12,7 @@ export const Hero = () => {
         .join(", "),
     []
   );
+
   return (
     <section id="about" className={styles.hero}>
       <div className={styles.haloPrimary} />
@@ -25,8 +26,10 @@ export const Hero = () => {
 
           <h1 className={styles.title}>
             Développeur <br />
-            <span className={styles.gradientText}>React</span> &{" "}
-            <span className={styles.gradientText}>Mobile</span>
+            <span className={styles.gradientText}>React</span> 
+            <span className={styles.noWrap}>
+              {" "}& <span className={styles.gradientText}>Mobile</span>
+            </span>
           </h1>
 
           <p className={styles.description}>
