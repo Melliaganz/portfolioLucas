@@ -40,14 +40,9 @@ const viteConfig = defineConfig({
     cssMinify: 'esbuild', 
     rollupOptions: {
       output: {
-        manualChunks: !isVitest ? undefined : (id) => {
-          if (id.includes('node_modules/preact/') || id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
-            return 'react-core';
-          }
-          if (id.includes('node_modules/react-icons')) {
-            return 'ui-icons';
-          }
-        }
+        // En mode PnP, les chemins ne contiennent plus "node_modules". 
+        // Si vous utilisez vite-plugin-singlefile, manualChunks n'est de toute façon pas utilisé.
+        manualChunks: undefined 
       }
     },
     chunkSizeWarningLimit: 600,
@@ -60,6 +55,13 @@ const vitestConfig = defineVitestConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    // Correction pour Yarn PnP sur Linux/GitHub Actions :
+    pool: 'threads',
+    poolOptions: {
+      threads: {
+        singleThread: true,
+      },
+    },
   },
 });
 
