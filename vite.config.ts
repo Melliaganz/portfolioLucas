@@ -53,12 +53,12 @@ const vitestConfig = defineVitestConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    // Vitest 4+ : Les options de pool sont désormais à la racine
+    // On désactive l'isolation des processus qui casse le loader PnP de Yarn
     pool: 'forks',
-    poolOptions: {
-      forks: {
-        singleFork: true,
-      },
-    }
+    forksOptions: {
+      singleFork: true,
+    },
   } as any,
 });
 
