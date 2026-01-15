@@ -47,7 +47,7 @@ export const projectsData: Project[] = [
     tags: ["Java", "JDA", "Spotify API", "YouTube API"],
     category: "Backend",
     image: logoDiscord,
-    githubUrl: "https://github.com/Melliaganz/MellianBot",
+    githubUrl: "https://github.com/Melliaganz/MellianBotV2",
     liveUrl:
       "https://discord.com/oauth2/authorize?client_id=1264609819533250600&permissions=3145728&scope=bot",
   },
