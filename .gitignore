@@ -7,9 +7,22 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Yarn PnP (Zero-Install)
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+!.yarn/cache
+
+# Dependencies
+node_modules/
+
+# Production
+dist/
+dist-ssr/
 *.local
 
 # Editor directories and files
@@ -22,4 +35,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment
 .env
+*.tsbuildinfo
