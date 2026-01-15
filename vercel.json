@@ -1,5 +1,5 @@
 {
-  "installCommand": "yarn install --immutable",
+  "installCommand": "yarn set version berry && yarn install --immutable && yarn build",
   "buildCommand": "yarn build",
   "rewrites": [
     {
