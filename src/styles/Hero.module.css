@@ -51,6 +51,23 @@
   border-radius: 16px;
   margin-bottom: 24px;
   display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badgeDot {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
 .badgeText {
@@ -67,7 +84,6 @@
   line-height: 1.1;
   color: #fff;
   margin: 0;
-  /* Supprime le micro-délai de rendu */
   text-rendering: optimizeSpeed;
 }
 
@@ -104,6 +120,11 @@
   font-weight: 700;
   text-decoration: none;
   font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.btnPrimary:hover, .btnSecondary:hover {
+  transform: translateY(-2px);
 }
 
 .btnPrimary { background-color: #135bec; color: #fff; }
@@ -124,14 +145,91 @@
   padding: 24px;
 }
 
+/* --- Skeleton & Animation --- */
+
+.skeletonGroup {
+  margin-bottom: 24px;
+}
+
+.skeletonTitle, .skeletonLine {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 4px;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.skeletonTitle {
+  height: 20px;
+  width: 40%;
+  margin-bottom: 12px;
+}
+
+.skeletonLine {
+  height: 8px;
+  margin-bottom: 8px;
+}
+
+.skeletonLine:nth-child(2) { animation-delay: 0.1s; }
+.skeletonLine:nth-child(3) { animation-delay: 0.2s; }
+.skeletonLine:nth-child(4) { animation-delay: 0.3s; }
+
+.w60 { width: 60%; }
+.w50 { width: 50%; }
+.w80 { width: 80%; }
+
+/* --- Editor --- */
+
 .editor {
   background: #0d121c;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
   padding: 16px;
-  font-family: ui-monospace, monospace;
+  font-family: 'Fira Code', ui-monospace, monospace;
   font-size: 13px;
+  line-height: 1.5;
+  color: #94a3b8;
 }
+
+.dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotRed { background: #ff5f56; }
+.dotYellow { background: #ffbd2e; }
+.dotGreen { background: #27c93f; }
+
+.codeLine {
+  white-space: pre-wrap;
+}
+
+.indent {
+  padding-left: 20px;
+}
+
+.purple { color: #c678dd; }
+.blue { color: #61afef; }
+.green { color: #98c379; }
+.white { color: #e5e7eb; }
+
+/* --- Image --- */
 
 .profileImageWrapper {
   margin-top: 2rem;

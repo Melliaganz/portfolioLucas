@@ -72,17 +72,17 @@ export const Hero = () => {
                 <span className={styles.blue}>Developer</span> = {"{"}
               </div>
               <div className={`${styles.codeLine} ${styles.indent}`}>
-                name: <span className={styles.green}>'Lengrand Lucas'</span>,
+                <span className={styles.white}>name:</span> <span className={styles.green}>'Lengrand Lucas'</span>,
               </div>
               <div className={`${styles.codeLine} ${styles.indent}`}>
-                skills: [<span className={styles.green}>{displayedSkills}</span>
-                ],
+                <span className={styles.white}>skills:</span> [<span className={styles.green}>{displayedSkills}</span>],
               </div>
               <div className={`${styles.codeLine} ${styles.indent}`}>
-                status: <span className={styles.green}>'Open to work'</span>
+                <span className={styles.white}>status:</span> <span className={styles.green}>'Open to work'</span>
               </div>
               <div className={styles.codeLine}>{"};"}</div>
             </div>
+            
             <div className={styles.profileImageWrapper}>
               <img
                 src="/lucasTravail.webp"
