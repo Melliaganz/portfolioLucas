@@ -153,6 +153,7 @@ export const Contact = () => {
                     placeholder="John Doe"
                     className={styles.input}
                     required
+                    autoComplete="name"
                   />
                 </div>
                 <div className={styles.inputGroup}>
@@ -166,6 +167,7 @@ export const Contact = () => {
                     placeholder="john@example.com"
                     className={styles.input}
                     required
+                    autoComplete="email"
                   />
                 </div>
               </div>
