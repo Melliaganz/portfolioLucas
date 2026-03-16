@@ -1,8 +1,7 @@
 import { defineConfig, mergeConfig, type UserConfig } from "vite";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-//import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
-import Sitemap from 'vite-plugin-sitemap';
+import Sitemap from "vite-plugin-sitemap";
 import { viteSingleFile } from "vite-plugin-singlefile";
 
 const isVitest = process.env.VITEST === "true";
@@ -10,12 +9,11 @@ const isVitest = process.env.VITEST === "true";
 const viteConfig = defineConfig({
   plugins: [
     react(),
-    //cssInjectedByJsPlugin(),
-    Sitemap({ 
-      hostname: 'https://www.lengrandlucas.com',
+    Sitemap({
+      hostname: "https://www.lengrandlucas.com",
       readable: true,
       generateRobotsTxt: true,
-      dynamicRoutes: ['/'],
+      dynamicRoutes: ["/"],
     }),
     ...(!isVitest ? [viteSingleFile()] : []),
   ],
@@ -25,35 +23,40 @@ const viteConfig = defineConfig({
   resolve: {
     alias: {
       "@vercel/speed-insights/next": "@vercel/speed-insights/react",
-      ...(!isVitest ? {
-        "react": "preact/compat",
-        "react-dom/test-utils": "preact/test-utils",
-        "react-dom": "preact/compat",
-        "react/jsx-runtime": "preact/jsx-runtime",
-      } : {}),
+      ...(!isVitest
+        ? {
+            react: "preact/compat",
+            "react-dom/test-utils": "preact/test-utils",
+            "react-dom": "preact/compat",
+            "react/jsx-runtime": "preact/jsx-runtime",
+          }
+        : {}),
     },
   },
-  build: {
-    minify: 'esbuild', // Ensure this is 'esbuild' to use the peer dep we fixed
+ build: {
+    cssMinify: 'esbuild',
+    minify: 'esbuild',
     target: 'esnext',
-    assetsInlineLimit: 100000000, // Ensure everything stays in one file
+    assetsInlineLimit: 100000000,
     chunkSizeWarningLimit: 600,
-  }
+  },
 });
 
 const vitestConfig = defineVitestConfig({
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    include: ['src/**/*.{test,spec}.{ts,tsx}'],
-    pool: 'threads',
-    poolOptions: {
-      threads: {
-        singleThread: true,
-      },
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.ts",
+    include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    pool: "threads",
+    fileParallelism: false,
+    browser: {
+      enabled: false,
     },
   },
 });
 
-export default mergeConfig(viteConfig as UserConfig, vitestConfig as UserConfig);
+export default mergeConfig(
+  viteConfig as UserConfig,
+  vitestConfig as UserConfig,
+);
