@@ -1,7 +1,7 @@
 import { defineConfig, mergeConfig, type UserConfig } from "vite";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+//import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import Sitemap from 'vite-plugin-sitemap';
 import { viteSingleFile } from "vite-plugin-singlefile";
 
@@ -10,7 +10,7 @@ const isVitest = process.env.VITEST === "true";
 const viteConfig = defineConfig({
   plugins: [
     react(),
-    cssInjectedByJsPlugin(),
+    //cssInjectedByJsPlugin(),
     Sitemap({ 
       hostname: 'https://www.lengrandlucas.com',
       readable: true,
@@ -34,11 +34,9 @@ const viteConfig = defineConfig({
     },
   },
   build: {
-    modulePreload: { polyfill: false },
-    cssMinify: 'esbuild', 
-    rollupOptions: {
-      output: { manualChunks: undefined }
-    },
+    minify: 'esbuild', // Ensure this is 'esbuild' to use the peer dep we fixed
+    target: 'esnext',
+    assetsInlineLimit: 100000000, // Ensure everything stays in one file
     chunkSizeWarningLimit: 600,
   }
 });
@@ -53,9 +51,9 @@ const vitestConfig = defineVitestConfig({
     poolOptions: {
       threads: {
         singleThread: true,
-      }
-    }
-  } as any,
+      },
+    },
+  },
 });
 
 export default mergeConfig(viteConfig as UserConfig, vitestConfig as UserConfig);
