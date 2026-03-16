@@ -1,5 +1,5 @@
 {
-  "installCommand": "yarn set version berry && yarn install --immutable && yarn build",
+  "installCommand": "yarn install --immutable && yarn build",
   "buildCommand": "yarn build",
   "rewrites": [
     {
@@ -8,15 +8,6 @@
     }
   ],
   "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
     {
       "source": "/(.*)",
       "headers": [
