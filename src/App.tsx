@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Suspense, lazy } from "react";
 import "./App.css";
 import { Header } from "./components/Header";
@@ -17,24 +17,19 @@ const Footer = lazy(() =>
   import("./components/Footer").then((module) => ({ default: module.Footer }))
 );
 
+const detectOs = (): "android" | "ios" | "other" => {
+  const ua = navigator.userAgent.toLowerCase();
+  if (/android/.test(ua)) return "android";
+  if (/iphone|ipad|ipod/.test(ua)) return "ios";
+  return "other";
+};
+
 const AppDownloadPopup = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [os, setOs] = useState<"android" | "ios" | "other">("other");
-
-  useEffect(() => {
-    const ua = navigator.userAgent.toLowerCase();
-    const isAndroid = /android/.test(ua);
-    const isIOS = /iphone|ipad|ipod/.test(ua);
-
-    if (isAndroid) setOs("android");
-    else if (isIOS) setOs("ios");
-
-    const hasSeenPopup = localStorage.getItem("hasSeenAppPopup");
-
-    if (!hasSeenPopup && (isAndroid || isIOS)) {
-      setIsVisible(true);
-    }
-  }, []);
+  const [os] = useState<"android" | "ios" | "other">(detectOs);
+  const [isVisible, setIsVisible] = useState(() => {
+    const detectedOs = detectOs();
+    return !localStorage.getItem("hasSeenAppPopup") && detectedOs !== "other";
+  });
 
   const closePopup = () => {
     setIsVisible(false);
@@ -51,13 +46,25 @@ const AppDownloadPopup = () => {
     closePopup();
   };
 
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    closeButtonRef.current?.focus();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closePopup();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isVisible]);
+
   if (!isVisible) return null;
 
   return (
-    <div className="popup-overlay">
+    <div className="popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popup-title">
       <div className="popup-card">
-        <div className="popup-emoji">{os === "android" ? "🤖" : "🍎"}</div>
-        <h2 className="popup-title">
+        <div className="popup-emoji" aria-hidden="true">{os === "android" ? "🤖" : "🍎"}</div>
+        <h2 id="popup-title" className="popup-title">
           {os === "android"
             ? "Version Android disponible"
             : "Application Mobile"}
@@ -69,12 +76,12 @@ const AppDownloadPopup = () => {
         </p>
 
         {os === "android" && (
-          <button className="popup-download-btn" onClick={handleDownload}>
+          <button type="button" className="popup-download-btn" onClick={handleDownload}>
             Télécharger l'APK
           </button>
         )}
 
-        <button className="popup-close-btn" onClick={closePopup}>
+        <button type="button" ref={closeButtonRef} className="popup-close-btn" onClick={closePopup}>
           Continuer sur le navigateur
         </button>
       </div>

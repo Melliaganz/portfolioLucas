@@ -72,7 +72,7 @@ export const TechStack = () => {
       >
         <div className={styles.marqueeTrack}>
           {[...technologies, ...technologies].map((tech, index) => (
-            <div key={index} className={styles.badge}>
+            <div key={`${tech.name}-${index}`} className={styles.badge}>
               <span className={styles.icon}>{tech.icon}</span>
               <span className={styles.techName}>{tech.name}</span>
             </div>

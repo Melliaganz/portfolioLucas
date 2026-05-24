@@ -25,11 +25,16 @@ export const Contact = () => {
     const formData = new FormData(e.currentTarget);
     if (apiKey) formData.append("access_key", apiKey);
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData,
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
       const data = await response.json();
 
       if (data.success) {
@@ -40,6 +45,7 @@ export const Contact = () => {
         setStatus("error");
       }
     } catch (error) {
+      clearTimeout(timeoutId);
       console.error("Erreur lors de l'envoi:", error);
       setStatus("error");
     }
@@ -53,7 +59,7 @@ export const Contact = () => {
           <div className={styles.infoColumn}>
             <div className={styles.headerGroup}>
               <div className={styles.accentBar} />
-              <h1 className={styles.title}>Travaillons ensemble</h1>
+              <h2 className={styles.title}>Travaillons ensemble</h2>
               <p className={styles.subtitle}>
                 Spécialiste React & TypeScript, je construis des applications
                 web et mobiles évolutives.
@@ -122,7 +128,7 @@ export const Contact = () => {
                     href={soc.href}
                     className={styles.socialBtn}
                     target="_blank"
-                    rel="noopener"
+                    rel="noopener noreferrer"
                     title={soc.label}
                   >
                     {soc.icon}

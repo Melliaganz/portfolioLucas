@@ -1,5 +1,5 @@
-// 1. Remplacez l'import de l'objet global par les exports nommés
 import { IconMobile, IconCode, IconDiplome } from "../utils/icons.module";
+import { getSmartLink } from "../utils/smartLink";
 
 interface Experience {
   id: string;
@@ -14,22 +14,13 @@ interface Experience {
   icon: React.ReactNode;
   isActive?: boolean;
 }
-const getSmartLink = () => {
-  if (typeof window === "undefined") return "https://www.impots.gouv.fr";
-  const ua = navigator.userAgent;
-  if (/iPad|iPhone|iPod/.test(ua))
-    return "https://apps.apple.com/fr/app/impots-gouv/id505488770";
-  if (/android/i.test(ua))
-    return "https://play.google.com/store/apps/details?id=fr.gouv.finances.smartphone.android";
-  return "https://www.impots.gouv.fr";
-};
 
 export const experiences: Experience[] = [
   {
     id: "dgfip",
     title: "Développeur Analyste pour application mobile",
     company: "DGFiP",
-    companyUrl: getSmartLink(),
+    companyUrl: getSmartLink("dgfip_smart_link"),
     location: "Montreuil",
     date: "2023 - Présent",
     // 2. Utilisez directement le nouveau composant d'icône

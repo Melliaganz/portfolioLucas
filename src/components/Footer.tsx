@@ -42,13 +42,13 @@ export const Footer = () => {
       <footer className={styles.footerContainer}>
         <div className={styles.contentWrapper}>
           <div className={styles.socialLinks}>
-            {socialLinks.map((link, index) => (
+            {socialLinks.map((link) => (
               <a
-                key={index}
+                key={link.href}
                 href={link.href}
                 className={styles.iconLink}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 title={link.title}
               >
                 {link.icon}

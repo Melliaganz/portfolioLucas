@@ -16,9 +16,9 @@ describe("Contact Component", () => {
   });
 
   it("doit soumettre le formulaire avec succès", async () => {
-    (fetch as any).mockResolvedValue({
+    vi.mocked(fetch).mockResolvedValue({
       json: () => Promise.resolve({ success: true }),
-    });
+    } as Response);
     render(<Contact />);
     
     fireEvent.change(screen.getByPlaceholderText("John Doe"), { target: { value: "Lucas" } });
@@ -31,9 +31,9 @@ describe("Contact Component", () => {
   });
 
   it("doit gérer une erreur de l'API", async () => {
-    (fetch as any).mockResolvedValue({
+    vi.mocked(fetch).mockResolvedValue({
       json: () => Promise.resolve({ success: false }),
-    });
+    } as Response);
     render(<Contact />);
     fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
     await waitFor(() => expect(screen.getByText("Envoyer")).toBeInTheDocument());
@@ -46,16 +46,16 @@ describe("Contact Component", () => {
 
   it("doit réinitialiser l'état après un certain temps en cas de succès", async () => {
     vi.useFakeTimers();
-    (fetch as any).mockResolvedValue({
+    vi.mocked(fetch).mockResolvedValue({
       json: () => Promise.resolve({ success: true }),
-    });
+    } as Response);
 
     render(<Contact />);
-    
+
     fireEvent.change(screen.getByPlaceholderText("John Doe"), { target: { value: "Lucas" } });
     fireEvent.change(screen.getByPlaceholderText("john@example.com"), { target: { value: "test@test.com" } });
     fireEvent.change(screen.getByPlaceholderText("Décrivez votre projet..."), { target: { value: "Bonjour" } });
-    
+
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
     });

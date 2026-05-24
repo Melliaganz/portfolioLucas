@@ -1,10 +1,3 @@
-@theme {
-  --color-background: #0b1120;
-  --color-primary: #1d63ff;
-  --color-text-muted: #94a3b8;
-  --color-surface-light: #1e293b;
-}
-
 :root {
   --primary: #135bec;
   --background-dark: #101622;
@@ -28,8 +21,7 @@ html, body {
   padding: 0;
   background-color: var(--background-dark);
   color: var(--text-main);
-  /* Empêche le scroll horizontal et stabilise le scroll vertical */
-  overflow-x: hidden; 
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -46,24 +38,14 @@ body {
 
 #root {
   width: 100%;
-  /* Changement ici : min-height au lieu de height pour laisser le contenu grandir */
   min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  /* Force le root à contenir toutes les marges de ses enfants */
-  display: flow-root; 
-}
-
-/* Si tu utilises Flexbox sur root, utilise cette version alternative : */
-#root {
   display: flex;
   flex-direction: column;
 }
 
 main {
   width: 100%;
-  /* flex-grow: 1 permet de prendre toute la place, mais 0 en shrink évite de pousser le footer */
-  flex: 1 0 auto; 
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -71,30 +53,13 @@ main {
 footer {
   flex-shrink: 0;
   width: 100%;
-  /* On s'assure qu'aucune marge ne dépasse en bas */
-  margin-bottom: 0; 
+  margin-bottom: 0;
 }
 
 main > section {
   padding: var(--section-spacing) 0;
   width: 100%;
-  /* Empêche les éléments animés dans les sections de créer du scroll */
-  overflow: hidden; 
-}
-
-.logo {
-  height: clamp(3em, 10vw, 6em);
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  overflow: hidden;
 }
 
 img {
@@ -103,26 +68,11 @@ img {
   display: block;
 }
 
-@keyframes logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
 .card {
   padding: clamp(1rem, 3vw, 2rem);
   background: var(--surface-dark);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-}
-
-.read-the-docs {
-  color: var(--text-muted);
 }
 
 @media (min-width: 768px) {

@@ -10,11 +10,8 @@ const NAV_LINKS: NavItem[] = [
 ];
 
 export const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Variable intermédiaire pour satisfaire les outils de diagnostic ARIA
-  const isExpanded = isMenuOpen ? "true" : "false";
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 20);
@@ -22,7 +19,6 @@ export const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
@@ -58,7 +54,7 @@ export const Header = () => {
           className={styles.burger} 
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={isExpanded}
+          aria-expanded={isMenuOpen}
         >
           <span className={styles.burgerLine}></span>
           <span className={styles.burgerLine}></span>

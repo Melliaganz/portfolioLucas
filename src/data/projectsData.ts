@@ -6,7 +6,7 @@ import imageNetflix from "../assets/images/Netflix.webp";
 import imageImpots from "../assets/images/impots.webp";
 import logoDiscord from "../assets/images/discordLogoP.webp";
 
-interface Project {
+export interface Project {
   id: number;
   title: string;
   year: string;

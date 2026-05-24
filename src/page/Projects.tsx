@@ -1,25 +1,11 @@
 import React, { useState, useMemo, useRef, useCallback } from "react";
 import styles from "../styles/Projects.module.css";
-import { projectsData } from "../data/projectsData";
-
-const STORES = {
-  IOS: "https://apps.apple.com/fr/app/impots-gouv/id505488770",
-  ANDROID: "https://play.google.com/store/apps/details?id=fr.gouv.finances.smartphone.android",
-  DESKTOP: "https://www.impots.gouv.fr",
-};
+import { projectsData, type Project } from "../data/projectsData";
+import { getSmartLink } from "../utils/smartLink";
 
 const TOP_TAGS = ["React", "React Native", "TypeScript", "Node.js", "JavaScript"];
 
-const getSmartLink = (url: string) => {
-  if (url !== "dgfip_smart_link") return url;
-  if (typeof navigator === "undefined") return url;
-  const ua = navigator.userAgent;
-  if (/iPad|iPhone|iPod/.test(ua)) return STORES.IOS;
-  if (/android/i.test(ua)) return STORES.ANDROID;
-  return STORES.DESKTOP;
-};
-
-const ProjectCard = ({ project }: { project: any; index: number }) => (
+const ProjectCard = ({ project }: { project: Project }) => (
   <article className={styles.card}>
     <img 
       src={project.image} 
@@ -46,7 +32,7 @@ const ProjectCard = ({ project }: { project: any; index: number }) => (
         )}
         {project.liveUrl && (
           <a 
-            href={getSmartLink(project.liveUrl)} 
+            href={getSmartLink(project.liveUrl)}
             target="_blank" 
             rel="noopener noreferrer" 
             className={styles.iconLink}
@@ -60,7 +46,7 @@ const ProjectCard = ({ project }: { project: any; index: number }) => (
       <p className={styles.description}>{project.description}</p>
       
       <div className={styles.tags}>
-        {project.tags.slice(0, 3).map((tag: string) => (
+        {project.tags.slice(0, 3).map((tag) => (
           <span key={tag} className={styles.tag}>{tag}</span>
         ))}
       </div>
@@ -125,6 +111,7 @@ export const Projects = () => {
 
   return (
     <section id="projects" className={styles.projectsSection}>
+      <div className={styles.innerContainer}>
       <header className={styles.header}>
         <h2 className={styles.title}>Mes Projets</h2>
         <p className={styles.subtitle}>
@@ -164,9 +151,10 @@ export const Projects = () => {
       >
         <div className={shouldScroll ? styles.marqueeTrack : styles.staticTrack}>
           {displayProjects.map((project, index) => (
-            <ProjectCard key={`${project.id}-${index}`} project={project} index={index} />
+            <ProjectCard key={`${project.id}-${index}`} project={project} />
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

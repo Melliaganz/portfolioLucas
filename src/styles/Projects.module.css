@@ -1,12 +1,16 @@
 .projectsSection {
   width: 100%;
+  background-color: #101622;
+  overflow: hidden;
+}
+
+.innerContainer {
   max-width: 1280px;
   margin: 0 auto;
   padding: 80px 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
 }
 
 .header {

@@ -14,7 +14,7 @@ class MockResizeObserver {
   disconnect = vi.fn();
 }
 
-window.ResizeObserver = MockResizeObserver as any;
+window.ResizeObserver = MockResizeObserver as unknown as typeof ResizeObserver;
 
 // Mock des données
 vi.mock("../data/parcours", () => ({

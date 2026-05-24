@@ -25,7 +25,7 @@ describe("Footer Component", () => {
       expect(anchor).toBeInTheDocument();
       expect(anchor).toHaveAttribute("href", link.href);
       expect(anchor).toHaveAttribute("target", "_blank");
-      expect(anchor).toHaveAttribute("rel", "noopener");
+      expect(anchor).toHaveAttribute("rel", "noopener noreferrer");
     });
   });
 

@@ -1,5 +1,6 @@
 import { memo } from 'react'
-import { IconContext, IconType } from 'react-icons'
+import type { IconBaseProps, IconType } from 'react-icons'
+import { IconContext } from 'react-icons'
 import { FaCode, FaCss3, FaDiscord, FaGraduationCap, FaLinkedin, FaMobile, FaReact } from 'react-icons/fa'
 import { GiScrollQuill } from 'react-icons/gi'
 import { IoMdDownload } from 'react-icons/io'
@@ -22,24 +23,23 @@ import {
 } from 'react-icons/si'
 import { TbBrandReactNative } from 'react-icons/tb'
 
-// On utilise les imports directs pour aider le Tree Shaking
 const createIcon = (
   IconComponent: IconType,
   defaultColor?: string,
   defaultSize: number = 24
 ) => {
-  const Icon: React.FC<any> = memo((props: any) => (
+  const Icon = memo(({ color, size, ...props }: IconBaseProps) => (
     <IconContext.Provider
       value={{
-        color: props.color || defaultColor,
-        size: props.size ? String(props.size) : String(defaultSize),
+        color: color ?? defaultColor,
+        size: size ? String(size) : String(defaultSize),
       }}
     >
       <IconComponent {...props} />
     </IconContext.Provider>
   ));
 
-  Icon.displayName = `Icon_${IconComponent.name}`;
+  Icon.displayName = `Icon_${(IconComponent as { displayName?: string }).displayName ?? ''}`;
   return Icon;
 };
 

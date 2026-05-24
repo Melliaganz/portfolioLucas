@@ -106,6 +106,7 @@ export const Parcours = () => {
                   </p>
 
                   <div
+                    id={`desc-${exp.id}`}
                     ref={(el) => {
                       descriptionRefs.current[exp.id] = el;
                     }}
@@ -133,8 +134,11 @@ export const Parcours = () => {
 
                   {canExpand && (
                     <button
+                      type="button"
                       className={styles.readMoreBtn}
                       onClick={() => toggleExpand(exp.id)}
+                      aria-expanded={expanded}
+                      aria-controls={`desc-${exp.id}`}
                     >
                       {expanded ? "Voir moins" : "Voir plus"}
                     </button>
