@@ -168,23 +168,30 @@
 
 .skeletonTitle,
 .skeletonLine {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeletonTitle::after,
+.skeletonLine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.03) 25%,
+    transparent 0%,
     rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.03) 75%
+    transparent 100%
   );
-  background-size: 200% 100%;
+  transform: translateX(-100%);
   animation: shimmer 2s infinite linear;
-  border-radius: 4px;
 }
 
 @keyframes shimmer {
-  from {
-    background-position: 200% 0;
-  }
   to {
-    background-position: -200% 0;
+    transform: translateX(200%);
   }
 }
 
@@ -199,13 +206,13 @@
   margin-bottom: 8px;
 }
 
-.skeletonLine:nth-child(2) {
+.skeletonLine:nth-child(2)::after {
   animation-delay: 0.1s;
 }
-.skeletonLine:nth-child(3) {
+.skeletonLine:nth-child(3)::after {
   animation-delay: 0.2s;
 }
-.skeletonLine:nth-child(4) {
+.skeletonLine:nth-child(4)::after {
   animation-delay: 0.3s;
 }
 
