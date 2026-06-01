@@ -18,7 +18,6 @@ const technologies: Technology[] = [
   { name: "NodeJs", icon: <IconNodeJs /> },
 ];
 
-const duplicatedTechnologies = [...technologies, ...technologies];
 
 export const TechStack = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -94,12 +93,20 @@ export const TechStack = () => {
         onTouchEnd={stopDragging}
       >
         <div className={styles.marqueeTrack}>
-          {duplicatedTechnologies.map((tech, index) => (
-            <div key={`${tech.name}-${index}`} className={styles.badge}>
-              <span className={styles.icon}>{tech.icon}</span>
+          {technologies.map((tech) => (
+            <div key={tech.name} className={styles.badge}>
+              <span className={styles.icon} aria-hidden="true">{tech.icon}</span>
               <span className={styles.techName}>{tech.name}</span>
             </div>
           ))}
+          <div inert className={styles.duplicateWrapper}>
+            {technologies.map((tech) => (
+              <div key={`dup-${tech.name}`} className={styles.badge}>
+                <span className={styles.icon}>{tech.icon}</span>
+                <span className={styles.techName}>{tech.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

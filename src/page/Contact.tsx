@@ -1,24 +1,9 @@
 import { useState } from "react";
 import styles from "../styles/Contact.module.css";
-import {
-  IconDiscord,
-  IconEmail,
-  IconFerme,
-  IconGithub,
-  IconInstagram,
-  IconLinkedIn,
-  IconMapPin,
-  IconSend,
-  IconTwitter,
-} from "../utils/icons.module";
+import { IconEmail, IconFerme, IconMapPin, IconSend } from "../utils/icons.module";
+import { socialLinks } from "../data/socialLinks";
 
-const socialLinks = [
-  { href: "https://discord.gg/7q5KAbqfdu", icon: <IconDiscord />, label: "Discord" },
-  { href: "https://github.com/Melliaganz", icon: <IconGithub />, label: "Github" },
-  { href: "https://www.linkedin.com/in/lucaslengrand", icon: <IconLinkedIn />, label: "LinkedIn" },
-  { href: "https://x.com/LucasLengrand2", icon: <IconTwitter />, label: "Twitter" },
-  { href: "https://www.instagram.com/melliaganz/", icon: <IconInstagram />, label: "Instagram" },
-];
+const contactSocialLinks = socialLinks.filter((l) => !l.href.startsWith("mailto:"));
 
 export const Contact = () => {
   const [status, setStatus] = useState<
@@ -121,7 +106,7 @@ export const Contact = () => {
             <div className={styles.socialGroup}>
               <p className={styles.socialTitle}>Suivez-moi</p>
               <div className={styles.socialLinks}>
-                {socialLinks.map((soc) => (
+                {contactSocialLinks.map((soc) => (
                   <a
                     key={soc.label}
                     href={soc.href}
@@ -130,7 +115,7 @@ export const Contact = () => {
                     rel="noopener noreferrer"
                     title={soc.label}
                   >
-                    {soc.icon}
+                    <span aria-hidden="true">{soc.icon}</span>
                   </a>
                 ))}
               </div>

@@ -48,7 +48,6 @@ export const Hero = () => {
         </div>
 
         <div className={styles.visualWrapper}>
-          <div className={styles.cardGradient} />
           <div className={styles.cardContent}>
             <div className={styles.skeletonGroup}>
               <div className={styles.skeletonTitle} />

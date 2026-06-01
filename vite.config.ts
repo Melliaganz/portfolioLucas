@@ -1,8 +1,7 @@
-import { defineConfig, mergeConfig, type UserConfig, type Plugin } from "vite";
+import { defineConfig, mergeConfig, type UserConfig, type Plugin, type HtmlTagDescriptor } from "vite";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import Sitemap from "vite-plugin-sitemap";
-import type { OutputChunk } from "rollup";
 
 function preloadLazyChunks(): Plugin {
   return {
@@ -11,15 +10,24 @@ function preloadLazyChunks(): Plugin {
       order: "post",
       handler(_, ctx) {
         if (!ctx.bundle) return [];
-        return Object.values(ctx.bundle)
-          .filter((c): c is OutputChunk =>
-            c.type === "chunk" && !c.isEntry && c.fileName.endsWith(".js")
-          )
-          .map((c) => ({
+        const tags: HtmlTagDescriptor[] = [];
+        for (const chunk of Object.values(ctx.bundle)) {
+          if (chunk.type !== "chunk" || chunk.isEntry || !chunk.fileName.endsWith(".js")) continue;
+          tags.push({
             tag: "link",
-            attrs: { rel: "modulepreload", crossorigin: "", href: `/${c.fileName}` },
+            attrs: { rel: "modulepreload", crossorigin: "", href: `/${chunk.fileName}` },
             injectTo: "head" as const,
-          }));
+          });
+          const importedCss = (chunk as unknown as { viteMetadata?: { importedCss?: Set<string> } }).viteMetadata?.importedCss;
+          importedCss?.forEach((css) => {
+            tags.push({
+              tag: "link",
+              attrs: { rel: "preload", as: "style", crossorigin: "", href: `/${css}` },
+              injectTo: "head" as const,
+            });
+          });
+        }
+        return tags;
       },
     },
   };
@@ -42,23 +50,18 @@ const viteConfig = defineConfig({
     __APP_YEAR__: JSON.stringify(new Date().getFullYear()),
   },
   resolve: {
-    alias: {
-      "@vercel/speed-insights/next": "@vercel/speed-insights/react",
-      ...(!isVitest
-        ? {
-            react: "preact/compat",
-            "react-dom/test-utils": "preact/test-utils",
-            "react-dom": "preact/compat",
-            "react/jsx-runtime": "preact/jsx-runtime",
-          }
-        : {}),
-    },
+    alias: !isVitest
+      ? {
+          react: "preact/compat",
+          "react-dom/test-utils": "preact/test-utils",
+          "react-dom": "preact/compat",
+          "react/jsx-runtime": "preact/jsx-runtime",
+        }
+      : {},
   },
   build: {
-    cssMinify: "esbuild",
-    minify: "esbuild",
+    cssMinify: "lightningcss",
     target: "esnext",
-    chunkSizeWarningLimit: 600,
   },
   preview: {
     headers: {
@@ -80,11 +83,7 @@ const vitestConfig = defineVitestConfig({
     environment: "jsdom",
     setupFiles: "./src/test/setup.ts",
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
-    pool: "threads",
     fileParallelism: false,
-    browser: {
-      enabled: false,
-    },
   },
 });
 

@@ -4,6 +4,6 @@ export interface NavItem {
 }
 
 export interface Technology {
-  name: React.ReactNode;
-  icon: React.ReactNode; 
+  name: string;
+  icon: React.ReactNode;
 }

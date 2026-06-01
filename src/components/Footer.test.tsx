@@ -12,12 +12,12 @@ describe("Footer Component", () => {
     render(<Footer />);
 
     const links = [
-      { title: "Mon github", href: "https://github.com/Melliaganz" },
-      { title: "Mon discord", href: "https://discord.gg/7q5KAbqfdu" },
-      { title: "Mon mail", href: "mailto:lucaslengranddev@gmail.com" },
-      { title: "Mon X", href: "https://x.com/LucasLengrand2" },
-      { title: "Mon linkedIn", href: "https://www.linkedin.com/in/lucaslengrand" },
-      { title: "Mon instagram", href: "https://www.instagram.com/melliaganz/" },
+      { title: "Github", href: "https://github.com/Melliaganz" },
+      { title: "Discord", href: "https://discord.gg/7q5KAbqfdu" },
+      { title: "Email", href: "mailto:lucaslengranddev@gmail.com" },
+      { title: "Twitter", href: "https://x.com/LucasLengrand2" },
+      { title: "LinkedIn", href: "https://www.linkedin.com/in/lucaslengrand" },
+      { title: "Instagram", href: "https://www.instagram.com/melliaganz/" },
     ];
 
     links.forEach((link) => {
