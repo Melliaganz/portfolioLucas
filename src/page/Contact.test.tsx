@@ -1,13 +1,18 @@
 import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import "@testing-library/jest-dom";
 import { Contact } from "./Contact";
 
 describe("Contact Component", () => {
   beforeEach(() => {
     vi.stubGlobal("fetch", vi.fn());
+    vi.stubEnv("VITE_API_FORM", "test-key");
     vi.clearAllMocks();
     vi.useRealTimers();
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
   });
 
   it("doit afficher correctement les informations de contact et le formulaire", () => {
@@ -17,21 +22,23 @@ describe("Contact Component", () => {
 
   it("doit soumettre le formulaire avec succès", async () => {
     vi.mocked(fetch).mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve({ success: true }),
     } as Response);
     render(<Contact />);
-    
+
     fireEvent.change(screen.getByPlaceholderText("John Doe"), { target: { value: "Lucas" } });
     fireEvent.change(screen.getByPlaceholderText("john@example.com"), { target: { value: "test@test.com" } });
     fireEvent.change(screen.getByPlaceholderText("Décrivez votre projet..."), { target: { value: "Bonjour" } });
-    
+
     fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
-    
+
     await waitFor(() => expect(screen.getByText("Envoyé !")).toBeInTheDocument());
   });
 
   it("doit gérer une erreur de l'API", async () => {
     vi.mocked(fetch).mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve({ success: false }),
     } as Response);
     render(<Contact />);
@@ -47,6 +54,7 @@ describe("Contact Component", () => {
   it("doit réinitialiser l'état après un certain temps en cas de succès", async () => {
     vi.useFakeTimers();
     vi.mocked(fetch).mockResolvedValue({
+      ok: true,
       json: () => Promise.resolve({ success: true }),
     } as Response);
 
@@ -60,13 +68,10 @@ describe("Contact Component", () => {
       fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
     });
 
-    // runAllTimersAsync va vider la file des micro-tâches (le fetch) 
-    // PUIS déclencher les macro-tâches (le setTimeout de 5s)
     await act(async () => {
       await vi.runAllTimersAsync();
     });
 
-    // On vérifie que le bouton est revenu à son état initial "Envoyer"
     expect(screen.getByText("Envoyer")).toBeInTheDocument();
 
     vi.useRealTimers();

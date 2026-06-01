@@ -186,12 +186,12 @@
     transparent 100%
   );
   transform: translateX(-100%);
-  animation: shimmer 2s infinite linear;
+  animation: heroSkeletonShimmer 2s infinite linear;
 }
 
-@keyframes shimmer {
+@keyframes heroSkeletonShimmer {
   to {
-    transform: translateX(200%);
+    transform: translateX(100%);
   }
 }
 

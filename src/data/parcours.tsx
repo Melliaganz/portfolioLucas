@@ -23,7 +23,6 @@ export const experiences: Experience[] = [
     companyUrl: getSmartLink("dgfip_smart_link"),
     location: "Montreuil",
     date: "2023 - Présent",
-    // 2. Utilisez directement le nouveau composant d'icône
     icon: <IconMobile />,
     isActive: true,
     isList: true,
@@ -46,7 +45,6 @@ export const experiences: Experience[] = [
     companyUrl: "https://www.optiquechatenay.fr/",
     location: "Chatenay-Malabry",
     date: "2022 - 2023",
-    // 3. Appel de l'icône de code
     icon: <IconCode />,
     isList: false,
     description:
@@ -59,7 +57,6 @@ export const experiences: Experience[] = [
     companyUrl: "https://openclassrooms.com",
     location: "Paris",
     date: "2021 - 2022",
-    // 4. Appel de l'icône de diplôme
     icon: <IconDiplome />,
     isList: false,
     description:

@@ -200,6 +200,8 @@
   font-weight: 600;
 }
 
+.duplicateWrapper { display: contents; }
+
 .yearBadge {
   position: absolute;
   top: 12px;

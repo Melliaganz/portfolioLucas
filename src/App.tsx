@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 import "./App.css";
 import { Header } from "./components/Header";
 import { Hero } from "./page/Hero";
+import { detectOs } from "./utils/smartLink";
 
 const Parcours = lazy(() =>
   import("./page/Parcours").then((module) => ({ default: module.Parcours }))
@@ -17,19 +18,12 @@ const Footer = lazy(() =>
   import("./components/Footer").then((module) => ({ default: module.Footer }))
 );
 
-const detectOs = (): "android" | "ios" | "other" => {
-  const ua = navigator.userAgent.toLowerCase();
-  if (/android/.test(ua)) return "android";
-  if (/iphone|ipad|ipod/.test(ua)) return "ios";
-  return "other";
-};
-
 const AppDownloadPopup = () => {
-  const [os] = useState<"android" | "ios" | "other">(detectOs);
-  const [isVisible, setIsVisible] = useState(() => {
+  const [[os, initiallyVisible]] = useState<["android" | "ios" | "other", boolean]>(() => {
     const detectedOs = detectOs();
-    return !localStorage.getItem("hasSeenAppPopup") && detectedOs !== "other";
+    return [detectedOs, !localStorage.getItem("hasSeenAppPopup") && detectedOs !== "other"];
   });
+  const [isVisible, setIsVisible] = useState(initiallyVisible);
 
   const closePopup = () => {
     setIsVisible(false);
@@ -39,7 +33,7 @@ const AppDownloadPopup = () => {
   const handleDownload = () => {
     if (os === "android") {
       window.location.href =
-        "https://github.com/Melliaganz/portfolioLucasMobile/releases/download/V1.0.0/PortfolioLucas.apk";
+        "https://github.com/Melliaganz/portfolioLucasMobile/releases/latest/download/PortfolioLucas.apk";
     } else {
       alert("La version iOS sera bientôt disponible sur l'App Store.");
     }

@@ -1,59 +1,79 @@
 import { useRef, useState } from "react";
 import type { Technology } from "../types/navigation";
 import styles from "../styles/TechStack.module.css";
-import { techNames } from "../utils/techData";
 import { IconAndroidStudio, IconAppStore, IconCss, IconGradle, IconJavaScript, IconKotlin, IconMongoDb, IconMySQL, IconNodeJs, IconReact, IconReactNative, IconTypeScript } from "../utils/icons.module";
 
 const technologies: Technology[] = [
-  { name: techNames[0], icon: <IconReact /> },
-  { name: techNames[1], icon: <IconTypeScript /> },
-  { name: techNames[2], icon: <IconReactNative/> },
-  { name: techNames[3], icon: <IconCss /> },
-  { name: techNames[4], icon: <IconAndroidStudio /> },
-  { name: techNames[5], icon: <IconAppStore /> },
-  { name: techNames[6], icon: <IconGradle /> },
-  { name: techNames[7], icon: <IconJavaScript/>},
-  { name: techNames[8], icon: <IconMongoDb /> },
-  { name: techNames[9], icon: <IconKotlin/> },
-  { name: techNames[10], icon: <IconMySQL /> },
-  { name: techNames[11], icon: <IconNodeJs /> },
+  { name: "React.js", icon: <IconReact /> },
+  { name: "TypeScript", icon: <IconTypeScript /> },
+  { name: "React Native", icon: <IconReactNative /> },
+  { name: "CSS3", icon: <IconCss /> },
+  { name: "Android Studio", icon: <IconAndroidStudio /> },
+  { name: "XCode", icon: <IconAppStore /> },
+  { name: "Gradle", icon: <IconGradle /> },
+  { name: "Javascript", icon: <IconJavaScript /> },
+  { name: "MongoDB", icon: <IconMongoDb /> },
+  { name: "Kotlin", icon: <IconKotlin /> },
+  { name: "MySQL", icon: <IconMySQL /> },
+  { name: "NodeJs", icon: <IconNodeJs /> },
 ];
+
+const duplicatedTechnologies = [...technologies, ...technologies];
 
 export const TechStack = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  
+
   const dragInfo = useRef({
     startX: 0,
     scrollLeft: 0,
-    isDragging: false
+    isDragging: false,
+    rafId: 0,
   });
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!scrollRef.current) return;
-    
-    const startX = e.pageX - scrollRef.current.offsetLeft;
-    const scrollLeft = scrollRef.current.scrollLeft;
-    
     dragInfo.current = {
       isDragging: true,
-      startX,
-      scrollLeft
+      startX: e.pageX - scrollRef.current.offsetLeft,
+      scrollLeft: scrollRef.current.scrollLeft,
+      rafId: 0,
     };
-    
     setIsDragging(true);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!dragInfo.current.isDragging || !scrollRef.current) return;
-
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
     const walk = (x - dragInfo.current.startX) * 1.5;
     scrollRef.current.scrollLeft = dragInfo.current.scrollLeft - walk;
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!scrollRef.current) return;
+    dragInfo.current = {
+      isDragging: true,
+      startX: e.touches[0].pageX - scrollRef.current.offsetLeft,
+      scrollLeft: scrollRef.current.scrollLeft,
+      rafId: 0,
+    };
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!dragInfo.current.isDragging || !scrollRef.current) return;
+    const x = e.touches[0].pageX - scrollRef.current.offsetLeft;
+    cancelAnimationFrame(dragInfo.current.rafId);
+    dragInfo.current.rafId = requestAnimationFrame(() => {
+      if (!scrollRef.current) return;
+      const walk = (x - dragInfo.current.startX) * 1.5;
+      scrollRef.current.scrollLeft = dragInfo.current.scrollLeft - walk;
+    });
+  };
+
   const stopDragging = () => {
+    cancelAnimationFrame(dragInfo.current.rafId);
     dragInfo.current.isDragging = false;
     setIsDragging(false);
   };
@@ -61,17 +81,20 @@ export const TechStack = () => {
   return (
     <section className={styles.stackContainer}>
       <h2 className={styles.title}>Stack technique principale</h2>
-      
-      <div 
+
+      <div
         className={`${styles.marqueeContainer} ${isDragging ? styles.isDragging : ""}`}
         ref={scrollRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={stopDragging}
         onMouseLeave={stopDragging}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={stopDragging}
       >
         <div className={styles.marqueeTrack}>
-          {[...technologies, ...technologies].map((tech, index) => (
+          {duplicatedTechnologies.map((tech, index) => (
             <div key={`${tech.name}-${index}`} className={styles.badge}>
               <span className={styles.icon}>{tech.icon}</span>
               <span className={styles.techName}>{tech.name}</span>

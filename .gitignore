@@ -39,3 +39,6 @@ dist-ssr/
 # Environment
 .env
 *.tsbuildinfo
+
+# Claude Code
+CLAUDE.md

@@ -1,17 +1,13 @@
-import { useMemo } from "react";
 import { TechStack } from "../components/TechStack";
 import { techNames } from "../utils/techData";
 import styles from "../styles/Hero.module.css";
 
+const displayedSkills = techNames
+  .slice(0, 6)
+  .map((skill) => `'${skill}'`)
+  .join(", ");
+
 export const Hero = () => {
-  const displayedSkills = useMemo(
-    () =>
-      techNames
-        .slice(0, 6)
-        .map((skill) => `'${skill}'`)
-        .join(", "),
-    []
-  );
 
   return (
     <section id="about" className={styles.hero}>
@@ -90,7 +86,7 @@ export const Hero = () => {
                 className={styles.profileImage}
                 fetchPriority="high"
                 loading="eager"
-                decoding="sync"
+                decoding="async"
                 width="800"
                 height="450"
               />

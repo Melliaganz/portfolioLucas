@@ -13,7 +13,7 @@ describe("Footer Component", () => {
 
     const links = [
       { title: "Mon github", href: "https://github.com/Melliaganz" },
-      { title: "Mon discord", href: "https://discord.gg/YJhEmGKK" },
+      { title: "Mon discord", href: "https://discord.gg/7q5KAbqfdu" },
       { title: "Mon mail", href: "mailto:lucaslengranddev@gmail.com" },
       { title: "Mon X", href: "https://x.com/LucasLengrand2" },
       { title: "Mon linkedIn", href: "https://www.linkedin.com/in/lucaslengrand" },

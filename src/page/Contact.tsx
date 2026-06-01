@@ -12,6 +12,14 @@ import {
   IconTwitter,
 } from "../utils/icons.module";
 
+const socialLinks = [
+  { href: "https://discord.gg/7q5KAbqfdu", icon: <IconDiscord />, label: "Discord" },
+  { href: "https://github.com/Melliaganz", icon: <IconGithub />, label: "Github" },
+  { href: "https://www.linkedin.com/in/lucaslengrand", icon: <IconLinkedIn />, label: "LinkedIn" },
+  { href: "https://x.com/LucasLengrand2", icon: <IconTwitter />, label: "Twitter" },
+  { href: "https://www.instagram.com/melliaganz/", icon: <IconInstagram />, label: "Instagram" },
+];
+
 export const Contact = () => {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -20,10 +28,18 @@ export const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!apiKey) {
+      console.error("VITE_API_FORM is not defined");
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+      return;
+    }
+
     setStatus("loading");
 
     const formData = new FormData(e.currentTarget);
-    if (apiKey) formData.append("access_key", apiKey);
+    formData.append("access_key", apiKey);
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 8000);
@@ -35,6 +51,13 @@ export const Contact = () => {
         signal: controller.signal,
       });
       clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+        return;
+      }
+
       const data = await response.json();
 
       if (data.success) {
@@ -43,11 +66,13 @@ export const Contact = () => {
         setTimeout(() => setStatus("idle"), 5000);
       } else {
         setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
       }
     } catch (error) {
       clearTimeout(timeoutId);
       console.error("Erreur lors de l'envoi:", error);
       setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
@@ -96,33 +121,7 @@ export const Contact = () => {
             <div className={styles.socialGroup}>
               <p className={styles.socialTitle}>Suivez-moi</p>
               <div className={styles.socialLinks}>
-                {[
-                  {
-                    href: "https://discord.gg/7q5KAbqfdu",
-                    icon: <IconDiscord />,
-                    label: "Discord",
-                  },
-                  {
-                    href: "https://github.com/Melliaganz",
-                    icon: <IconGithub />,
-                    label: "Github",
-                  },
-                  {
-                    href: "https://www.linkedin.com/in/lucaslengrand",
-                    icon: <IconLinkedIn />,
-                    label: "LinkedIn",
-                  },
-                  {
-                    href: "https://x.com/LucasLengrand2",
-                    icon: <IconTwitter />,
-                    label: "Twitter",
-                  },
-                  {
-                    href: "https://www.instagram.com/melliaganz/",
-                    icon: <IconInstagram />,
-                    label: "Instagram",
-                  },
-                ].map((soc) => (
+                {socialLinks.map((soc) => (
                   <a
                     key={soc.label}
                     href={soc.href}
@@ -146,6 +145,8 @@ export const Contact = () => {
                 type="checkbox"
                 name="botcheck"
                 className={styles.hidden}
+                tabIndex={-1}
+                aria-hidden="true"
               />
               <div className={styles.row}>
                 <div className={styles.inputGroup}>

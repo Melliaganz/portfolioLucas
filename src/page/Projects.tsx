@@ -79,10 +79,6 @@ export const Projects = () => {
 
   const shouldScroll = filteredProjects.length > 3;
 
-  const displayProjects = useMemo(() => {
-    if (filteredProjects.length === 0) return [];
-    return shouldScroll ? [...filteredProjects, ...filteredProjects] : filteredProjects;
-  }, [filteredProjects, shouldScroll]);
 
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     if (!shouldScroll || !scrollRef.current) return;
@@ -150,9 +146,16 @@ export const Projects = () => {
         onTouchEnd={handleStop}
       >
         <div className={shouldScroll ? styles.marqueeTrack : styles.staticTrack}>
-          {displayProjects.map((project, index) => (
-            <ProjectCard key={`${project.id}-${index}`} project={project} />
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
           ))}
+          {shouldScroll && (
+            <div inert className={styles.duplicateWrapper}>
+              {filteredProjects.map((project) => (
+                <ProjectCard key={`dup-${project.id}`} project={project} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
       </div>

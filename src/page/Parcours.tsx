@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useLayoutEffect } from "react";
+import { useRef, useState, useCallback, useLayoutEffect, useEffect } from "react";
 import { experiences } from "../data/parcours";
 import styles from "../styles/Parcours.module.css";
 import { IconParchemin } from "../utils/icons.module";
@@ -7,6 +7,11 @@ export const Parcours = () => {
   const [isExpanded, setIsExpanded] = useState<Record<string, boolean>>({});
   const [hasOverflow, setHasOverflow] = useState<Record<string, boolean>>({});
   const descriptionRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const isExpandedRef = useRef(isExpanded);
+
+  useEffect(() => {
+    isExpandedRef.current = isExpanded;
+  }, [isExpanded]);
 
   const toggleExpand = (id: string) => {
     setIsExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -29,7 +34,7 @@ export const Parcours = () => {
       const element = descriptionRefs.current[exp.id];
       if (element) {
         const observer = new ResizeObserver(() => {
-          if (!isExpanded[exp.id]) {
+          if (!isExpandedRef.current[exp.id]) {
             verifyElementOverflow(exp.id);
           }
         });
@@ -39,7 +44,7 @@ export const Parcours = () => {
     });
 
     return () => observers.forEach((o) => o.disconnect());
-  }, [verifyElementOverflow, isExpanded]);
+  }, [verifyElementOverflow]);
 
   return (
     <section className={styles.section}>
