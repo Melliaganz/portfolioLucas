@@ -22,6 +22,13 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
+  // Sécurité : restaure le scroll du body si le Header démonte menu ouvert.
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
   const toggleMenu = () => {
     setIsMenuOpen((prev) => {
       const newState = !prev;

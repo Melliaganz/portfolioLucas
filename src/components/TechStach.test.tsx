@@ -8,6 +8,8 @@ describe("TechStack Component", () => {
   const originalScrollLeft = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollLeft');
   const originalOffsetLeft = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetLeft');
 
+  let rafSpy: ReturnType<typeof vi.spyOn>;
+
   beforeEach(() => {
     scrollLeftStore = 0;
     Object.defineProperty(HTMLElement.prototype, 'scrollLeft', {
@@ -19,9 +21,16 @@ describe("TechStack Component", () => {
       configurable: true,
       get: () => 0
     });
+    // Le drag écrit scrollLeft dans un requestAnimationFrame ; on l'exécute
+    // de façon synchrone pour pouvoir l'asserter dans le test.
+    rafSpy = vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation((cb) => {
+      cb(0);
+      return 0;
+    });
   });
 
   afterEach(() => {
+    rafSpy.mockRestore();
     if (originalScrollLeft) {
       Object.defineProperty(HTMLElement.prototype, 'scrollLeft', originalScrollLeft);
     }

@@ -30,33 +30,61 @@ const AppDownloadPopup = () => {
     localStorage.setItem("hasSeenAppPopup", "true");
   };
 
+  // Le bouton de téléchargement ne s'affiche que pour Android, donc
+  // handleDownload n'est appelé que dans ce contexte.
   const handleDownload = () => {
-    if (os === "android") {
-      window.location.href =
-        "https://github.com/Melliaganz/portfolioLucasMobile/releases/latest/download/PortfolioLucas.apk";
-    } else {
-      alert("La version iOS sera bientôt disponible sur l'App Store.");
-    }
+    window.location.href =
+      "https://github.com/Melliaganz/portfolioLucasMobile/releases/latest/download/PortfolioLucas.apk";
     closePopup();
   };
 
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isVisible) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closePopup();
+      if (e.key === "Escape") {
+        closePopup();
+        return;
+      }
+      if (e.key !== "Tab" || !cardRef.current) return;
+
+      const focusable = cardRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
+
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      previouslyFocused?.focus();
+    };
   }, [isVisible]);
 
   if (!isVisible) return null;
 
   return (
     <div className="popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-      <div className="popup-card">
+      <div className="popup-card" ref={cardRef}>
         <div className="popup-emoji" aria-hidden="true">{os === "android" ? "🤖" : "🍎"}</div>
         <h2 id="popup-title" className="popup-title">
           {os === "android"

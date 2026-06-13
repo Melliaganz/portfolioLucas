@@ -1,23 +1,6 @@
 import { useRef, useState } from "react";
-import type { Technology } from "../types/navigation";
 import styles from "../styles/TechStack.module.css";
-import { IconAndroidStudio, IconAppStore, IconCss, IconGradle, IconJavaScript, IconKotlin, IconMongoDb, IconMySQL, IconNodeJs, IconReact, IconReactNative, IconTypeScript } from "../utils/icons.module";
-
-const technologies: Technology[] = [
-  { name: "React.js", icon: <IconReact /> },
-  { name: "TypeScript", icon: <IconTypeScript /> },
-  { name: "React Native", icon: <IconReactNative /> },
-  { name: "CSS3", icon: <IconCss /> },
-  { name: "Android Studio", icon: <IconAndroidStudio /> },
-  { name: "XCode", icon: <IconAppStore /> },
-  { name: "Gradle", icon: <IconGradle /> },
-  { name: "Javascript", icon: <IconJavaScript /> },
-  { name: "MongoDB", icon: <IconMongoDb /> },
-  { name: "Kotlin", icon: <IconKotlin /> },
-  { name: "MySQL", icon: <IconMySQL /> },
-  { name: "NodeJs", icon: <IconNodeJs /> },
-];
-
+import { technologies } from "../utils/techData";
 
 export const TechStack = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -45,8 +28,12 @@ export const TechStack = () => {
     if (!dragInfo.current.isDragging || !scrollRef.current) return;
     e.preventDefault();
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - dragInfo.current.startX) * 1.5;
-    scrollRef.current.scrollLeft = dragInfo.current.scrollLeft - walk;
+    cancelAnimationFrame(dragInfo.current.rafId);
+    dragInfo.current.rafId = requestAnimationFrame(() => {
+      if (!scrollRef.current) return;
+      const walk = (x - dragInfo.current.startX) * 1.5;
+      scrollRef.current.scrollLeft = dragInfo.current.scrollLeft - walk;
+    });
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {

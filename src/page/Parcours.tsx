@@ -50,7 +50,7 @@ export const Parcours = () => {
     <section className={styles.section}>
       <div className={styles.header}>
         <div className={styles.headerIconBox}>
-          <span className={`material-symbols-outlined ${styles.headerIcon}`}>
+          <span className={styles.headerIcon}>
             <IconParchemin />
           </span>
         </div>
@@ -83,9 +83,7 @@ export const Parcours = () => {
                       exp.isActive ? styles.activeIcon : ""
                     }`}
                   >
-                    <span
-                      className={`material-symbols-outlined ${styles.iconSmall}`}
-                    >
+                    <span className={styles.iconSmall}>
                       {exp.icon}
                     </span>
                   </div>

@@ -131,11 +131,13 @@ export const Projects = () => {
 
       <div
         ref={scrollRef}
-        className={`
-          ${shouldScroll ? styles.marqueeContainer : styles.staticGrid} 
-          ${isDragging ? styles.isDragging : ""}
-          ${shouldScroll ? styles.canScroll : ""}
-        `}
+        className={[
+          shouldScroll ? styles.marqueeContainer : styles.staticGrid,
+          isDragging ? styles.isDragging : "",
+          shouldScroll ? styles.canScroll : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
         onMouseDown={handleStart}
         onMouseMove={handleMove}
         onMouseUp={handleStop}
