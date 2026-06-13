@@ -20,4 +20,12 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // Edge Middleware Vercel : pas un module React, la règle react-refresh
+    // (export de composants uniquement) ne s'applique pas.
+    files: ['middleware.ts'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
