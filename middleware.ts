@@ -36,8 +36,9 @@ function buildCsp(nonce: string): string {
     "base-uri 'self'",
     // strict-dynamic : les navigateurs modernes ignorent les allowlists
     // d'hôtes et ne font confiance qu'au script noncé + à ce qu'il importe.
-    // `https:` sert de repli pour les navigateurs sans strict-dynamic.
-    `script-src 'nonce-${nonce}' 'strict-dynamic' https:`,
+    // `https:` et `'unsafe-inline'` sont des replis ignorés par les
+    // navigateurs gérant les nonces, mais assurent la rétrocompatibilité.
+    `script-src 'nonce-${nonce}' 'strict-dynamic' https: 'unsafe-inline'`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https:",
