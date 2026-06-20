@@ -1,0 +1,20 @@
+# Lucas Lengrand — Portfolio
+
+> Développeur Fullstack spécialisé en React, TypeScript et mobile (React Native, Kotlin). Disponible en freelance, basé à Paris.
+
+## Site
+
+- [Accueil](https://www.lengrandlucas.com/): portfolio one-page (à propos, parcours, projets, contact)
+- [CV (PDF)](https://www.lengrandlucas.com/CVLengrandLucas.pdf): CV à jour de Lucas Lengrand
+
+## Projets
+
+- [Impots.gouv](https://www.impots.gouv.fr): application mobile officielle (React Native, Kotlin, Gradle)
+- [MellianBot](https://github.com/Melliaganz/MellianBotV2): bot Discord musical (Node.js, TypeScript, Docker)
+- [Optique Chatenay](https://www.optiquechatenay.fr/): site vitrine React + Firebase
+- [Groupomania](https://github.com/Melliaganz/Groupomania): réseau social d'entreprise (Node.js, Express, React, MySQL)
+
+## Liens
+
+- [GitHub](https://github.com/Melliaganz)
+- [LinkedIn](https://www.linkedin.com/in/lucaslengrand)
