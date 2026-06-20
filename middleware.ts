@@ -34,10 +34,13 @@ function buildCsp(nonce: string): string {
   return [
     "default-src 'self'",
     "base-uri 'self'",
-    // strict-dynamic : seul le script noncé (et ce qu'il importe) est exécuté.
-    // Pas de repli `https:`/`'unsafe-inline'` : ils sont de toute façon ignorés
-    // par les navigateurs gérant les nonces et ne font que générer des warnings.
-    `script-src 'nonce-${nonce}' 'strict-dynamic'`,
+    // strict-dynamic : les navigateurs modernes ne font confiance qu'au script
+    // noncé et à ce qu'il importe ; ils ignorent `https:`/`http:`/`'unsafe-inline'`.
+    // Ces replis sont la forme recommandée par le CSP Evaluator de Google
+    // (et Lighthouse) pour rester rétrocompatible avec les vieux navigateurs
+    // (sans eux, ils bloqueraient tous les scripts). Firefox loggue un warning
+    // bénin « Ignoring … » : c'est attendu, pas une erreur.
+    `script-src 'nonce-${nonce}' 'strict-dynamic' https: http: 'unsafe-inline'`,
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https:",
