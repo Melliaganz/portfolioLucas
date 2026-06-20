@@ -11,13 +11,18 @@ export const Contact = () => {
   >("idle");
   const apiKey = import.meta.env.VITE_API_FORM;
 
+  // Affiche l'état final puis revient à "idle" après 5 s.
+  const finish = (next: "success" | "error") => {
+    setStatus(next);
+    setTimeout(() => setStatus("idle"), 5000);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!apiKey) {
       console.error("VITE_API_FORM is not defined");
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 5000);
+      finish("error");
       return;
     }
 
@@ -38,26 +43,22 @@ export const Contact = () => {
       clearTimeout(timeoutId);
 
       if (!response.ok) {
-        setStatus("error");
-        setTimeout(() => setStatus("idle"), 5000);
+        finish("error");
         return;
       }
 
       const data = await response.json();
 
       if (data.success) {
-        setStatus("success");
         (e.target as HTMLFormElement).reset();
-        setTimeout(() => setStatus("idle"), 5000);
+        finish("success");
       } else {
-        setStatus("error");
-        setTimeout(() => setStatus("idle"), 5000);
+        finish("error");
       }
     } catch (error) {
       clearTimeout(timeoutId);
       console.error("Erreur lors de l'envoi:", error);
-      setStatus("error");
-      setTimeout(() => setStatus("idle"), 5000);
+      finish("error");
     }
   };
 

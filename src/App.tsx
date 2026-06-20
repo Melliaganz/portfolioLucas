@@ -1,9 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Suspense, lazy } from "react";
 import "./App.css";
+import { Analytics } from "@vercel/analytics/react";
 import { Header } from "./components/Header";
 import { Hero } from "./page/Hero";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { detectOs } from "./utils/smartLink";
+import { safeGetItem, safeSetItem } from "./utils/storage";
+import { useFocusTrap } from "./utils/useFocusTrap";
 
 const Parcours = lazy(() =>
   import("./page/Parcours").then((module) => ({ default: module.Parcours }))
@@ -21,13 +25,13 @@ const Footer = lazy(() =>
 const AppDownloadPopup = () => {
   const [[os, initiallyVisible]] = useState<["android" | "ios" | "other", boolean]>(() => {
     const detectedOs = detectOs();
-    return [detectedOs, !localStorage.getItem("hasSeenAppPopup") && detectedOs !== "other"];
+    return [detectedOs, !safeGetItem("hasSeenAppPopup") && detectedOs !== "other"];
   });
   const [isVisible, setIsVisible] = useState(initiallyVisible);
 
   const closePopup = () => {
     setIsVisible(false);
-    localStorage.setItem("hasSeenAppPopup", "true");
+    safeSetItem("hasSeenAppPopup", "true");
   };
 
   // Le bouton de téléchargement ne s'affiche que pour Android, donc
@@ -41,44 +45,12 @@ const AppDownloadPopup = () => {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const previouslyFocused = document.activeElement as HTMLElement | null;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        closePopup();
-        return;
-      }
-      if (e.key !== "Tab" || !cardRef.current) return;
-
-      const focusable = cardRef.current.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = previousOverflow;
-      previouslyFocused?.focus();
-    };
-  }, [isVisible]);
+  useFocusTrap({
+    active: isVisible,
+    onClose: closePopup,
+    containerRef: cardRef,
+    initialFocusRef: closeButtonRef,
+  });
 
   if (!isVisible) return null;
 
@@ -118,12 +90,15 @@ function App() {
       <Header />
       <Hero />
 
-      <Suspense fallback={null}>
-        <Parcours />
-        <Projects />
-        <Contact />
-        <Footer />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          <Parcours />
+          <Projects />
+          <Contact />
+          <Footer />
+        </Suspense>
+      </ErrorBoundary>
+      <Analytics />
     </main>
   );
 }

@@ -21,13 +21,11 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Set Yarn Version
-        run: yarn set version 4.12.0
-
       - name: Install dependencies
-        run: |
-          yarn config set nodeLinker node-modules
-          yarn install
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
 
       - name: Run Tests
         run: yarn test:run

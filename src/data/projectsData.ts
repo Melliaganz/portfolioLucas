@@ -44,7 +44,7 @@ export const projectsData: Project[] = [
     year: "2024",
     description:
       "Bot Discord multi-serveur spécialisé dans la lecture musicale haute fidélité avec intégration des API Spotify et YouTube.",
-    tags: ["NodeJS", "Typescript", "Spotify API", "YouTube API", "Docker"],
+    tags: ["Node.js", "TypeScript", "Spotify API", "YouTube API", "Docker"],
     category: "Backend",
     image: logoDiscord,
     githubUrl: "https://github.com/Melliaganz/MellianBotV2",
@@ -104,7 +104,7 @@ export const projectsData: Project[] = [
     year: "2022",
     description:
       "Plateforme e-commerce front-end. Gestion dynamique du panier, interaction avec un service web et validation rigoureuse des données.",
-    tags: ["Javascript", "HTML5", "CSS3"],
+    tags: ["JavaScript", "HTML5", "CSS3"],
     category: "Fullstack",
     image: imageKanap,
     githubUrl: "https://github.com/Melliaganz/Kanap",

@@ -78,7 +78,7 @@ const viteConfig = defineConfig({
       "Content-Security-Policy": "default-src 'self'; base-uri 'self'; script-src 'self' https://vitals.vercel-insights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://vitals.vercel-insights.com https://api.web3forms.com; object-src 'none'; require-trusted-types-for 'script'; upgrade-insecure-requests; frame-ancestors 'none';",
       "Cross-Origin-Opener-Policy": "same-origin",
       "X-Content-Type-Options": "nosniff",
-      "X-Frame-Options": "DENY",
+      "X-Frame-Options": "SAMEORIGIN",
       "X-XSS-Protection": "1; mode=block",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",

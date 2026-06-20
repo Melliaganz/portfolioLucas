@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
+import { track } from "@vercel/analytics";
 import type { NavItem } from "../types/navigation";
 import styles from "../styles/Header.module.css";
 import { IconCode, IconTelecharger } from "../utils/icons.module";
+import { CvModal } from "./CvModal";
 
 const NAV_LINKS: NavItem[] = [
   { label: "À propos", href: "#about" },
@@ -12,6 +14,7 @@ const NAV_LINKS: NavItem[] = [
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCvOpen, setIsCvOpen] = useState(false);
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 20);
@@ -82,22 +85,26 @@ export const Header = () => {
             ))}
           </nav>
 
-          <a
-            href="/CVLengrandLucas.pdf"
-            download="CV_Lengrand_Lucas.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
             className={styles.cvButton}
-            onClick={closeMenu}
+            aria-haspopup="dialog"
+            onClick={() => {
+              track("cv_open");
+              closeMenu();
+              setIsCvOpen(true);
+            }}
           >
             <IconTelecharger aria-hidden="true" />
             <span>
               CV
               <span className={styles.fileFormat}> (PDF)</span>
             </span>
-          </a>
+          </button>
         </div>
       </div>
+
+      {isCvOpen && <CvModal onClose={() => setIsCvOpen(false)} />}
     </header>
   );
 };

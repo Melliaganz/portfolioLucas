@@ -1,11 +1,11 @@
 # Portfolio Lucas - React - Typescript - Vite
 
-Ce portfolio est une application web ultra-performante et moderne, construite avec **React 19** et **Vite 7**. L'architecture est optimisée pour la rapidité de chargement, l'accessibilité, et intègre une détection de plateforme pour proposer une expérience mobile native.
+Ce portfolio est une application web ultra-performante et moderne, construite avec **React 19** et **Vite 8**. L'architecture est optimisée pour la rapidité de chargement, l'accessibilité, et intègre une détection de plateforme pour proposer une expérience mobile native.
 
 ## 🚀 Optimisations Techniques
 
 Le projet utilise des outils de pointe pour garantir une efficacité maximale :
-* **Single File Bundle** : Compilation en un fichier HTML unique via `vite-plugin-singlefile`.
+* **Code-splitting** : Composants chargés à la demande (chunks séparés) avec préchargement (`modulepreload`) injecté au build.
 * **Performance CSS** : Utilisation de `lightningcss` pour une minification et une compilation ultra-rapide des styles.
 * **SEO & Indexation** : Génération automatique du sitemap grâce à `vite-plugin-sitemap`.
 * **Lazy Loading** : Chargement différé des composants (`Suspense`) pour un affichage initial instantané.
@@ -14,24 +14,24 @@ Le projet utilise des outils de pointe pour garantir une efficacité maximale :
 
 ### Core
 * **Framework** : React 19 (dernière version stable)
-* **Langage** : TypeScript 5.9
+* **Langage** : TypeScript 6.0
 * **Icônes** : React Icons
-* **Gestion de paquets** : Yarn 4.12 (Berry)
+* **Gestion de paquets** : Yarn 4.17 (Berry, PnP)
 
 ### Build & Tooling
-* **Bundler** : Vite 7.3
+* **Bundler** : Vite 8
 * **CSS Engine** : Lightning CSS
-* **Plugins** : CSS Injected by JS, SingleFile, Sitemap
+* **Plugins** : Sitemap, préchargement des chunks lazy (plugin maison), CSP nonce via Edge Middleware
 
 ### Qualité & Tests
-* **Test Runner** : Vitest 4.0
+* **Test Runner** : Vitest 4.1
 * **DOM Testing** : React Testing Library & JSDOM
-* **Linter** : ESLint 9 (Flat Config) avec plugins React-hooks et Refresh
+* **Linter** : ESLint 10 (Flat Config) avec plugins React-hooks et Refresh
 
 ## 📦 Installation et Utilisation
 
 ### Prérequis
-* Node.js 18+
+* Node.js 20+
 * Yarn 4.x
 
 ### Commandes principales

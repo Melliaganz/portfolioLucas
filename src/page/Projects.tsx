@@ -1,7 +1,8 @@
-import React, { useState, useMemo, useRef, useCallback } from "react";
+import { useState, useMemo } from "react";
 import styles from "../styles/Projects.module.css";
 import { projectsData, type Project } from "../data/projectsData";
 import { getSmartLink } from "../utils/smartLink";
+import { useDragScroll } from "../utils/useDragScroll";
 
 const TOP_TAGS = ["React", "React Native", "TypeScript", "Node.js", "JavaScript"];
 
@@ -56,14 +57,6 @@ const ProjectCard = ({ project }: { project: Project }) => (
 
 export const Projects = () => {
   const [filter, setFilter] = useState("Tout");
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  
-  const dragContext = useRef({
-    startX: 0,
-    scrollLeft: 0,
-    rafId: 0
-  });
 
   const categories = useMemo(() => {
     const relevantTags = projectsData.flatMap(p => p.tags).filter(tag => TOP_TAGS.includes(tag));
@@ -79,31 +72,7 @@ export const Projects = () => {
 
   const shouldScroll = filteredProjects.length > 3;
 
-
-  const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!shouldScroll || !scrollRef.current) return;
-    setIsDragging(true);
-    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
-    dragContext.current.startX = clientX - scrollRef.current.offsetLeft;
-    dragContext.current.scrollLeft = scrollRef.current.scrollLeft;
-  };
-
-  const handleMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDragging || !scrollRef.current) return;
-    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
-    cancelAnimationFrame(dragContext.current.rafId);
-    dragContext.current.rafId = requestAnimationFrame(() => {
-      if (!scrollRef.current) return;
-      const x = clientX - scrollRef.current.offsetLeft;
-      const walk = (x - dragContext.current.startX) * 1.5;
-      scrollRef.current.scrollLeft = dragContext.current.scrollLeft - walk;
-    });
-  }, [isDragging]);
-
-  const handleStop = () => {
-    setIsDragging(false);
-    cancelAnimationFrame(dragContext.current.rafId);
-  };
+  const { scrollRef, isDragging, handlers } = useDragScroll({ enabled: shouldScroll });
 
   return (
     <section id="projects" className={styles.projectsSection}>
@@ -121,6 +90,8 @@ export const Projects = () => {
         {categories.map((cat) => (
           <button
             key={cat}
+            type="button"
+            aria-pressed={filter === cat}
             className={`${styles.filterBtn} ${filter === cat ? styles.active : ""}`}
             onClick={() => setFilter(cat)}
           >
@@ -138,14 +109,8 @@ export const Projects = () => {
         ]
           .filter(Boolean)
           .join(" ")}
-        onMouseDown={handleStart}
-        onMouseMove={handleMove}
-        onMouseUp={handleStop}
-        onMouseLeave={handleStop}
         onFocusCapture={(e) => e.stopPropagation()}
-        onTouchStart={handleStart}
-        onTouchMove={handleMove}
-        onTouchEnd={handleStop}
+        {...handlers}
       >
         <div className={shouldScroll ? styles.marqueeTrack : styles.staticTrack}>
           {filteredProjects.map((project) => (

@@ -65,13 +65,32 @@ describe("Header Component", () => {
     expect(document.body.style.overflow).toBe("unset");
   });
 
-  it("doit avoir les bons attributs pour le téléchargement du CV", () => {
+  it("doit ouvrir la modale d'aperçu du CV au clic", () => {
     render(<Header />);
-    
-    const cvLink = screen.getByRole("link", { name: /CV/i });
-    
-    expect(cvLink).toHaveAttribute("download", "CV_Lengrand_Lucas.pdf");
-    expect(cvLink).toHaveAttribute("target", "_blank");
-    expect(cvLink).toHaveAttribute("rel", "noopener noreferrer");
+
+    // Aucune modale au départ.
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    const cvButton = screen.getByRole("button", { name: /CV/i });
+    expect(cvButton).toHaveAttribute("aria-haspopup", "dialog");
+    fireEvent.click(cvButton);
+
+    // La modale s'ouvre avec l'aperçu et le lien de téléchargement.
+    const dialog = screen.getByRole("dialog");
+    expect(dialog).toBeInTheDocument();
+
+    const downloadLink = screen.getByRole("link", { name: /Télécharger/i });
+    expect(downloadLink).toHaveAttribute("href", "/CVLengrandLucas.pdf");
+    expect(downloadLink).toHaveAttribute("download", "CV_Lengrand_Lucas.pdf");
+  });
+
+  it("doit fermer la modale du CV via le bouton de fermeture", () => {
+    render(<Header />);
+
+    fireEvent.click(screen.getByRole("button", { name: /CV/i }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /Fermer l'aperçu/i }));
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 });
