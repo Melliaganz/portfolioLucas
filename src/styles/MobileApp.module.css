@@ -1,0 +1,121 @@
+.section {
+  padding: 80px 20px;
+  background-color: #101622;
+  width: 100%;
+}
+
+.card {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 40px;
+  background: linear-gradient(135deg, #161a23 0%, #1a2333 100%);
+  border: 1px solid #282e39;
+  border-radius: 20px;
+}
+
+.content {
+  flex: 1;
+}
+
+.accentBar {
+  width: 48px;
+  height: 4px;
+  background-color: #135bec;
+  border-radius: 9999px;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  font-weight: 900;
+  margin: 0 0 14px 0;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.text {
+  color: #9da6b9;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 28px 0;
+  max-width: 460px;
+}
+
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 10px;
+  background-color: #135bec;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgb(19 91 236 / 0.25);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.downloadBtn:hover {
+  background-color: #0e44b5;
+  transform: translateY(-2px);
+}
+
+.androidNote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  color: #9da6b9;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.qrWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+
+.qrCaption {
+  color: #101622;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+  }
+
+  .text {
+    max-width: none;
+  }
+
+  /* Carte centrée sur mobile : on centre aussi la barre d'accent
+     et la mention Android. */
+  .accentBar {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .androidNote {
+    justify-content: center;
+  }
+
+  /* Inutile de scanner son propre écran : on masque le QR sur mobile,
+     le bouton de téléchargement suffit. */
+  .qrWrapper {
+    display: none;
+  }
+}
