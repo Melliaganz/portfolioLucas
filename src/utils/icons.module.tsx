@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import type { IconBaseProps, IconType } from 'react-icons'
 import { IconContext } from 'react-icons'
-import { FaCode, FaCss3, FaDiscord, FaGraduationCap, FaLinkedin, FaMobile, FaReact } from 'react-icons/fa'
+import { FaBolt, FaCheckCircle, FaCode, FaCss3, FaDiscord, FaGraduationCap, FaLinkedin, FaMobile, FaReact, FaShieldAlt, FaUniversalAccess } from 'react-icons/fa'
 import { GiScrollQuill } from 'react-icons/gi'
 import { IoMdDownload } from 'react-icons/io'
 import { IoSend } from 'react-icons/io5'
@@ -70,3 +70,7 @@ export const IconTwitter = createIcon(RiTwitterXFill);
 export const IconInstagram = createIcon(SiInstagram);
 export const IconFerme = createIcon(MdOutlineKeyboardArrowDown);
 export const IconDiscord = createIcon(FaDiscord);
+export const IconPerf = createIcon(FaBolt, "#facc15");
+export const IconSecurity = createIcon(FaShieldAlt, "#34d399");
+export const IconA11y = createIcon(FaUniversalAccess, "#60a5fa");
+export const IconReliability = createIcon(FaCheckCircle, "#a78bfa");

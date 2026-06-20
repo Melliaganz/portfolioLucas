@@ -22,7 +22,12 @@ jobs:
         run: corepack enable
 
       - name: Install dependencies
-        run: yarn install --immutable
+        # Linker node-modules en CI : le loader ESM de PnP échoue à résoudre
+        # certaines dépendances transitives (ex. @exodus/bytes) au lancement
+        # des workers Vitest. node-modules extrait tout, c'est robuste ici.
+        run: |
+          yarn config set nodeLinker node-modules
+          yarn install
 
       - name: Lint
         run: yarn lint

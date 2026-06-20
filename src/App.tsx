@@ -15,6 +15,9 @@ const Parcours = lazy(() =>
 const Projects = lazy(() =>
   import("./page/Projects").then((module) => ({ default: module.Projects }))
 );
+const Quality = lazy(() =>
+  import("./page/Quality").then((module) => ({ default: module.Quality }))
+);
 const Contact = lazy(() =>
   import("./page/Contact").then((module) => ({ default: module.Contact }))
 );
@@ -94,6 +97,7 @@ function App() {
         <Suspense fallback={null}>
           <Parcours />
           <Projects />
+          <Quality />
           <Contact />
           <Footer />
         </Suspense>
