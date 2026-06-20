@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
+import { LanguageProvider } from "./i18n/LanguageContext";
 
 // Trusted Types : la CSP impose `require-trusted-types-for 'script'`. Des libs
 // tierces (ex. @vercel/analytics) injectent leur script via `script.src = "…"`,
@@ -32,6 +33,8 @@ try {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
   </StrictMode>
 );

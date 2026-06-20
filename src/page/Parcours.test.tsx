@@ -21,12 +21,15 @@ vi.mock("../data/parcours", () => ({
   experiences: [
     {
       id: "1",
-      date: "2023 - Présent",
-      title: "Développeur Fullstack",
+      date: { fr: "2023 - Présent", en: "2023 - Present" },
+      title: { fr: "Développeur Fullstack", en: "Fullstack Developer" },
       company: "Ma Super Entreprise",
       location: "Paris",
-      intro: "Une intro passionnante",
-      description: ["Mission A", "Mission B"],
+      intro: { fr: "Une intro passionnante", en: "An exciting intro" },
+      description: {
+        fr: ["Mission A", "Mission B"],
+        en: ["Task A", "Task B"],
+      },
       isList: true,
       isActive: true,
       icon: "work",

@@ -43,6 +43,15 @@
     align-items: center;
     text-align: center;
   }
+
+  .buttonGroup {
+    justify-content: center;
+  }
+
+  .visualWrapper {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .badge {

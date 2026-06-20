@@ -1,6 +1,7 @@
 import { TechStack } from "../components/TechStack";
 import { techNames } from "../utils/techData";
 import styles from "../styles/Hero.module.css";
+import { useLang } from "../i18n/LanguageContext";
 
 const displayedSkills = techNames
   .slice(0, 6)
@@ -8,6 +9,7 @@ const displayedSkills = techNames
   .join(", ");
 
 export const Hero = () => {
+  const { t } = useLang();
 
   return (
     <section id="about" className={styles.hero}>
@@ -17,32 +19,28 @@ export const Hero = () => {
         <div className={styles.textContent}>
           <div className={styles.badge}>
             <span className={styles.badgeDot} />
-            <span className={styles.badgeText}>Disponible en freelance</span>
+            <span className={styles.badgeText}>{t.hero.available}</span>
           </div>
 
           <h1 className={styles.title}>
-            Développeur <br />
-            <span className={styles.gradientText}>React</span> 
+            {t.hero.titleLead} <br />
+            <span className={styles.gradientText}>{t.hero.react}</span>
             <span className={styles.noWrap}>
-              {" "}& <span className={styles.gradientText}>Mobile</span>
+              {" "}& <span className={styles.gradientText}>{t.hero.mobile}</span>
             </span>
           </h1>
 
-          <p className={styles.description}>
-            Je conçois des expériences web et mobiles performantes, accessibles
-            et modernes. Expert en écosystème JavaScript, je transforme vos
-            idées en produits digitaux robustes.
-          </p>
+          <p className={styles.description}>{t.hero.description}</p>
 
           <TechStack />
 
           <div className={styles.buttonGroup}>
             <a href="#projects" className={styles.btnPrimary}>
-              Voir mes projets
+              {t.hero.viewProjects}
             </a>
 
             <a href="#contact" className={styles.btnSecondary}>
-              Me contacter
+              {t.hero.contactMe}
             </a>
           </div>
         </div>

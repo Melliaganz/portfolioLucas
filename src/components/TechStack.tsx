@@ -1,13 +1,15 @@
 import styles from "../styles/TechStack.module.css";
 import { technologies } from "../utils/techData";
 import { useDragScroll } from "../utils/useDragScroll";
+import { useLang } from "../i18n/LanguageContext";
 
 export const TechStack = () => {
   const { scrollRef, isDragging, handlers } = useDragScroll();
+  const { t } = useLang();
 
   return (
     <section className={styles.stackContainer}>
-      <h2 className={styles.title}>Stack technique principale</h2>
+      <h2 className={styles.title}>{t.tech.title}</h2>
 
       <div
         className={`${styles.marqueeContainer} ${isDragging ? styles.isDragging : ""}`}

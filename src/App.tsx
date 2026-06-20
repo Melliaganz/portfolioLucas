@@ -8,6 +8,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { detectOs } from "./utils/smartLink";
 import { safeGetItem, safeSetItem } from "./utils/storage";
 import { useFocusTrap } from "./utils/useFocusTrap";
+import { useLang } from "./i18n/LanguageContext";
 
 const Parcours = lazy(() =>
   import("./page/Parcours").then((module) => ({ default: module.Parcours }))
@@ -18,6 +19,12 @@ const Projects = lazy(() =>
 const Quality = lazy(() =>
   import("./page/Quality").then((module) => ({ default: module.Quality }))
 );
+const CaseStudy = lazy(() =>
+  import("./page/CaseStudy").then((module) => ({ default: module.CaseStudy }))
+);
+const MobileApp = lazy(() =>
+  import("./page/MobileApp").then((module) => ({ default: module.MobileApp }))
+);
 const Contact = lazy(() =>
   import("./page/Contact").then((module) => ({ default: module.Contact }))
 );
@@ -26,6 +33,7 @@ const Footer = lazy(() =>
 );
 
 const AppDownloadPopup = () => {
+  const { t } = useLang();
   const [[os, initiallyVisible]] = useState<["android" | "ios" | "other", boolean]>(() => {
     const detectedOs = detectOs();
     return [detectedOs, !safeGetItem("hasSeenAppPopup") && detectedOs !== "other"];
@@ -62,24 +70,20 @@ const AppDownloadPopup = () => {
       <div className="popup-card" ref={cardRef}>
         <div className="popup-emoji" aria-hidden="true">{os === "android" ? "🤖" : "🍎"}</div>
         <h2 id="popup-title" className="popup-title">
-          {os === "android"
-            ? "Version Android disponible"
-            : "Application Mobile"}
+          {os === "android" ? t.popup.androidTitle : t.popup.iosTitle}
         </h2>
         <p className="popup-description">
-          {os === "android"
-            ? "Téléchargez l'APK pour profiter d'une expérience fluide et native sur votre smartphone."
-            : "Mon application arrive bientôt sur iOS. En attendant, continuez la visite sur le web !"}
+          {os === "android" ? t.popup.androidDesc : t.popup.iosDesc}
         </p>
 
         {os === "android" && (
           <button type="button" className="popup-download-btn" onClick={handleDownload}>
-            Télécharger l'APK
+            {t.popup.download}
           </button>
         )}
 
         <button type="button" ref={closeButtonRef} className="popup-close-btn" onClick={closePopup}>
-          Continuer sur le navigateur
+          {t.popup.continue}
         </button>
       </div>
     </div>
@@ -97,7 +101,9 @@ function App() {
         <Suspense fallback={null}>
           <Parcours />
           <Projects />
+          <CaseStudy />
           <Quality />
+          <MobileApp />
           <Contact />
           <Footer />
         </Suspense>

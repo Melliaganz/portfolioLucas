@@ -1,9 +1,12 @@
 import styles from '../styles/Footer.module.css'
 import { socialLinks } from '../data/socialLinks'
+import { useLang } from '../i18n/LanguageContext'
 
 declare const __APP_YEAR__: string;
 
-export const Footer = () => (
+export const Footer = () => {
+  const { t } = useLang();
+  return (
   <section className={styles.footerSection}>
     <footer className={styles.footerContainer}>
       <div className={styles.contentWrapper}>
@@ -23,9 +26,10 @@ export const Footer = () => (
         </div>
 
         <p className={styles.copyright}>
-          © {__APP_YEAR__} Lengrand Lucas. Tous droits réservés.
+          © {__APP_YEAR__} Lengrand Lucas. {t.footer.rights}
         </p>
       </div>
     </footer>
   </section>
-);
+  );
+};

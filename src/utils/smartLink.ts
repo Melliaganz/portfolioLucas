@@ -21,3 +21,14 @@ export const getSmartLink = (url?: string): string => {
   if (/android/i.test(ua)) return STORES.ANDROID;
   return STORES.DESKTOP;
 };
+
+// Toujours un store applicatif (jamais le web), choisi selon l'OS, y compris
+// sur ordinateur : Apple (iOS/macOS) → App Store, le reste → Play Store.
+export const getAppStoreLink = (): string => {
+  if (typeof navigator === "undefined") return STORES.ANDROID;
+  const ua = navigator.userAgent;
+  if (/iPad|iPhone|iPod/i.test(ua)) return STORES.IOS;
+  if (/android/i.test(ua)) return STORES.ANDROID;
+  if (/Macintosh|Mac OS X/i.test(ua)) return STORES.IOS;
+  return STORES.ANDROID;
+};

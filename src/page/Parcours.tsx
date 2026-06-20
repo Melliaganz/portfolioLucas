@@ -1,9 +1,10 @@
 import { useRef, useState, useCallback, useLayoutEffect, useEffect } from "react";
 import { experiences } from "../data/parcours";
 import styles from "../styles/Parcours.module.css";
-import { IconParchemin } from "../utils/icons.module";
+import { useLang } from "../i18n/LanguageContext";
 
 export const Parcours = () => {
+  const { t, lang } = useLang();
   const [isExpanded, setIsExpanded] = useState<Record<string, boolean>>({});
   const [hasOverflow, setHasOverflow] = useState<Record<string, boolean>>({});
   const descriptionRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -49,12 +50,8 @@ export const Parcours = () => {
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <div className={styles.headerIconBox}>
-          <span className={styles.headerIcon}>
-            <IconParchemin />
-          </span>
-        </div>
-        <h2 className={styles.titleMain}>Mon Parcours</h2>
+        <div className={styles.accentBar} />
+        <h2 className={styles.titleMain}>{t.parcours.title}</h2>
       </div>
 
       <div className={styles.card}>
@@ -63,6 +60,8 @@ export const Parcours = () => {
             const isLast = index === experiences.length - 1;
             const expanded = isExpanded[exp.id];
             const canExpand = hasOverflow[exp.id];
+            const desc = exp.description[lang];
+            const intro = exp.intro?.[lang];
 
             return (
               <div key={exp.id} className={styles.experienceWrapper}>
@@ -72,7 +71,7 @@ export const Parcours = () => {
                       exp.isActive ? styles.dateActive : ""
                     }`}
                   >
-                    {exp.date}
+                    {exp.date[lang]}
                   </span>
                 </div>
 
@@ -95,7 +94,7 @@ export const Parcours = () => {
                     isLast ? styles.lastStep : ""
                   }`}
                 >
-                  <h3 className={styles.jobTitle}>{exp.title}</h3>
+                  <h3 className={styles.jobTitle}>{exp.title[lang]}</h3>
                   <p className={styles.company}>
                     {exp.companyUrl ? (
                       <a href={exp.companyUrl} target="_blank" rel="noopener noreferrer">
@@ -120,17 +119,17 @@ export const Parcours = () => {
                     }
                   >
                     <div className={styles.description}>
-                      {exp.intro && (
-                        <p className={styles.introText}>{exp.intro}</p>
+                      {intro && (
+                        <p className={styles.introText}>{intro}</p>
                       )}
-                      {exp.isList && Array.isArray(exp.description) ? (
+                      {exp.isList && Array.isArray(desc) ? (
                         <ul className={styles.list}>
-                          {exp.description.map((point, i) => (
+                          {desc.map((point, i) => (
                             <li key={i}>{point}</li>
                           ))}
                         </ul>
                       ) : (
-                        <p className={styles.textBlock}>{exp.description}</p>
+                        <p className={styles.textBlock}>{desc as string}</p>
                       )}
                     </div>
                   </div>
@@ -143,7 +142,7 @@ export const Parcours = () => {
                       aria-expanded={expanded}
                       aria-controls={`desc-${exp.id}`}
                     >
-                      {expanded ? "Voir moins" : "Voir plus"}
+                      {expanded ? t.parcours.less : t.parcours.more}
                     </button>
                   )}
                 </div>

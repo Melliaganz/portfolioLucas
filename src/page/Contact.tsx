@@ -2,10 +2,12 @@ import { useState } from "react";
 import styles from "../styles/Contact.module.css";
 import { IconEmail, IconFerme, IconMapPin, IconSend } from "../utils/icons.module";
 import { socialLinks } from "../data/socialLinks";
+import { useLang } from "../i18n/LanguageContext";
 
 const contactSocialLinks = socialLinks.filter((l) => !l.href.startsWith("mailto:"));
 
 export const Contact = () => {
+  const { t } = useLang();
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -70,11 +72,8 @@ export const Contact = () => {
           <div className={styles.infoColumn}>
             <div className={styles.headerGroup}>
               <div className={styles.accentBar} />
-              <h2 className={styles.title}>Travaillons ensemble</h2>
-              <p className={styles.subtitle}>
-                Spécialiste React & TypeScript, je construis des applications
-                web et mobiles évolutives.
-              </p>
+              <h2 className={styles.title}>{t.contact.title}</h2>
+              <p className={styles.subtitle}>{t.contact.subtitle}</p>
             </div>
 
             <div className={styles.contactDetails}>
@@ -83,7 +82,7 @@ export const Contact = () => {
                   <IconEmail />
                 </div>
                 <div className={styles.detailText}>
-                  <p className={styles.labelSmall}>Email</p>
+                  <p className={styles.labelSmall}>{t.contact.email}</p>
                   <a
                     href="mailto:lucaslengranddev@gmail.com"
                     className={styles.detailLink}
@@ -98,14 +97,14 @@ export const Contact = () => {
                   <IconMapPin />
                 </div>
                 <div className={styles.detailText}>
-                  <p className={styles.labelSmall}>Localisation</p>
-                  <span className={styles.staticDetail}>Paris, France</span>
+                  <p className={styles.labelSmall}>{t.contact.location}</p>
+                  <span className={styles.staticDetail}>{t.contact.locationValue}</span>
                 </div>
               </div>
             </div>
 
             <div className={styles.socialGroup}>
-              <p className={styles.socialTitle}>Suivez-moi</p>
+              <p className={styles.socialTitle}>{t.contact.follow}</p>
               <div className={styles.socialLinks}>
                 {contactSocialLinks.map((soc) => (
                   <a
@@ -125,7 +124,7 @@ export const Contact = () => {
 
           {/* Colonne Droite : Formulaire */}
           <div className={styles.formCard}>
-            <h2 className={styles.formTitle}>Envoyer un message</h2>
+            <h2 className={styles.formTitle}>{t.contact.formTitle}</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
               <input
                 type="checkbox"
@@ -137,13 +136,13 @@ export const Contact = () => {
               <div className={styles.row}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="name" className={styles.inputLabel}>
-                    Nom
+                    {t.contact.name}
                   </label>
                   <input
                     id="name"
                     name="name"
                     type="text"
-                    placeholder="John Doe"
+                    placeholder={t.contact.namePh}
                     className={styles.input}
                     required
                     autoComplete="name"
@@ -151,13 +150,13 @@ export const Contact = () => {
                 </div>
                 <div className={styles.inputGroup}>
                   <label htmlFor="email" className={styles.inputLabel}>
-                    Email
+                    {t.contact.emailLabel}
                   </label>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder={t.contact.emailPh}
                     className={styles.input}
                     required
                     autoComplete="email"
@@ -167,7 +166,7 @@ export const Contact = () => {
 
               <div className={styles.inputGroup}>
                 <label htmlFor="subject" className={styles.inputLabel}>
-                  Sujet
+                  {t.contact.subject}
                 </label>
                 <div className={styles.selectWrapper}>
                   <select
@@ -176,11 +175,11 @@ export const Contact = () => {
                     className={styles.select}
                     required
                   >
-                    <option value="Demande de projet">Demande de projet</option>
-                    <option value="Opportunité freelance">
-                      Opportunité freelance
+                    <option value={t.contact.subjectProject}>{t.contact.subjectProject}</option>
+                    <option value={t.contact.subjectFreelance}>
+                      {t.contact.subjectFreelance}
                     </option>
-                    <option value="Question générale">Question générale</option>
+                    <option value={t.contact.subjectGeneral}>{t.contact.subjectGeneral}</option>
                   </select>
                   <span className={styles.selectArrow}>
                     <IconFerme />
@@ -190,12 +189,12 @@ export const Contact = () => {
 
               <div className={styles.inputGroup}>
                 <label htmlFor="message" className={styles.inputLabel}>
-                  Message
+                  {t.contact.message}
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  placeholder="Décrivez votre projet..."
+                  placeholder={t.contact.messagePh}
                   className={styles.textarea}
                   required
                 />
@@ -210,10 +209,10 @@ export const Contact = () => {
               >
                 <span>
                   {status === "loading"
-                    ? "Envoi..."
+                    ? t.contact.sending
                     : status === "success"
-                    ? "Envoyé !"
-                    : "Envoyer"}
+                    ? t.contact.sent
+                    : t.contact.send}
                 </span>
                 <span className={styles.btnIcon}>
                   <IconSend />

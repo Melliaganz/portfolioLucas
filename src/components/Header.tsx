@@ -1,20 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 import { track } from "@vercel/analytics";
-import type { NavItem } from "../types/navigation";
 import styles from "../styles/Header.module.css";
 import { IconCode, IconTelecharger } from "../utils/icons.module";
 import { CvModal } from "./CvModal";
-
-const NAV_LINKS: NavItem[] = [
-  { label: "À propos", href: "#about" },
-  { label: "Projets", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
+import { useLang } from "../i18n/LanguageContext";
 
 export const Header = () => {
+  const { t, lang, setLang } = useLang();
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
+
+  const navLinks = [
+    { label: t.header.about, href: "#about" },
+    { label: t.header.projects, href: "#projects" },
+    { label: t.header.contact, href: "#contact" },
+  ];
 
   const handleScroll = useCallback(() => {
     setIsScrolled(window.scrollY > 20);
@@ -52,18 +53,18 @@ export const Header = () => {
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${isMenuOpen ? styles.menuOpen : ""}`}>
       <div className={styles.container}>
-        
-        <a href="#" className={styles.logo} onClick={closeMenu} aria-label="Retour en haut">
+
+        <a href="#" className={styles.logo} onClick={closeMenu} aria-label={t.header.backToTop}>
           <div className={styles.logoBox}>
             <IconCode />
           </div>
           <span className={styles.navTitre}>Lengrand Lucas</span>
         </a>
 
-        <button 
-          className={styles.burger} 
+        <button
+          className={styles.burger}
           onClick={toggleMenu}
-          aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={isMenuOpen ? t.header.closeMenu : t.header.openMenu}
           aria-expanded={isMenuOpen}
         >
           <span className={styles.burgerLine}></span>
@@ -72,11 +73,11 @@ export const Header = () => {
         </button>
 
         <div className={`${styles.rightNavContainer} ${isMenuOpen ? styles.navActive : ""}`}>
-          <nav className={styles.nav} aria-label="Navigation principale">
-            {NAV_LINKS.map((link) => (
-              <a 
-                key={link.href} 
-                href={link.href} 
+          <nav className={styles.nav} aria-label={t.header.nav}>
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
                 className={styles.navLink}
                 onClick={closeMenu}
               >
@@ -84,6 +85,15 @@ export const Header = () => {
               </a>
             ))}
           </nav>
+
+          <button
+            type="button"
+            className={styles.langButton}
+            onClick={() => setLang(lang === "fr" ? "en" : "fr")}
+            aria-label={t.header.langLabel}
+          >
+            {lang === "fr" ? "EN" : "FR"}
+          </button>
 
           <button
             type="button"
@@ -97,8 +107,8 @@ export const Header = () => {
           >
             <IconTelecharger aria-hidden="true" />
             <span>
-              CV
-              <span className={styles.fileFormat}> (PDF)</span>
+              {t.header.cv}
+              <span className={styles.fileFormat}>{t.header.cvFormat}</span>
             </span>
           </button>
         </div>
