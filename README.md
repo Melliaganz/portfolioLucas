@@ -1,5 +1,8 @@
 # Portfolio Lucas - React - Typescript - Vite
 
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)](https://github.com/Melliaganz/portfolioLucas/releases/tag/v1.0.0)
+[![License](https://img.shields.io/badge/license-Tous%20droits%20réservés-red)](./LICENSE)
+
 Ce portfolio est une application web ultra-performante et moderne, construite avec **React 19** et **Vite 8**. L'architecture est optimisée pour la rapidité de chargement, l'accessibilité, et intègre une détection de plateforme pour proposer une expérience mobile native.
 
 ## 🚀 Optimisations Techniques
@@ -9,6 +12,13 @@ Le projet utilise des outils de pointe pour garantir une efficacité maximale :
 * **Performance CSS** : Utilisation de `lightningcss` pour une minification et une compilation ultra-rapide des styles.
 * **SEO & Indexation** : Génération automatique du sitemap grâce à `vite-plugin-sitemap`.
 * **Lazy Loading** : Chargement différé des composants (`Suspense`) pour un affichage initial instantané.
+* **Internationalisation** : Interface bilingue **FR / EN** avec détection automatique de la langue et persistance du choix.
+
+## 🔒 Sécurité
+
+* **CSP par requête** : Content-Security-Policy stricte générée par une Edge Middleware Vercel (nonce unique, `strict-dynamic`, Trusted Types).
+* **Entêtes de sécurité** : HSTS, COOP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
+* **Formulaire de contact** : envoi via Web3Forms protégé par un honeypot anti-spam et un rate-limit côté client.
 
 ## 🛠️ Stack Technique
 
@@ -70,5 +80,9 @@ yarn build
 * Le bon fonctionnement des interactions utilisateur (fermeture de popup, liens de téléchargement).
 
 * La persistance des données dans le stockage local.
+
+## 📄 Licence
+
+Tous droits réservés. Le code est public à des fins de consultation et de démonstration uniquement ; toute réutilisation est interdite sans autorisation écrite. Voir [LICENSE](./LICENSE).
 
 Développé avec ❤️ par Lucas.
