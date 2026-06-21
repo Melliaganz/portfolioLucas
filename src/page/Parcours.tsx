@@ -2,6 +2,7 @@ import { useRef, useState, useCallback, useLayoutEffect, useEffect } from "react
 import { experiences } from "../data/parcours";
 import styles from "../styles/Parcours.module.css";
 import { useLang } from "../i18n/LanguageContext";
+import { useInView } from "../utils/useInView";
 
 export const Parcours = () => {
   const { t, lang } = useLang();
@@ -9,6 +10,7 @@ export const Parcours = () => {
   const [hasOverflow, setHasOverflow] = useState<Record<string, boolean>>({});
   const descriptionRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const isExpandedRef = useRef(isExpanded);
+  const { ref: revealRef, inView } = useInView();
 
   useEffect(() => {
     isExpandedRef.current = isExpanded;
@@ -54,7 +56,10 @@ export const Parcours = () => {
         <h2 className={styles.titleMain}>{t.parcours.title}</h2>
       </div>
 
-      <div className={styles.card}>
+      <div
+        ref={revealRef}
+        className={`${styles.card} ${inView ? styles.revealed : ""}`}
+      >
         <div className={styles.timelineGrid}>
           {experiences.map((exp, index) => {
             const isLast = index === experiences.length - 1;
