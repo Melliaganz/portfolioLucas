@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { track } from "@vercel/analytics";
 import styles from "../styles/Header.module.css";
 import { IconCode, IconTelecharger } from "../utils/icons.module";
+import { FlagFR, FlagGB } from "../utils/flags";
 import { CvModal } from "./CvModal";
 import { useLang } from "../i18n/LanguageContext";
 
@@ -102,7 +103,13 @@ export const Header = () => {
             onClick={() => setLang(lang === "fr" ? "en" : "fr")}
             aria-label={t.header.langLabel}
           >
-            {lang === "fr" ? "EN" : "FR"}
+            <span key={lang} className={styles.langText}>
+              {lang === "fr" ? (
+                <FlagGB className={styles.flag} />
+              ) : (
+                <FlagFR className={styles.flag} />
+              )}
+            </span>
           </button>
 
           <button

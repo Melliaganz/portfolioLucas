@@ -30,6 +30,18 @@ button {
   font-family: inherit;
 }
 
+/* Fondu enchaîné du contenu au changement de langue : la classe est posée sur
+   <html> par LanguageContext le temps de la transition. */
+@keyframes langSwitch {
+  0% { opacity: 1; }
+  35% { opacity: 0.45; }
+  100% { opacity: 1; }
+}
+
+html.is-lang-switching #root {
+  animation: langSwitch 0.45s ease;
+}
+
 /* Respecte la préférence système de mouvement réduit : neutralise les
    animations infinies (marquees, pulse, shimmer), les transitions et le
    défilement fluide pour les utilisateurs sensibles au mouvement. */

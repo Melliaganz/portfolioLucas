@@ -3,6 +3,7 @@ import {
   useContext,
   useState,
   useEffect,
+  useRef,
   type ReactNode,
 } from "react";
 import { dictionaries, type Dictionary, type Lang } from "./translations";
@@ -36,9 +37,27 @@ const LanguageContext = createContext<LanguageContextValue>({
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLangState] = useState<Lang>(detectInitialLang);
+  const firstRender = useRef(true);
 
   useEffect(() => {
     document.documentElement.lang = lang;
+
+    // Pas d'animation au tout premier rendu, seulement lors d'un changement.
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    const el = document.documentElement;
+    el.classList.add("is-lang-switching");
+    const id = window.setTimeout(
+      () => el.classList.remove("is-lang-switching"),
+      450
+    );
+    return () => {
+      window.clearTimeout(id);
+      el.classList.remove("is-lang-switching");
+    };
   }, [lang]);
 
   const setLang = (l: Lang) => {
