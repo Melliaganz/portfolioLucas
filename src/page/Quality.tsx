@@ -7,11 +7,13 @@ import {
   IconGithub,
 } from "../utils/icons.module";
 import { useLang } from "../i18n/LanguageContext";
+import { useInView } from "../utils/useInView";
 
 const REPO_URL = "https://github.com/Melliaganz/portfolioLucas";
 
 export const Quality = () => {
   const { t } = useLang();
+  const { ref: gridRef, inView } = useInView();
 
   const pillars = [
     { icon: <IconPerf />, title: t.quality.perfTitle, text: t.quality.perfText },
@@ -37,7 +39,10 @@ export const Quality = () => {
           <p className={styles.subtitle}>{t.quality.subtitle}</p>
         </header>
 
-        <div className={styles.grid}>
+        <div
+          ref={gridRef}
+          className={`${styles.grid} ${inView ? styles.revealed : ""}`}
+        >
           {pillars.map((p) => (
             <article key={p.title} className={styles.card}>
               <span className={styles.icon} aria-hidden="true">

@@ -3,11 +3,13 @@ import styles from "../styles/Contact.module.css";
 import { IconEmail, IconFerme, IconMapPin, IconSend } from "../utils/icons.module";
 import { socialLinks } from "../data/socialLinks";
 import { useLang } from "../i18n/LanguageContext";
+import { useInView } from "../utils/useInView";
 
 const contactSocialLinks = socialLinks.filter((l) => !l.href.startsWith("mailto:"));
 
 export const Contact = () => {
   const { t } = useLang();
+  const { ref: layoutRef, inView } = useInView();
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -72,7 +74,10 @@ export const Contact = () => {
   return (
     <section id="contact" className={styles.contactSection}>
       <div className={styles.container}>
-        <div className={styles.layout}>
+        <div
+          ref={layoutRef}
+          className={`${styles.layout} ${inView ? styles.revealed : ""}`}
+        >
           {/* Colonne Gauche : Infos */}
           <div className={styles.infoColumn}>
             <div className={styles.headerGroup}>

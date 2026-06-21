@@ -3,6 +3,7 @@ import styles from "../styles/Projects.module.css";
 import { projectsData, type Project } from "../data/projectsData";
 import { getSmartLink } from "../utils/smartLink";
 import { useDragScroll } from "../utils/useDragScroll";
+import { useInView } from "../utils/useInView";
 import { useLang } from "../i18n/LanguageContext";
 
 const TOP_TAGS = ["React", "React Native", "TypeScript", "Node.js", "JavaScript"];
@@ -78,10 +79,14 @@ export const Projects = () => {
   const shouldScroll = filteredProjects.length > 3;
 
   const { scrollRef, isDragging, handlers } = useDragScroll({ enabled: shouldScroll });
+  const { ref: revealRef, inView } = useInView();
 
   return (
     <section id="projects" className={styles.projectsSection}>
-      <div className={styles.innerContainer}>
+      <div
+        ref={revealRef}
+        className={`${styles.innerContainer} ${inView ? styles.revealed : ""}`}
+      >
       <header className={styles.header}>
         <div className={styles.accentBar} />
         <h2 className={styles.title}>{t.projects.title}</h2>
@@ -105,11 +110,13 @@ export const Projects = () => {
       </nav>
 
       <div
+        key={filter}
         ref={scrollRef}
         className={[
           shouldScroll ? styles.marqueeContainer : styles.staticGrid,
           isDragging ? styles.isDragging : "",
           shouldScroll ? styles.canScroll : "",
+          styles.filterFade,
         ]
           .filter(Boolean)
           .join(" ")}
