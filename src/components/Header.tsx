@@ -43,12 +43,21 @@ export const Header = () => {
     });
   };
 
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
     if (typeof document !== "undefined") {
       document.body.style.overflow = "unset";
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handleResize = () => {
+      if (window.innerWidth > 768) closeMenu();
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMenuOpen, closeMenu]);
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${isMenuOpen ? styles.menuOpen : ""}`}>
@@ -62,6 +71,7 @@ export const Header = () => {
         </a>
 
         <button
+          type="button"
           className={styles.burger}
           onClick={toggleMenu}
           aria-label={isMenuOpen ? t.header.closeMenu : t.header.openMenu}

@@ -1,7 +1,12 @@
 import { useEffect, useRef, type RefObject } from "react";
 
 const FOCUSABLE =
-  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+const getFocusable = (container: HTMLElement): HTMLElement[] =>
+  Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+    (el) => el.offsetParent !== null || el === document.activeElement
+  );
 
 interface Options {
   active: boolean;
@@ -36,10 +41,8 @@ export const useFocusTrap = ({
 
     if (initialFocusRef?.current) {
       initialFocusRef.current.focus();
-    } else {
-      containerRef.current
-        ?.querySelectorAll<HTMLElement>(FOCUSABLE)[0]
-        ?.focus();
+    } else if (containerRef.current) {
+      getFocusable(containerRef.current)[0]?.focus();
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -49,7 +52,7 @@ export const useFocusTrap = ({
       }
       if (e.key !== "Tab" || !containerRef.current) return;
 
-      const focusable = containerRef.current.querySelectorAll<HTMLElement>(FOCUSABLE);
+      const focusable = getFocusable(containerRef.current);
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];

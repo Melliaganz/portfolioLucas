@@ -11,6 +11,7 @@ export const Contact = () => {
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
+  const [cooldown, setCooldown] = useState(false);
   const apiKey = import.meta.env.VITE_API_FORM;
 
   // Affiche l'état final puis revient à "idle" après 5 s.
@@ -21,6 +22,8 @@ export const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (status === "loading" || cooldown) return;
 
     if (!apiKey) {
       console.error("VITE_API_FORM is not defined");
@@ -53,6 +56,8 @@ export const Contact = () => {
 
       if (data.success) {
         (e.target as HTMLFormElement).reset();
+        setCooldown(true);
+        setTimeout(() => setCooldown(false), 30000);
         finish("success");
       } else {
         finish("error");
@@ -205,7 +210,7 @@ export const Contact = () => {
                 className={`${styles.submitBtn} ${
                   status === "loading" ? styles.loading : ""
                 }`}
-                disabled={status === "loading"}
+                disabled={status === "loading" || cooldown}
               >
                 <span>
                   {status === "loading"
