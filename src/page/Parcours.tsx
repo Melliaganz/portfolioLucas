@@ -129,8 +129,8 @@ export const Parcours = () => {
                       )}
                       {exp.isList && Array.isArray(desc) ? (
                         <ul className={styles.list}>
-                          {desc.map((point, i) => (
-                            <li key={i}>{point}</li>
+                          {desc.map((point) => (
+                            <li key={point}>{point}</li>
                           ))}
                         </ul>
                       ) : (

@@ -1,7 +1,6 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { track } from "@vercel/analytics";
 import styles from "../styles/CvModal.module.css";
-import { useFocusTrap } from "../utils/useFocusTrap";
 import { IconTelecharger } from "../utils/icons.module";
 import { useLang } from "../i18n/LanguageContext";
 
@@ -9,27 +8,46 @@ const CV_URL = "/CVLengrandLucas.pdf";
 
 export const CvModal = ({ onClose }: { onClose: () => void }) => {
   const { t } = useLang();
-  const cardRef = useRef<HTMLDivElement>(null);
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
-
-  useFocusTrap({
-    active: true,
-    onClose,
-    containerRef: cardRef,
-    initialFocusRef: closeBtnRef,
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
   });
 
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    dialog.showModal();
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleCancel = (e: Event) => {
+      e.preventDefault();
+      onCloseRef.current();
+    };
+
+    const handleMouseDown = (e: MouseEvent) => {
+      if (e.target === dialog) onCloseRef.current();
+    };
+
+    dialog.addEventListener("cancel", handleCancel);
+    dialog.addEventListener("mousedown", handleMouseDown);
+    return () => {
+      dialog.removeEventListener("cancel", handleCancel);
+      dialog.removeEventListener("mousedown", handleMouseDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
+
   return (
-    <div
-      className={styles.overlay}
-      role="dialog"
-      aria-modal="true"
+    <dialog
+      ref={dialogRef}
+      className={styles.dialog}
       aria-labelledby="cv-modal-title"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
     >
-      <div className={styles.card} ref={cardRef}>
+      <div className={styles.card}>
         <div className={styles.header}>
           <h2 id="cv-modal-title" className={styles.title}>
             {t.cvModal.title}
@@ -46,7 +64,7 @@ export const CvModal = ({ onClose }: { onClose: () => void }) => {
             </a>
             <button
               type="button"
-              ref={closeBtnRef}
+              autoFocus
               className={styles.closeBtn}
               onClick={onClose}
               aria-label={t.cvModal.close}
@@ -60,8 +78,9 @@ export const CvModal = ({ onClose }: { onClose: () => void }) => {
           className={styles.viewer}
           src={`${CV_URL}#toolbar=0&navpanes=0`}
           title={t.cvModal.iframeTitle}
+          tabIndex={-1}
         />
       </div>
-    </div>
+    </dialog>
   );
 };

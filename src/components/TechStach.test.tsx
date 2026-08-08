@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import "@testing-library/jest-dom";
 import { TechStack } from "./TechStack";
@@ -47,12 +47,10 @@ describe("TechStack Component", () => {
 
     fireEvent.mouseDown(marquee, { pageX: 100, clientX: 100 });
 
-    act(() => {
-      fireEvent.mouseMove(marquee, { 
-        pageX: 50, 
-        clientX: 50,
-        buttons: 1 
-      });
+    fireEvent.mouseMove(marquee, {
+      pageX: 50,
+      clientX: 50,
+      buttons: 1
     });
 
     expect(scrollLeftStore).toBe(75);
@@ -65,7 +63,7 @@ describe("TechStack Component", () => {
     expect(screen.getByText(/Stack technique principale/i)).toBeInTheDocument();
     
     const badges = document.querySelectorAll('[class*="badge"]');
-    expect(badges.length).toBe(24);
+    expect(badges).toHaveLength(24);
   });
 
   it("doit changer la classe CSS lors du drag", () => {

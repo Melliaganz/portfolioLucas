@@ -7,7 +7,7 @@
 export const config = {
   // Intercepte les documents (pas les assets ni /index.html, qui contiennent
   // un point et servent de source au fetch interne ci-dessous).
-  matcher: ["/((?!_vercel|assets|.*\\.).*)"],
+  matcher: [String.raw`/((?!_vercel|assets|.*\.).*)`],
 };
 
 const NONCE_PLACEHOLDER = "__CSP_NONCE__";
@@ -26,7 +26,7 @@ function generateNonce(): string {
   const bytes = new Uint8Array(16);
   crypto.getRandomValues(bytes);
   let binary = "";
-  for (const b of bytes) binary += String.fromCharCode(b);
+  for (const b of bytes) binary += String.fromCodePoint(b);
   return btoa(binary);
 }
 

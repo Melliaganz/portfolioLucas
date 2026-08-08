@@ -64,12 +64,20 @@ export const Header = () => {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${isMenuOpen ? styles.menuOpen : ""}`}>
       <div className={styles.container}>
 
-        <a href="#" className={styles.logo} onClick={closeMenu} aria-label={t.header.backToTop}>
+        <button
+          type="button"
+          className={styles.logo}
+          onClick={() => {
+            closeMenu();
+            window.scrollTo({ top: 0 });
+          }}
+          aria-label={t.header.backToTop}
+        >
           <div className={styles.logoBox}>
             <IconCode />
           </div>
           <span className={styles.navTitre}>Lengrand Lucas</span>
-        </a>
+        </button>
 
         <button
           type="button"

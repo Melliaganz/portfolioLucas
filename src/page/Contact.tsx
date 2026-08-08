@@ -71,6 +71,13 @@ export const Contact = () => {
     }
   };
 
+  const submitLabel = {
+    loading: t.contact.sending,
+    success: t.contact.sent,
+    idle: t.contact.send,
+    error: t.contact.send,
+  }[status];
+
   return (
     <section id="contact" className={styles.contactSection}>
       <div className={styles.container}>
@@ -217,13 +224,7 @@ export const Contact = () => {
                 }`}
                 disabled={status === "loading" || cooldown}
               >
-                <span>
-                  {status === "loading"
-                    ? t.contact.sending
-                    : status === "success"
-                    ? t.contact.sent
-                    : t.contact.send}
-                </span>
+                <span>{submitLabel}</span>
                 <span className={styles.btnIcon}>
                   <IconSend />
                 </span>

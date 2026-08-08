@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import type { IconBaseProps, IconType } from 'react-icons'
 import { IconContext } from 'react-icons'
 import { FaAndroid, FaBolt, FaCheckCircle, FaCode, FaCss3, FaDiscord, FaGraduationCap, FaLinkedin, FaMobile, FaReact, FaShieldAlt, FaUniversalAccess } from 'react-icons/fa'
@@ -28,16 +28,21 @@ const createIcon = (
   defaultColor?: string,
   defaultSize: number = 24
 ) => {
-  const Icon = memo(({ color, size, ...props }: IconBaseProps) => (
-    <IconContext.Provider
-      value={{
+  const Icon = memo(({ color, size, ...props }: IconBaseProps) => {
+    const value = useMemo(
+      () => ({
         color: color ?? defaultColor,
         size: size ? String(size) : String(defaultSize),
-      }}
-    >
-      <IconComponent {...props} />
-    </IconContext.Provider>
-  ));
+      }),
+      [color, size]
+    );
+
+    return (
+      <IconContext.Provider value={value}>
+        <IconComponent {...props} />
+      </IconContext.Provider>
+    );
+  });
 
   Icon.displayName = `Icon_${(IconComponent as { displayName?: string }).displayName ?? ''}`;
   return Icon;

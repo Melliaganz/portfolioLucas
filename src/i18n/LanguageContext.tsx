@@ -1,6 +1,8 @@
 import {
   createContext,
+  useCallback,
   useContext,
+  useMemo,
   useState,
   useEffect,
   useRef,
@@ -36,7 +38,7 @@ const LanguageContext = createContext<LanguageContextValue>({
 });
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [lang, setLangState] = useState<Lang>(detectInitialLang);
+  const [lang, setLang] = useState<Lang>(detectInitialLang);
   const firstRender = useRef(true);
 
   useEffect(() => {
@@ -60,13 +62,18 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     };
   }, [lang]);
 
-  const setLang = (l: Lang) => {
-    setLangState(l);
+  const changeLang = useCallback((l: Lang) => {
+    setLang(l);
     safeSetItem("lang", l);
-  };
+  }, []);
+
+  const value = useMemo<LanguageContextValue>(
+    () => ({ lang, setLang: changeLang, t: dictionaries[lang] }),
+    [lang, changeLang]
+  );
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t: dictionaries[lang] }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );

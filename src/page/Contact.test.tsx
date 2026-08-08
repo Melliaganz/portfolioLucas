@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import "@testing-library/jest-dom";
 import { Contact } from "./Contact";
@@ -33,7 +33,7 @@ describe("Contact Component", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
 
-    await waitFor(() => expect(screen.getByText("Envoyé !")).toBeInTheDocument());
+    expect(await screen.findByText("Envoyé !")).toBeInTheDocument();
   });
 
   it("doit gérer une erreur de l'API", async () => {
@@ -43,7 +43,7 @@ describe("Contact Component", () => {
     } as Response);
     render(<Contact />);
     fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
-    await waitFor(() => expect(screen.getByText("Envoyer")).toBeInTheDocument());
+    expect(await screen.findByText("Envoyer")).toBeInTheDocument();
   });
 
   it("doit valider les champs requis", () => {
@@ -64,9 +64,10 @@ describe("Contact Component", () => {
     fireEvent.change(screen.getByPlaceholderText("john@example.com"), { target: { value: "test@test.com" } });
     fireEvent.change(screen.getByPlaceholderText("Décrivez votre projet..."), { target: { value: "Bonjour" } });
 
-    await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
-    });
+    fireEvent.click(screen.getByRole("button", { name: /envoyer/i }));
+
+    await act(async () => {});
+    expect(screen.getByText("Envoyé !")).toBeInTheDocument();
 
     await act(async () => {
       await vi.runAllTimersAsync();

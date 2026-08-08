@@ -6,7 +6,7 @@ import { useDragScroll } from "../utils/useDragScroll";
 import { useInView } from "../utils/useInView";
 import { useLang } from "../i18n/LanguageContext";
 
-const TOP_TAGS = ["React", "React Native", "TypeScript", "Node.js", "JavaScript"];
+const TOP_TAGS = new Set(["React", "React Native", "TypeScript", "Node.js", "JavaScript"]);
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const { t, lang } = useLang();
@@ -65,10 +65,10 @@ export const Projects = () => {
   const [filter, setFilter] = useState("Tout");
 
   const categories = useMemo(() => {
-    const relevantTags = projectsData.flatMap(p => p.tags).filter(tag => TOP_TAGS.includes(tag));
+    const relevantTags = projectsData.flatMap(p => p.tags).filter(tag => TOP_TAGS.has(tag));
     const allCategories = projectsData.map(p => p.category);
     const combined = Array.from(new Set([...allCategories, ...relevantTags]));
-    return ["Tout", ...combined.sort()];
+    return ["Tout", ...combined.sort((a, b) => a.localeCompare(b))];
   }, []);
 
   const filteredProjects = useMemo(() => {
