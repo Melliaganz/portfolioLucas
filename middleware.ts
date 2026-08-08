@@ -7,7 +7,7 @@
 export const config = {
   // Intercepte les documents (pas les assets ni /index.html, qui contiennent
   // un point et servent de source au fetch interne ci-dessous).
-  matcher: [String.raw`/((?!_vercel|assets|.*\.).*)`],
+  matcher: ["/((?!_vercel|assets|.*\\.).*)"],
 };
 
 const NONCE_PLACEHOLDER = "__CSP_NONCE__";
