@@ -86,7 +86,7 @@ const fr = {
       "Code-splitting, préchargement des chunks, images WebP en lazy et CSS minifié. Bundle d'entrée optimisé pour un premier rendu quasi instantané.",
     securityTitle: "Sécurité",
     securityText:
-      "CSP stricte (nonce par requête + strict-dynamic), Trusted Types et en-têtes durcis (HSTS, anti-clickjacking) servis via Edge Middleware.",
+      "CSP stricte (nonce par requête + strict-dynamic), Trusted Types et en-têtes durcis (HSTS, anti-clickjacking) servis par un middleware Vercel.",
     a11yTitle: "Accessibilité",
     a11yText:
       "Navigation clavier complète, focus trap sur les modales, respect de prefers-reduced-motion, attributs ARIA et contrastes soignés.",
@@ -225,7 +225,7 @@ const en: typeof fr = {
       "Code-splitting, chunk preloading, lazy WebP images and minified CSS. An entry bundle tuned for a near-instant first render.",
     securityTitle: "Security",
     securityText:
-      "Strict CSP (per-request nonce + strict-dynamic), Trusted Types and hardened headers (HSTS, anti-clickjacking) served via Edge Middleware.",
+      "Strict CSP (per-request nonce + strict-dynamic), Trusted Types and hardened headers (HSTS, anti-clickjacking) served by a Vercel middleware.",
     a11yTitle: "Accessibility",
     a11yText:
       "Full keyboard navigation, focus trap on modals, prefers-reduced-motion support, ARIA attributes and careful contrast.",

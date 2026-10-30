@@ -1,10 +1,15 @@
-// Edge Middleware Vercel : génère un nonce CSP unique par requête, l'injecte
-// dans le HTML statique (placeholders posés au build par vite.config.ts) et
+// Routing Middleware Vercel (runtime Node.js) : génère un nonce CSP unique
+// par requête, l'injecte dans le HTML statique (placeholders posés au build
+// par vite.config.ts) et
 // pose une Content-Security-Policy stricte (nonce + strict-dynamic + Trusted
 // Types). Le reste du site demeure statique ; seul le document HTML transite
 // par cette fonction.
 
 export const config = {
+  // Runtime Node.js (le runtime "edge" est déprécié par Vercel). Le code
+  // n'utilise que des API web standard (fetch, Request/Response, crypto,
+  // btoa), disponibles nativement dans Node 18+.
+  runtime: "nodejs",
   // Intercepte les documents (pas les assets ni /index.html, qui contiennent
   // un point et servent de source au fetch interne ci-dessous).
   matcher: ["/((?!_vercel|assets|.*\\.).*)"],

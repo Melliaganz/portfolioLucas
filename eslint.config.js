@@ -21,7 +21,7 @@ export default defineConfig([
     },
   },
   {
-    // Edge Middleware Vercel : pas un module React, la règle react-refresh
+    // Routing Middleware Vercel : pas un module React, la règle react-refresh
     // (export de composants uniquement) ne s'applique pas.
     files: ['middleware.ts'],
     rules: {

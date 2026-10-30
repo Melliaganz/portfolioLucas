@@ -16,7 +16,7 @@ Le projet utilise des outils de pointe pour garantir une efficacité maximale :
 
 ## 🔒 Sécurité
 
-* **CSP par requête** : Content-Security-Policy stricte générée par une Edge Middleware Vercel (nonce unique, `strict-dynamic`, Trusted Types).
+* **CSP par requête** : Content-Security-Policy stricte générée par un Routing Middleware Vercel (runtime Node.js) (nonce unique, `strict-dynamic`, Trusted Types).
 * **Entêtes de sécurité** : HSTS, COOP, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
 * **Formulaire de contact** : envoi via Web3Forms protégé par un honeypot anti-spam et un rate-limit côté client.
 
@@ -31,7 +31,7 @@ Le projet utilise des outils de pointe pour garantir une efficacité maximale :
 ### Build & Tooling
 * **Bundler** : Vite 8
 * **CSS Engine** : Lightning CSS
-* **Plugins** : Sitemap, préchargement des chunks lazy (plugin maison), CSP nonce via Edge Middleware
+* **Plugins** : Sitemap, préchargement des chunks lazy (plugin maison), CSP nonce via Routing Middleware
 
 ### Qualité & Tests
 * **Test Runner** : Vitest 4.1

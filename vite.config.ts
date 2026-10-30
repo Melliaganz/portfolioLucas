@@ -41,7 +41,7 @@ function preloadLazyChunks(): Plugin {
           delete ctx.bundle[fileName];
         }
         // Ajoute le nonce sur chaque <script> (entrée Vite + JSON-LD) pour la
-        // CSP strict-dynamic posée par l'Edge Middleware.
+        // CSP strict-dynamic posée par le Routing Middleware (middleware.ts).
         const htmlWithNonce = html.replace(
           /<script(?=[\s>])/g,
           `<script nonce="${NONCE_PLACEHOLDER}"`
