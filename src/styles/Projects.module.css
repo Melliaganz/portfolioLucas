@@ -176,6 +176,7 @@
 }
 
 .marqueeContainer:hover .marqueeTrack,
+.marqueeContainer:focus-within .marqueeTrack,
 .isDragging .marqueeTrack {
   animation-play-state: paused;
 }

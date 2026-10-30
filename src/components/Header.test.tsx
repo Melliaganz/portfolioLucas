@@ -115,4 +115,16 @@ describe("Header Component", () => {
     render(<Header />);
     expect(screen.getByRole("navigation").parentElement).not.toHaveAttribute("inert");
   });
+  it("doit fermer le menu avec Échap et rendre le focus au burger", () => {
+    render(<Header />);
+    const burger = screen.getByRole("button", { name: /Ouvrir le menu/i });
+
+    fireEvent.click(burger);
+    expect(burger).toHaveAttribute("aria-expanded", "true");
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(burger).toHaveAttribute("aria-expanded", "false");
+    expect(burger).toHaveFocus();
+    expect(document.body.style.overflow).toBe("unset");
+  });
 });

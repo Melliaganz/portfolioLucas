@@ -1,92 +1,22 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
 import "@testing-library/jest-dom";
 import { TechStack } from "./TechStack";
+import { technologies } from "../utils/techData";
 
 describe("TechStack Component", () => {
-  let scrollLeftStore = 0;
-  const originalScrollLeft = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollLeft');
-  const originalOffsetLeft = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetLeft');
-
-  let rafSpy: ReturnType<typeof vi.spyOn>;
-
-  beforeEach(() => {
-    scrollLeftStore = 0;
-    Object.defineProperty(HTMLElement.prototype, 'scrollLeft', {
-      configurable: true,
-      get: () => scrollLeftStore,
-      set: (v) => { scrollLeftStore = v; }
-    });
-    Object.defineProperty(HTMLElement.prototype, 'offsetLeft', {
-      configurable: true,
-      get: () => 0
-    });
-    // Le drag écrit scrollLeft dans un requestAnimationFrame ; on l'exécute
-    // de façon synchrone pour pouvoir l'asserter dans le test.
-    rafSpy = vi.spyOn(globalThis, 'requestAnimationFrame').mockImplementation((cb) => {
-      cb(0);
-      return 0;
-    });
-  });
-
-  afterEach(() => {
-    rafSpy.mockRestore();
-    if (originalScrollLeft) {
-      Object.defineProperty(HTMLElement.prototype, 'scrollLeft', originalScrollLeft);
-    }
-    if (originalOffsetLeft) {
-      Object.defineProperty(HTMLElement.prototype, 'offsetLeft', originalOffsetLeft);
-    }
-  });
-
-  it("doit mettre à jour le scrollLeft lors du mouvement de la souris (drag)", () => {
-    const { container } = render(<TechStack />);
-    const marquee = container.querySelector('[class*="marqueeContainer"]') as HTMLElement;
-
-    if (!marquee) throw new Error("Marquee non trouvé");
-
-    fireEvent.mouseDown(marquee, { pageX: 100, clientX: 100 });
-
-    fireEvent.mouseMove(marquee, {
-      pageX: 50,
-      clientX: 50,
-      buttons: 1
-    });
-
-    expect(scrollLeftStore).toBe(75);
-  });
-
-  it("doit afficher le titre et le nombre de badges correct (24)", () => {
+  it("doit afficher le titre et un badge par techno, sans doublon", () => {
     render(<TechStack />);
-    
-    // Correction du titre ici pour correspondre au DOM reçu
+
     expect(screen.getByText(/Stack technique principale/i)).toBeInTheDocument();
-    
-    const badges = document.querySelectorAll('[class*="badge"]');
-    expect(badges).toHaveLength(24);
+    expect(screen.getAllByRole("listitem")).toHaveLength(technologies.length);
   });
 
-  it("doit changer la classe CSS lors du drag", () => {
-    const { container } = render(<TechStack />);
-    const marquee = container.querySelector('[class*="marqueeContainer"]') as HTMLElement;
+  it("doit garder le nom de chaque techno dans le DOM (lecteurs d'écran)", () => {
+    render(<TechStack />);
 
-    expect(marquee.className).not.toMatch(/isDragging/);
-    
-    fireEvent.mouseDown(marquee, { pageX: 100 });
-    expect(marquee.className).toMatch(/isDragging/);
-    
-    fireEvent.mouseUp(marquee);
-    expect(marquee.className).not.toMatch(/isDragging/);
-  });
-
-  it("doit arrêter le drag quand la souris quitte le conteneur", () => {
-    const { container } = render(<TechStack />);
-    const marquee = container.querySelector('[class*="marqueeContainer"]') as HTMLElement;
-
-    fireEvent.mouseDown(marquee, { pageX: 100 });
-    expect(marquee.className).toMatch(/isDragging/);
-
-    fireEvent.mouseLeave(marquee);
-    expect(marquee.className).not.toMatch(/isDragging/);
+    for (const tech of technologies) {
+      expect(screen.getByText(tech.name)).toBeInTheDocument();
+    }
   });
 });

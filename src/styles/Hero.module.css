@@ -344,6 +344,27 @@
   to { opacity: 1; translate: 0 0; }
 }
 
+/* Mobile : espacements resserrés pour garder les deux boutons visibles sans
+   défiler. Placé après les règles de base pour les surcharger. */
+@media (max-width: 1023px) {
+  .description {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  .buttonGroup {
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  /* Padding horizontal réduit : les deux boutons tiennent sur une ligne dès
+     360 px (FR et EN) ; en dessous, flex-wrap les repasse à la ligne. */
+  .btnPrimary,
+  .btnSecondary {
+    padding: 14px 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .badge,
   .description,

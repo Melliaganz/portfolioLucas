@@ -49,7 +49,7 @@ const createIcon = (
 };
 
 export const IconReact = createIcon(FaReact, "#61dafb");
-export const IconCss = createIcon(FaCss3, "#204de5");
+export const IconCss = createIcon(FaCss3, "#3b7bf5");
 export const IconTypeScript = createIcon(SiTypescript, "#2d79c7");
 export const IconReactNative = createIcon(TbBrandReactNative, "#61dafb");
 export const IconAndroidStudio = createIcon(SiAndroidstudio, "#a5c736");
@@ -62,7 +62,7 @@ export const IconMongoDb = createIcon(SiMongodb, "#139251");
 export const IconKotlin = createIcon(SiKotlin, "#aa23e3");
 export const IconGithub = createIcon(SiGithub);
 export const IconMail = createIcon(SiMailgun);
-export const IconMySQL = createIcon(SiMysql, "#006f9e");
+export const IconMySQL = createIcon(SiMysql, "#5b9bd5");
 export const IconNodeJs = createIcon(SiNodedotjs, "#55b936");
 export const IconDiplome = createIcon(FaGraduationCap);
 export const IconMobile = createIcon(FaMobile);

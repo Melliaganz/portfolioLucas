@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { track } from "@vercel/analytics";
 import styles from "../styles/Header.module.css";
 import { IconCode, IconTelecharger } from "../utils/icons.module";
@@ -13,6 +13,7 @@ export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
+  const burgerRef = useRef<HTMLButtonElement>(null);
   // Sous 768 px, le menu fermé est seulement poussé hors écran : on le rend
   // `inert` pour le retirer de la tabulation et de l'arbre d'accessibilité.
   const [isMobile, setIsMobile] = useState(
@@ -58,6 +59,18 @@ export const Header = () => {
     }
   }, []);
 
+  // Échap ferme le menu mobile et rend le focus au bouton burger.
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      closeMenu();
+      burgerRef.current?.focus();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen, closeMenu]);
+
   useEffect(() => {
     const mql = window.matchMedia?.(MOBILE_QUERY);
     if (!mql) return;
@@ -90,6 +103,7 @@ export const Header = () => {
 
         <button
           type="button"
+          ref={burgerRef}
           className={styles.burger}
           onClick={toggleMenu}
           aria-label={isMenuOpen ? t.header.closeMenu : t.header.openMenu}
