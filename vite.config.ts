@@ -59,7 +59,7 @@ const viteConfig = defineConfig({
     react(),
     Sitemap({
       hostname: "https://www.lengrandlucas.com",
-      readable: true,
+      readable: false,
       generateRobotsTxt: true,
       changefreq: "monthly",
       priority: 1.0,
@@ -85,12 +85,16 @@ const viteConfig = defineConfig({
     target: "esnext",
   },
   preview: {
+    // Vite applique ces en-têtes à tous les fichiers servis, PDF compris :
+    // frame-ancestors 'self' (et non 'none' comme en prod) pour que l'aperçu
+    // du CV en iframe fonctionne en local. En prod, middleware.ts et
+    // vercel.json gardent 'none' pour le HTML et SAMEORIGIN pour le PDF.
     headers: {
-      "Content-Security-Policy": "default-src 'self'; base-uri 'self'; script-src 'self' https://vitals.vercel-insights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://vitals.vercel-insights.com https://api.web3forms.com; object-src 'none'; require-trusted-types-for 'script'; upgrade-insecure-requests; frame-ancestors 'none';",
+      "Content-Security-Policy": "default-src 'self'; base-uri 'self'; script-src 'self' https://vitals.vercel-insights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://api.web3forms.com; object-src 'none'; form-action 'self'; require-trusted-types-for 'script'; upgrade-insecure-requests; frame-ancestors 'self';",
       "Cross-Origin-Opener-Policy": "same-origin",
       "X-Content-Type-Options": "nosniff",
       "X-Frame-Options": "SAMEORIGIN",
-      "X-XSS-Protection": "1; mode=block",
+      "X-XSS-Protection": "0",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
       "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",

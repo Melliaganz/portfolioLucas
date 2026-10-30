@@ -16,7 +16,9 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Cross-Origin-Opener-Policy": "same-origin",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "DENY",
-  "X-XSS-Protection": "1; mode=block",
+  // Filtre XSS historique désactivé : obsolète et exploitable, la CSP le
+  // remplace (recommandation OWASP).
+  "X-XSS-Protection": "0",
   "Referrer-Policy": "strict-origin-when-cross-origin",
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
   "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
@@ -41,11 +43,12 @@ function buildCsp(nonce: string): string {
     // (sans eux, ils bloqueraient tous les scripts). Firefox loggue un warning
     // bénin « Ignoring … » : c'est attendu, pas une erreur.
     `script-src 'nonce-${nonce}' 'strict-dynamic' https: http: 'unsafe-inline'`,
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.gstatic.com",
-    "img-src 'self' data: https:",
+    "style-src 'self' 'unsafe-inline'",
+    "font-src 'self'",
+    "img-src 'self' data:",
     "connect-src 'self' https://vitals.vercel-insights.com https://api.web3forms.com",
     "object-src 'none'",
+    "form-action 'self'",
     "frame-ancestors 'none'",
     "require-trusted-types-for 'script'",
     "upgrade-insecure-requests",
