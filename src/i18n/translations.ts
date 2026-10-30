@@ -45,6 +45,7 @@ const fr = {
     subtitleScroll: "Découvrez mes projets (glissez pour explorer).",
     subtitleStatic: "Mes projets.",
     all: "Tout",
+    filterLabel: "Filtrer les projets par technologie",
     codeAria: (t: string) => `Voir le code source de ${t} sur GitHub`,
     liveAria: (t: string) => `Voir la démo live de ${t}`,
   },
@@ -140,6 +141,13 @@ const fr = {
     download: "Télécharger",
     close: "Fermer l'aperçu du CV",
     iframeTitle: "Aperçu du CV de Lucas Lengrand",
+    noPreview: "L'aperçu n'est pas disponible sur cet appareil.",
+    open: "Ouvrir le CV",
+  },
+  errorBoundary: {
+    title: "Une erreur est survenue",
+    text: "Le contenu n'a pas pu se charger. Cela arrive parfois après une mise à jour du site.",
+    reload: "Recharger la page",
   },
 };
 
@@ -176,6 +184,7 @@ const en: typeof fr = {
     subtitleScroll: "Explore my projects (drag to browse).",
     subtitleStatic: "My projects.",
     all: "All",
+    filterLabel: "Filter projects by technology",
     codeAria: (t: string) => `View the source code of ${t} on GitHub`,
     liveAria: (t: string) => `View the live demo of ${t}`,
   },
@@ -271,6 +280,13 @@ const en: typeof fr = {
     download: "Download",
     close: "Close resume preview",
     iframeTitle: "Resume preview of Lucas Lengrand",
+    noPreview: "Preview isn't available on this device.",
+    open: "Open the resume",
+  },
+  errorBoundary: {
+    title: "Something went wrong",
+    text: "The content couldn't load. This sometimes happens after a site update.",
+    reload: "Reload the page",
   },
 };
 

@@ -40,4 +40,11 @@ describe("App Component", () => {
     render(<App />);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
+
+  it("doit garder le header et le footer hors de <main>", async () => {
+    render(<App />);
+    const main = screen.getByRole("main");
+    expect(main).not.toContainElement(screen.getByRole("banner"));
+    expect(main).not.toContainElement(await screen.findByRole("contentinfo"));
+  });
 });

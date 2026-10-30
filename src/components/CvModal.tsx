@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import styles from "../styles/CvModal.module.css";
 import { IconTelecharger } from "../utils/icons.module";
@@ -6,9 +6,17 @@ import { useLang } from "../i18n/LanguageContext";
 
 const CV_URL = "/CVLengrandLucas.pdf";
 
+// Chrome Android (et la plupart des navigateurs mobiles) n'affiche pas un PDF
+// dans une iframe : cadre vide ou téléchargement forcé. On ne l'intègre que si
+// le navigateur annonce un lecteur PDF et que le pointeur est précis.
+const canEmbedPdf = () =>
+  navigator.pdfViewerEnabled !== false &&
+  !window.matchMedia?.("(pointer: coarse)").matches;
+
 export const CvModal = ({ onClose }: { onClose: () => void }) => {
   const { t } = useLang();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [canEmbed] = useState(canEmbedPdf);
   const onCloseRef = useRef(onClose);
   useEffect(() => {
     onCloseRef.current = onClose;
@@ -47,7 +55,7 @@ export const CvModal = ({ onClose }: { onClose: () => void }) => {
       className={styles.dialog}
       aria-labelledby="cv-modal-title"
     >
-      <div className={styles.card}>
+      <div className={`${styles.card} ${canEmbed ? "" : styles.cardCompact}`}>
         <div className={styles.header}>
           <h2 id="cv-modal-title" className={styles.title}>
             {t.cvModal.title}
@@ -74,12 +82,27 @@ export const CvModal = ({ onClose }: { onClose: () => void }) => {
           </div>
         </div>
 
-        <iframe
-          className={styles.viewer}
-          src={`${CV_URL}#toolbar=0&navpanes=0`}
-          title={t.cvModal.iframeTitle}
-          tabIndex={-1}
-        />
+        {canEmbed ? (
+          <iframe
+            className={styles.viewer}
+            src={`${CV_URL}#toolbar=0&navpanes=0`}
+            title={t.cvModal.iframeTitle}
+            tabIndex={-1}
+          />
+        ) : (
+          <div className={styles.fallback}>
+            <p className={styles.fallbackText}>{t.cvModal.noPreview}</p>
+            <a
+              className={styles.downloadBtn}
+              href={CV_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("cv_open_pdf")}
+            >
+              {t.cvModal.open}
+            </a>
+          </div>
+        )}
       </div>
     </dialog>
   );

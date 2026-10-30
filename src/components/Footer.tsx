@@ -7,8 +7,7 @@ declare const __APP_YEAR__: string;
 export const Footer = () => {
   const { t } = useLang();
   return (
-  <section className={styles.footerSection}>
-    <footer className={styles.footerContainer}>
+    <footer className={`${styles.footerSection} ${styles.footerContainer}`}>
       <div className={styles.contentWrapper}>
         <div className={styles.socialLinks}>
           {socialLinks.map((link) => (
@@ -30,6 +29,5 @@ export const Footer = () => {
         </p>
       </div>
     </footer>
-  </section>
   );
 };

@@ -104,6 +104,31 @@
   background-color: #525659;
 }
 
+/* Mobile sans lecteur PDF intégré : carte réduite à son contenu. */
+.cardCompact {
+  height: auto;
+}
+
+.fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.fallbackText {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Prime sur le padding réduit de .downloadBtn sous 600 px. */
+.fallback .downloadBtn {
+  padding: 0.75rem 1.5rem;
+}
+
 @media (max-width: 600px) {
   .downloadBtn span {
     display: none;

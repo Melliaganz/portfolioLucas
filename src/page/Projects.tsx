@@ -16,6 +16,8 @@ const ProjectCard = ({ project }: { project: Project }) => {
         src={project.image}
         alt={project.title}
         className={styles.image}
+        width={340}
+        height={190}
         loading="lazy"
       />
       <span className={styles.yearBadge}>{project.year}</span>
@@ -23,7 +25,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
       <div className={styles.content}>
         <h3 className={styles.projectTitle}>{project.title}</h3>
 
-        <nav className={styles.links}>
+        <div className={styles.links}>
           {project.githubUrl && (
             <a
               href={project.githubUrl}
@@ -46,7 +48,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
               Live
             </a>
           )}
-        </nav>
+        </div>
 
         <p className={styles.description}>{project.description[lang]}</p>
 
@@ -95,7 +97,7 @@ export const Projects = () => {
         </p>
       </header>
 
-      <nav className={styles.filterBar}>
+      <div role="group" aria-label={t.projects.filterLabel} className={styles.filterBar}>
         {categories.map((cat) => (
           <button
             key={cat}
@@ -107,7 +109,7 @@ export const Projects = () => {
             {cat === "Tout" ? t.projects.all : cat}
           </button>
         ))}
-      </nav>
+      </div>
 
       <div
         key={filter}

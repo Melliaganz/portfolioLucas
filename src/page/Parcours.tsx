@@ -49,6 +49,15 @@ export const Parcours = () => {
     return () => observers.forEach((o) => o.disconnect());
   }, [verifyElementOverflow]);
 
+  // Changement de langue : la hauteur de la boîte repliée (plafonnée) peut ne
+  // pas varier alors que son contenu, lui, change. Le ResizeObserver ne se
+  // déclenche pas : on revérifie explicitement.
+  useLayoutEffect(() => {
+    experiences.forEach((exp) => {
+      if (!isExpandedRef.current[exp.id]) verifyElementOverflow(exp.id);
+    });
+  }, [lang, verifyElementOverflow]);
+
   return (
     <section className={styles.section}>
       <div className={styles.header}>
