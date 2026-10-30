@@ -62,24 +62,18 @@ yarn test:ui
 yarn build
 ```
 ### 📱 Expérience Mobile
-* **L'application** inclut un système de détection intelligent du système d'exploitation (User-Agent) :
+* La section **Application mobile** propose le téléchargement de l'APK Android natif (hébergé sur GitHub Releases), avec un QR code pour l'installer depuis un ordinateur.
 
-* **Android** : Affiche une popup proposant le téléchargement de l'APK natif (hébergé sur GitHub Releases).
-
-* **iOS** : Notifie l'utilisateur de la disponibilité future sur l'App Store.
-
-**Persistance** : Le choix de l'utilisateur est sauvegardé via le localStorage pour éviter les répétitions intrusives.
+* Le lien de l'étude de cas Impots.gouv pointe vers le store adapté à l'OS (App Store ou Play Store).
 
 ### 🧪 Stratégie de Test
 * La robustesse de l'application est validée par une suite de tests couvrant :
 
 * Le rendu correct des composants principaux (Header, Hero, Projects, etc.).
 
-* La logique de détection d'OS et l'affichage conditionnel de la popup.
+* Le bon fonctionnement des interactions utilisateur (menu, modale CV, formulaire de contact).
 
-* Le bon fonctionnement des interactions utilisateur (fermeture de popup, liens de téléchargement).
-
-* La persistance des données dans le stockage local.
+* La persistance de la langue choisie dans le stockage local.
 
 ## 📄 Licence
 

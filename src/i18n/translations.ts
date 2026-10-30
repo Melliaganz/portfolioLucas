@@ -141,16 +141,6 @@ const fr = {
     close: "Fermer l'aperçu du CV",
     iframeTitle: "Aperçu du CV de Lucas Lengrand",
   },
-  popup: {
-    androidTitle: "Version Android disponible",
-    iosTitle: "Application Mobile",
-    androidDesc:
-      "Téléchargez l'APK pour profiter d'une expérience fluide et native sur votre smartphone.",
-    iosDesc:
-      "Mon application arrive bientôt sur iOS. En attendant, continuez la visite sur le web !",
-    download: "Télécharger l'APK",
-    continue: "Continuer sur le navigateur",
-  },
 };
 
 const en: typeof fr = {
@@ -281,16 +271,6 @@ const en: typeof fr = {
     download: "Download",
     close: "Close resume preview",
     iframeTitle: "Resume preview of Lucas Lengrand",
-  },
-  popup: {
-    androidTitle: "Android version available",
-    iosTitle: "Mobile App",
-    androidDesc:
-      "Download the APK for a smooth, native experience on your smartphone.",
-    iosDesc:
-      "My app is coming soon to iOS. In the meantime, keep browsing on the web!",
-    download: "Download the APK",
-    continue: "Continue on the web",
   },
 };
 

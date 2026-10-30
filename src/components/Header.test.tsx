@@ -93,4 +93,26 @@ describe("Header Component", () => {
     fireEvent.click(screen.getByRole("button", { name: /Fermer l'aperçu/i }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
+  it("doit rendre le menu mobile fermé inert, et le réactiver à l'ouverture", () => {
+    vi.stubGlobal("matchMedia", (query: string) => ({
+      matches: true,
+      media: query,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }));
+    render(<Header />);
+    const navContainer = screen.getByRole("navigation", { hidden: true }).parentElement!;
+
+    expect(navContainer).toHaveAttribute("inert");
+
+    fireEvent.click(screen.getByRole("button", { name: /Ouvrir le menu/i }));
+    expect(navContainer).not.toHaveAttribute("inert");
+
+    vi.unstubAllGlobals();
+  });
+
+  it("ne doit pas rendre la navigation inert sur ordinateur", () => {
+    render(<Header />);
+    expect(screen.getByRole("navigation").parentElement).not.toHaveAttribute("inert");
+  });
 });

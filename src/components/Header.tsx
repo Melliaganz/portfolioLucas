@@ -6,11 +6,18 @@ import { FlagFR, FlagGB } from "../utils/flags";
 import { CvModal } from "./CvModal";
 import { useLang } from "../i18n/LanguageContext";
 
+const MOBILE_QUERY = "(max-width: 768px)";
+
 export const Header = () => {
   const { t, lang, setLang } = useLang();
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 20);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCvOpen, setIsCvOpen] = useState(false);
+  // Sous 768 px, le menu fermé est seulement poussé hors écran : on le rend
+  // `inert` pour le retirer de la tabulation et de l'arbre d'accessibilité.
+  const [isMobile, setIsMobile] = useState(
+    () => window.matchMedia?.(MOBILE_QUERY).matches ?? false
+  );
 
   const navLinks = [
     { label: t.header.about, href: "#about" },
@@ -52,13 +59,15 @@ export const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMenuOpen) return;
-    const handleResize = () => {
-      if (window.innerWidth > 768) closeMenu();
+    const mql = window.matchMedia?.(MOBILE_QUERY);
+    if (!mql) return;
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+      if (!e.matches) closeMenu();
     };
-    window.addEventListener("resize", handleResize, { passive: true });
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isMenuOpen, closeMenu]);
+    mql.addEventListener("change", handleChange);
+    return () => mql.removeEventListener("change", handleChange);
+  }, [closeMenu]);
 
   return (
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""} ${isMenuOpen ? styles.menuOpen : ""}`}>
@@ -91,7 +100,10 @@ export const Header = () => {
           <span className={styles.burgerLine}></span>
         </button>
 
-        <div className={`${styles.rightNavContainer} ${isMenuOpen ? styles.navActive : ""}`}>
+        <div
+          className={`${styles.rightNavContainer} ${isMenuOpen ? styles.navActive : ""}`}
+          inert={isMobile && !isMenuOpen}
+        >
           <nav className={styles.nav} aria-label={t.header.nav}>
             {navLinks.map((link) => (
               <a
