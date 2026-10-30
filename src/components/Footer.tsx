@@ -17,6 +17,7 @@ export const Footer = () => {
               className={styles.iconLink}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={link.label}
               title={link.label}
             >
               <span aria-hidden="true">{link.icon}</span>

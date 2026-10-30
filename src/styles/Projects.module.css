@@ -172,7 +172,7 @@
   width: max-content;
   align-items: stretch;
   will-change: transform;
-  animation: scrollInfinite 40s linear infinite;
+  animation: projectsScrollInfinite 40s linear infinite;
 }
 
 .marqueeContainer:hover .marqueeTrack,
@@ -181,7 +181,7 @@
   animation-play-state: paused;
 }
 
-@keyframes scrollInfinite {
+@keyframes projectsScrollInfinite {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }

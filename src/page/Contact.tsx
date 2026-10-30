@@ -131,6 +131,7 @@ export const Contact = () => {
                     className={styles.socialBtn}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={soc.label}
                     title={soc.label}
                   >
                     <span aria-hidden="true">{soc.icon}</span>
