@@ -31,6 +31,9 @@ export const Parcours = () => {
   }, []);
 
   useLayoutEffect(() => {
+    // Absent des vieux navigateurs (et de jsdom) : on garde alors la seule
+    // vérification au changement de langue ci-dessous, sans planter.
+    if (typeof ResizeObserver === "undefined") return;
     const observers: ResizeObserver[] = [];
 
     experiences.forEach((exp) => {

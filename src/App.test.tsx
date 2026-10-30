@@ -46,5 +46,7 @@ describe("App Component", () => {
     const main = screen.getByRole("main");
     expect(main).not.toContainElement(screen.getByRole("banner"));
     expect(main).not.toContainElement(await screen.findByRole("contentinfo"));
+    // Aucune section lazy ne doit avoir planté dans l'ErrorBoundary.
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 });
