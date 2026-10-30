@@ -31,6 +31,15 @@ function preloadLazyChunks(): Plugin {
             });
           });
         }
+        // Intègre le CSS d'entrée (~5 Ko) dans le HTML pour le sortir du chemin
+        // critique. style-src autorise déjà 'unsafe-inline'.
+        for (const [fileName, asset] of Object.entries(ctx.bundle)) {
+          if (asset.type !== "asset" || !fileName.endsWith(".css")) continue;
+          const linkRe = new RegExp(`<link[^>]*href="/${fileName}"[^>]*>`);
+          if (!linkRe.test(html)) continue;
+          html = html.replace(linkRe, () => `<style>${String(asset.source)}</style>`);
+          delete ctx.bundle[fileName];
+        }
         // Ajoute le nonce sur chaque <script> (entrée Vite + JSON-LD) pour la
         // CSP strict-dynamic posée par l'Edge Middleware.
         const htmlWithNonce = html.replace(

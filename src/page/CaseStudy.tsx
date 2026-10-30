@@ -1,6 +1,7 @@
 import styles from "../styles/CaseStudy.module.css";
 import { getAppStoreLink } from "../utils/smartLink";
-import appIcon from "../assets/images/impotsAppIcon.webp";
+import appIcon240 from "../assets/images/impotsAppIcon-240.webp";
+import appIcon480 from "../assets/images/impotsAppIcon-480.webp";
 import { useLang } from "../i18n/LanguageContext";
 
 const STACK = [
@@ -50,7 +51,9 @@ export const CaseStudy = () => {
 
           <div className={styles.visual}>
             <img
-              src={appIcon}
+              src={appIcon240}
+              srcSet={`${appIcon240} 240w, ${appIcon480} 480w`}
+              sizes="240px"
               alt={t.caseStudy.imageAlt}
               className={styles.appImage}
               width="240"

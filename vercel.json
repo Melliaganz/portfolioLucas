@@ -65,6 +65,19 @@
           "value": "public, max-age=86400, must-revalidate"
         }
       ]
+    },
+    {
+      "source": "/.well-known/ai-catalog.json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/ai-catalog+json; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
     }
   ]
 }

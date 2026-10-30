@@ -1,0 +1,35 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Lucas Lengrand",
+    "identifier": "www.lengrandlucas.com",
+    "documentationUrl": "https://www.lengrandlucas.com/llms.txt",
+    "logoUrl": "https://www.lengrandlucas.com/favicon.svg"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:lengrandlucas.com:doc:llms-txt",
+      "displayName": "Lucas Lengrand — llms.txt",
+      "type": "text/markdown",
+      "description": "Résumé du portfolio (profil, projets, liens) destiné aux LLM.",
+      "tags": ["portfolio", "llms.txt", "fullstack"],
+      "url": "https://www.lengrandlucas.com/llms.txt",
+      "publisher": {
+        "identifier": "www.lengrandlucas.com",
+        "displayName": "Lucas Lengrand"
+      }
+    },
+    {
+      "identifier": "urn:air:lengrandlucas.com:doc:cv",
+      "displayName": "CV de Lucas Lengrand",
+      "type": "application/pdf",
+      "description": "CV à jour de Lucas Lengrand, développeur Fullstack React / TypeScript / mobile.",
+      "tags": ["cv", "resume"],
+      "url": "https://www.lengrandlucas.com/CVLengrandLucas.pdf",
+      "publisher": {
+        "identifier": "www.lengrandlucas.com",
+        "displayName": "Lucas Lengrand"
+      }
+    }
+  ]
+}
