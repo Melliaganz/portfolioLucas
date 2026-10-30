@@ -128,6 +128,9 @@ const fr = {
     send: "Envoyer",
     sending: "Envoi...",
     sent: "Envoyé !",
+    sentMsg: "Merci ! Votre message a bien été envoyé.",
+    errorMsg:
+      "L'envoi a échoué. Vérifiez votre connexion et réessayez, ou écrivez-moi directement par email.",
   },
   footer: {
     rights: "Tous droits réservés.",
@@ -266,6 +269,9 @@ const en: typeof fr = {
     send: "Send",
     sending: "Sending...",
     sent: "Sent!",
+    sentMsg: "Thanks! Your message has been sent.",
+    errorMsg:
+      "Sending failed. Check your connection and try again, or email me directly.",
   },
   footer: {
     rights: "All rights reserved.",

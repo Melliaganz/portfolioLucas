@@ -16,10 +16,11 @@ export const Contact = () => {
   const [cooldown, setCooldown] = useState(false);
   const apiKey = import.meta.env.VITE_API_FORM;
 
-  // Affiche l'état final puis revient à "idle" après 5 s.
+  // Succès : affiché 5 s puis retour à "idle". Erreur : reste affichée (carte
+  // rouge) jusqu'au prochain envoi.
   const finish = (next: "success" | "error") => {
     setStatus(next);
-    setTimeout(() => setStatus("idle"), 5000);
+    if (next === "success") setTimeout(() => setStatus("idle"), 5000);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -140,7 +141,9 @@ export const Contact = () => {
           </div>
 
           {/* Colonne Droite : Formulaire */}
-          <div className={styles.formCard}>
+          <div
+            className={`${styles.formCard} ${status === "error" ? styles.formError : ""}`}
+          >
             <h2 className={styles.formTitle}>{t.contact.formTitle}</h2>
             <form className={styles.form} onSubmit={handleSubmit}>
               <input
@@ -229,6 +232,19 @@ export const Contact = () => {
                   <IconSend />
                 </span>
               </button>
+
+              {/* Toujours présent dans le DOM : les lecteurs d'écran n'annoncent
+                  que les changements d'une région live déjà montée. */}
+              <p
+                role="status"
+                aria-live="polite"
+                className={`${styles.statusMsg} ${
+                  status === "error" ? styles.statusError : styles.statusSuccess
+                }`}
+              >
+                {status === "error" && t.contact.errorMsg}
+                {status === "success" && t.contact.sentMsg}
+              </p>
             </form>
           </div>
         </div>
