@@ -53,11 +53,15 @@ function buildCsp(nonce: string): string {
 }
 
 export default async function middleware(request: Request): Promise<Response> {
-  const origin = new URL(request.url).origin;
+  const { origin, pathname } = new URL(request.url);
 
-  // Récupère le HTML statique. /index.html contient un point : il n'est pas
-  // intercepté par ce middleware, donc pas de boucle.
-  const assetResponse = await fetch(new URL("/index.html", origin), {
+  // Site one-page : seul "/" existe. Tout autre chemin reçoit la page 404 avec
+  // un vrai statut 404 (évite les « soft 404 » indexés par les moteurs).
+  const isHome = pathname === "/";
+
+  // Récupère le HTML statique. /index.html et /404.html contiennent un point :
+  // ils ne sont pas interceptés par ce middleware, donc pas de boucle.
+  const assetResponse = await fetch(new URL(isHome ? "/index.html" : "/404.html", origin), {
     headers: { accept: "text/html" },
   });
 
@@ -68,7 +72,7 @@ export default async function middleware(request: Request): Promise<Response> {
   const html = (await assetResponse.text()).replaceAll(NONCE_PLACEHOLDER, nonce);
 
   return new Response(html, {
-    status: 200,
+    status: isHome ? 200 : 404,
     headers: {
       ...SECURITY_HEADERS,
       "content-type": "text/html; charset=utf-8",

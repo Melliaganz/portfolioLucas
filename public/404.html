@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101622" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Page introuvable | Lucas Lengrand</title>
+    <!-- Page autonome (sans JS) : servie avec un statut 404 par middleware.ts
+         pour les chemins inconnus, et par Vercel pour les fichiers absents.
+         Reprend les tokens visuels du site (fond, carte, accent, boutons). -->
+    <style>
+      :root {
+        color-scheme: dark;
+        --primary: #135bec;
+        --primary-hover: #0e44b5;
+        --background-dark: #101622;
+        --card: #161a23;
+        --border: #282e39;
+        --muted: #9da6b9;
+        --font-display: "Inter", system-ui, -apple-system, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        min-height: 100%;
+        margin: 0;
+        background-color: var(--background-dark);
+        color: #fff;
+        font-family: var(--font-display);
+        -webkit-font-smoothing: antialiased;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .header {
+        padding: 20px 24px;
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.125rem;
+        letter-spacing: -0.02em;
+      }
+      .logoBox {
+        width: 32px;
+        height: 32px;
+        background-color: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px 80px;
+        position: relative;
+        overflow: hidden;
+      }
+      .halo {
+        position: absolute;
+        width: 520px;
+        height: 520px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgb(19 91 236 / 0.18), transparent 70%);
+        pointer-events: none;
+      }
+      .card {
+        position: relative;
+        width: 100%;
+        max-width: 560px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 48px 40px;
+        text-align: center;
+        box-shadow: 0 25px 50px rgb(0 0 0 / 0.5);
+        animation: notFoundFadeUp 0.6s ease both;
+      }
+      .iconWrapper {
+        width: 88px;
+        height: 88px;
+        margin: 0 auto 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1c1f27;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        color: var(--primary);
+      }
+      .code {
+        margin: 0 0 8px;
+        font-size: clamp(3.5rem, 14vw, 5.5rem);
+        font-weight: 900;
+        line-height: 1;
+        background: linear-gradient(90deg, #135bec, #60a5fa);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .accentBar {
+        width: 48px;
+        height: 4px;
+        background-color: var(--primary);
+        border-radius: 9999px;
+        margin: 20px auto;
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(1.5rem, 4.5vw, 2rem);
+        font-weight: 900;
+        line-height: 1.15;
+      }
+      p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+      .en {
+        margin-top: 8px;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 36px;
+      }
+      .btn {
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        color: #fff;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+      .btn:hover { transform: translateY(-2px); }
+      .btn:focus-visible {
+        outline: 2px solid #60a5fa;
+        outline-offset: 3px;
+      }
+      .btnPrimary { background-color: var(--primary); }
+      .btnPrimary:hover { background-color: var(--primary-hover); }
+      .btnSecondary {
+        background-color: #1a202c;
+        border: 1px solid var(--border);
+      }
+      @keyframes notFoundFadeUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to { opacity: 1; transform: none; }
+      }
+      @media (max-width: 480px) {
+        .card { padding: 36px 22px; }
+        .btn { width: 100%; text-align: center; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card { animation: none; }
+        .btn { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a class="logo" href="/" aria-label="Lengrand Lucas — accueil">
+        <span class="logoBox" aria-hidden="true">
+          <svg fill="currentColor" viewBox="0 0 640 512" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"/></svg>
+        </span>
+        <span>Lengrand Lucas</span>
+      </a>
+    </header>
+
+    <main>
+      <div class="halo" aria-hidden="true"></div>
+      <div class="card">
+        <div class="iconWrapper" aria-hidden="true">
+          <!-- MdOutlineConstruction (react-icons/md) -->
+          <svg fill="currentColor" viewBox="0 0 24 24" height="48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="m13.783 15.172 2.121-2.121 5.996 5.996-2.121 2.121zM17.5 10c1.93 0 3.5-1.57 3.5-3.5 0-.58-.16-1.12-.41-1.6l-2.7 2.7-1.49-1.49 2.7-2.7c-.48-.25-1.02-.41-1.6-.41C15.57 3 14 4.57 14 6.5c0 .41.08.8.21 1.16l-1.85 1.85-1.78-1.78.71-.71-1.41-1.41L12 3.49a3 3 0 0 0-4.24 0L4.22 7.03l1.41 1.41H2.81l-.71.71 3.54 3.54.71-.71V9.15l1.41 1.41.71-.71 1.78 1.78-7.41 7.41 2.12 2.12L16.34 9.79c.36.13.75.21 1.16.21"/></svg>
+        </div>
+
+        <p class="code" aria-hidden="true">404</p>
+        <h1>Page introuvable</h1>
+        <div class="accentBar" aria-hidden="true"></div>
+        <p>Cette page n'existe pas ou a été déplacée.</p>
+        <p class="en" lang="en">This page doesn't exist or has been moved.</p>
+
+        <div class="actions">
+          <a class="btn btnPrimary" href="/">Retour à l'accueil</a>
+          <a class="btn btnSecondary" href="/#contact">Me contacter</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
